@@ -1287,6 +1287,44 @@ body {
 }
 
 /* ============================================
+   SINGLE SESSION CARD
+   ============================================ */
+.single-session-card {
+  background: linear-gradient(to bottom right, #FEF3C7, var(--surface));
+  border: 2px solid var(--accent);
+}
+
+.single-session-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+}
+
+.session-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.session-duration {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.session-price {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ============================================
    ACCOUNT PAGE
    ============================================ */
 .profile-header {

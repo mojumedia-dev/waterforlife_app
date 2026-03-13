@@ -2,33 +2,47 @@
   {
     "id": "pkg-001",
     "locationId": "loc-001",
-    "name": "Starter Package",
-    "sessionsIncluded": 5,
-    "priceDisplay": "$295",
-    "priceValue": 295,
-    "description": "Perfect for trying SpectraLight therapy or addressing acute conditions. Save 9% compared to single sessions.",
-    "perSessionPrice": "$59"
+    "name": "10-Session Package (15 min)",
+    "sessionsIncluded": 10,
+    "priceDisplay": "$175",
+    "priceValue": 175,
+    "description": "Perfect for quick wellness boosts. Save 50% off the single-session rate!",
+    "perSessionPrice": "$17.50",
+    "shopifyUrl": "https://waterlightforhealth.com/products/spectralight-session-packages?variant=10-15min"
   },
   {
     "id": "pkg-002",
     "locationId": "loc-001",
-    "name": "Wellness Builder",
+    "name": "10-Session Package (30 min)",
     "sessionsIncluded": 10,
-    "priceDisplay": "$550",
-    "priceValue": 550,
-    "description": "Most popular choice for chronic conditions and wellness maintenance. Save 15% with our 10-session package!",
-    "perSessionPrice": "$55",
-    "badge": "MOST POPULAR"
+    "priceDisplay": "$325",
+    "priceValue": 325,
+    "description": "Most popular choice for addressing specific conditions. Save 50% off the single-session rate!",
+    "perSessionPrice": "$32.50",
+    "badge": "MOST POPULAR",
+    "shopifyUrl": "https://waterlightforhealth.com/products/spectralight-session-packages?variant=10-30min"
   },
   {
     "id": "pkg-003",
     "locationId": "loc-001",
-    "name": "Complete Healing",
+    "name": "10-Session Package (60 min)",
+    "sessionsIncluded": 10,
+    "priceDisplay": "$625",
+    "priceValue": 625,
+    "description": "Best for comprehensive treatment and deep healing. Save 50% off the single-session rate!",
+    "perSessionPrice": "$62.50",
+    "shopifyUrl": "https://waterlightforhealth.com/products/spectralight-session-packages?variant=10-60min"
+  },
+  {
+    "id": "pkg-004",
+    "locationId": "loc-001",
+    "name": "20-Session Package (30 min)",
     "sessionsIncluded": 20,
-    "priceDisplay": "$1,000",
-    "priceValue": 1000,
-    "description": "Best value for comprehensive treatment programs and long-term healing. Save 23% - maximum savings!",
-    "perSessionPrice": "$50",
-    "badge": "BEST VALUE"
+    "priceDisplay": "$625",
+    "priceValue": 625,
+    "description": "Maximum savings for long-term healing programs. Save 52% - our best value!",
+    "perSessionPrice": "$31.25",
+    "badge": "BEST VALUE",
+    "shopifyUrl": "https://waterlightforhealth.com/products/spectralight-session-packages?variant=20-30min"
   }
 ]
