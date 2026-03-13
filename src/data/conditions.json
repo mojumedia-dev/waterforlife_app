@@ -1,312 +1,2662 @@
-[
+﻿[
   {
-    "id": "cond-001",
-    "conditionName": "Arthritis",
-    "bodySystem": "Musculoskeletal",
-    "category": "Musculoskeletal",
-    "tags": ["joint pain", "inflammation", "mobility", "chronic pain", "stiffness"],
-    "description": "Helps reduce inflammation and improve joint mobility. Best results with consistent treatment schedule.",
-    "protocols": [
-      {
-        "id": "prot-001-1",
-        "name": "Arthritis General Protocol (XTRA)",
-        "frequencies": "50, 750, 900, 9000",
-        "source": "XTRA",
-        "frequencyPerWeek": 3,
-        "durationMinutes": 30,
-        "recommendedWeeks": 8,
-        "totalSessions": 24
-      },
-      {
-        "id": "prot-001-2",
-        "name": "Arthritis Alternative (CAFL)",
-        "frequencies": "120, 250, 700, 870, 1000",
-        "source": "CAFL",
-        "frequencyPerWeek": 3,
-        "durationMinutes": 30,
-        "recommendedWeeks": 8,
-        "totalSessions": 24
-      }
+    "id": "cond-1",
+    "conditionName": "Abdominal Cramps",
+    "bodySystem": "Stomach",
+    "category": "Digestive",
+    "tags": [
+      "abdominal",
+      "cramps",
+      "stomach"
     ],
-    "suggestedPackageId": "pkg-003"
-  },
-  {
-    "id": "cond-002",
-    "conditionName": "Migraine",
-    "bodySystem": "Neurological",
-    "category": "Neurological",
-    "tags": ["headache", "pain", "tension", "stress", "nausea"],
-    "description": "Can help reduce frequency and intensity of migraines. Most effective when started at onset of symptoms.",
+    "description": "SpectraLight therapy protocol for abdominal cramps. Uses specific therapeutic frequencies to support healing and wellness.",
     "protocols": [
       {
-        "id": "prot-002-1",
-        "name": "Migraine Primary (XTRA)",
-        "frequencies": "160, 550, 950, 7500",
+        "id": "prot-1-1",
+        "name": "Abdominal Cramps Protocol 1 (XTRA)",
+        "frequencies": "72, 95, 190, 304",
         "source": "XTRA",
-        "frequencyPerWeek": 2,
-        "durationMinutes": 20,
-        "recommendedWeeks": 6,
-        "totalSessions": 12
-      },
-      {
-        "id": "prot-002-2",
-        "name": "Migraine Tension (CAFL)",
-        "frequencies": "520, 650, 3000, 10000",
-        "source": "CAFL",
-        "frequencyPerWeek": 2,
-        "durationMinutes": 20,
-        "recommendedWeeks": 6,
-        "totalSessions": 12
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
       }
     ],
     "suggestedPackageId": "pkg-002"
   },
   {
-    "id": "cond-003",
-    "conditionName": "Insomnia",
-    "bodySystem": "Sleep Disorders",
-    "category": "Sleep Disorders",
-    "tags": ["sleep", "rest", "relaxation", "anxiety", "stress"],
-    "description": "Promotes relaxation and supports natural sleep cycles. Best used 30-60 minutes before bedtime.",
+    "id": "cond-2",
+    "conditionName": "Abdominal Pain",
+    "bodySystem": "Stomach",
+    "category": "Digestive",
+    "tags": [
+      "abdominal",
+      "pain",
+      "stomach"
+    ],
+    "description": "SpectraLight therapy protocol for abdominal pain. Uses specific therapeutic frequencies to support healing and wellness.",
     "protocols": [
       {
-        "id": "prot-003-1",
-        "name": "Insomnia Relaxation (XTRA)",
-        "frequencies": "10, 120, 465, 3170",
-        "source": "XTRA",
-        "frequencyPerWeek": 4,
-        "durationMinutes": 25,
-        "recommendedWeeks": 4,
-        "totalSessions": 16
+        "id": "prot-2-1",
+        "name": "Abdominal Pain Protocol 1 (CAFL)",
+        "frequencies": "3, 26, 95, 124, 160, 440, 522, 3000, 3040, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
       },
       {
-        "id": "prot-003-2",
-        "name": "Sleep Support (CAFL)",
-        "frequencies": "304, 496, 1550, 3000",
-        "source": "CAFL",
-        "frequencyPerWeek": 4,
-        "durationMinutes": 25,
-        "recommendedWeeks": 4,
-        "totalSessions": 16
+        "id": "prot-2-2",
+        "name": "Abdominal Pain Protocol 2 (XTRA)",
+        "frequencies": "5000, 10000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
       }
     ],
     "suggestedPackageId": "pkg-002"
   },
   {
-    "id": "cond-004",
-    "conditionName": "Back Pain (Lower)",
-    "bodySystem": "Musculoskeletal",
-    "category": "Musculoskeletal",
-    "tags": ["chronic pain", "sciatica", "spinal", "muscle pain", "inflammation"],
-    "description": "Addresses chronic lower back pain, muscle tension, and inflammation. Effective for sciatica and spinal issues.",
-    "protocols": [
-      {
-        "id": "prot-004-1",
-        "name": "Lower Back Pain (XTRA)",
-        "frequencies": "120, 212, 832, 5000",
-        "source": "XTRA",
-        "frequencyPerWeek": 3,
-        "durationMinutes": 30,
-        "recommendedWeeks": 10,
-        "totalSessions": 30
-      },
-      {
-        "id": "prot-004-2",
-        "name": "Spinal Support (CAFL)",
-        "frequencies": "100, 400, 787, 10000",
-        "source": "CAFL",
-        "frequencyPerWeek": 3,
-        "durationMinutes": 30,
-        "recommendedWeeks": 10,
-        "totalSessions": 30
-      }
+    "id": "cond-3",
+    "conditionName": "Abscess Nocardia Asteroides",
+    "bodySystem": "Respiratory",
+    "category": "Respiratory",
+    "tags": [
+      "abscess",
+      "nocardia",
+      "asteroides",
+      "respiratory"
     ],
-    "suggestedPackageId": "pkg-003"
-  },
-  {
-    "id": "cond-005",
-    "conditionName": "Anxiety",
-    "bodySystem": "Mental Health",
-    "category": "Mental Health",
-    "tags": ["stress", "worry", "panic", "tension", "nervousness"],
-    "description": "Supports emotional balance and reduces anxiety symptoms. Promotes calm and relaxation.",
+    "description": "SpectraLight therapy protocol for abscess nocardia asteroides. Uses specific therapeutic frequencies to support healing and wellness.",
     "protocols": [
       {
-        "id": "prot-005-1",
-        "name": "Anxiety Relief (XTRA)",
-        "frequencies": "30, 95, 3000, 10000",
+        "id": "prot-3-1",
+        "name": "Abscess Nocardia Asteroides Protocol 1 (XTRA)",
+        "frequencies": "228, 231, 237, 694, 710, 887, 2890",
         "source": "XTRA",
         "frequencyPerWeek": 3,
-        "durationMinutes": 25,
-        "recommendedWeeks": 8,
-        "totalSessions": 24
-      },
-      {
-        "id": "prot-005-2",
-        "name": "Calm & Balance (CAFL)",
-        "frequencies": "522, 680, 870, 7830",
-        "source": "CAFL",
-        "frequencyPerWeek": 3,
-        "durationMinutes": 25,
+        "durationMinutes": 30,
         "recommendedWeeks": 8,
         "totalSessions": 24
       }
     ],
-    "suggestedPackageId": "pkg-003"
+    "suggestedPackageId": "pkg-002"
   },
   {
-    "id": "cond-006",
-    "conditionName": "Fibromyalgia",
-    "bodySystem": "Musculoskeletal",
-    "category": "Musculoskeletal",
-    "tags": ["chronic pain", "fatigue", "muscle pain", "tender points", "sleep issues"],
-    "description": "Comprehensive support for fibromyalgia symptoms including pain, fatigue, and sleep disturbances.",
+    "id": "cond-4",
+    "conditionName": "Abscesses",
+    "bodySystem": "Skin",
+    "category": "Dermatological",
+    "tags": [
+      "abscesses",
+      "skin"
+    ],
+    "description": "SpectraLight therapy protocol for abscesses. Uses specific therapeutic frequencies to support healing and wellness.",
     "protocols": [
       {
-        "id": "prot-006-1",
-        "name": "Fibromyalgia Primary (XTRA)",
-        "frequencies": "120, 140, 304, 464, 728",
+        "id": "prot-4-1",
+        "name": "Abscesses Protocol 1 (XTRA)",
+        "frequencies": "190, 444, 500, 727, 787, 802, 880, 1550, 1865, 2170, 2720",
         "source": "XTRA",
         "frequencyPerWeek": 3,
         "durationMinutes": 30,
-        "recommendedWeeks": 12,
-        "totalSessions": 36
+        "recommendedWeeks": 8,
+        "totalSessions": 24
       },
       {
-        "id": "prot-006-2",
-        "name": "Fibro Pain Relief (CAFL)",
-        "frequencies": "328, 880, 5000, 7280",
+        "id": "prot-4-2",
+        "name": "Abscesses Protocol 2 (XTRA)",
+        "frequencies": "190, 428, 444, 450, 465, 500, 660, 690, 727, 760, 787, 802, 880, 1550, 1865, 2170, 2720",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-4-3",
+        "name": "Abscesses Protocol 3 (CAFL)",
+        "frequencies": "428, 444, 450, 465, 660, 760, 802, 1550",
         "source": "CAFL",
         "frequencyPerWeek": 3,
         "durationMinutes": 30,
-        "recommendedWeeks": 12,
-        "totalSessions": 36
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-4-4",
+        "name": "Abscesses Protocol 4 (CAFL)",
+        "frequencies": "190, 200, 500, 727, 787, 880, 2170, 2720",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
       }
     ],
-    "suggestedPackageId": "pkg-003"
+    "suggestedPackageId": "pkg-002"
   },
   {
-    "id": "cond-007",
-    "conditionName": "Allergies",
+    "id": "cond-5",
+    "conditionName": "Acidosis",
+    "bodySystem": "Blood Tissue",
+    "category": "Cardiovascular",
+    "tags": [
+      "acidosis",
+      "blood tissue"
+    ],
+    "description": "SpectraLight therapy protocol for acidosis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-5-1",
+        "name": "Acidosis Protocol 1 (CAFL)",
+        "frequencies": "20, 146, 727, 776, 787, 802, 880, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-6",
+    "conditionName": "Acne",
+    "bodySystem": "Skin",
+    "category": "Dermatological",
+    "tags": [
+      "acne",
+      "skin"
+    ],
+    "description": "SpectraLight therapy protocol for acne. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-6-1",
+        "name": "Acne Protocol 1 (CAFL)",
+        "frequencies": "428, 444, 450, 465, 660, 727, 741, 760, 778, 787, 802, 880, 1500, 1550, 1552, 1600, 1800, 2170, 2720",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-6-2",
+        "name": "Acne Protocol 2 (CAFL)",
+        "frequencies": "428, 444, 450, 465, 660, 760",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-6-3",
+        "name": "Acne Protocol 3 (XTRA)",
+        "frequencies": "727, 787, 880, 5000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-6-4",
+        "name": "Acne Protocol 4 (XTRA)",
+        "frequencies": "50, 370, 830, 2500, 3000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-7",
+    "conditionName": "Acne Vulgaris Junior",
+    "bodySystem": "Skin",
+    "category": "Dermatological",
+    "tags": [
+      "acne",
+      "vulgaris",
+      "junior",
+      "skin"
+    ],
+    "description": "SpectraLight therapy protocol for acne vulgaris junior. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-7-1",
+        "name": "Acne Vulgaris Junior Protocol 1 (XTRA)",
+        "frequencies": "185, 514, 832",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-8",
+    "conditionName": "Aconite",
     "bodySystem": "Immune System",
     "category": "Immune System",
-    "tags": ["seasonal", "hay fever", "sinus", "congestion", "inflammation"],
-    "description": "Helps reduce allergic responses and supports immune balance. Effective for seasonal and environmental allergies.",
+    "tags": [
+      "aconite",
+      "immune system"
+    ],
+    "description": "SpectraLight therapy protocol for aconite. Uses specific therapeutic frequencies to support healing and wellness.",
     "protocols": [
       {
-        "id": "prot-007-1",
-        "name": "Allergy Relief (XTRA)",
-        "frequencies": "10, 120, 727, 3000",
-        "source": "XTRA",
-        "frequencyPerWeek": 2,
-        "durationMinutes": 20,
-        "recommendedWeeks": 6,
-        "totalSessions": 12
-      },
-      {
-        "id": "prot-007-2",
-        "name": "Immune Support (CAFL)",
-        "frequencies": "333, 444, 880, 10000",
+        "id": "prot-8-1",
+        "name": "Aconite Protocol 1 (CAFL)",
+        "frequencies": "2791, 3347, 5611",
         "source": "CAFL",
-        "frequencyPerWeek": 2,
-        "durationMinutes": 20,
-        "recommendedWeeks": 6,
-        "totalSessions": 12
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
       }
     ],
     "suggestedPackageId": "pkg-002"
   },
   {
-    "id": "cond-008",
-    "conditionName": "Hypertension (High Blood Pressure)",
-    "bodySystem": "Cardiovascular",
-    "category": "Cardiovascular",
-    "tags": ["blood pressure", "heart health", "circulation", "stress"],
-    "description": "Supports cardiovascular health and promotes healthy blood pressure levels.",
+    "id": "cond-9",
+    "conditionName": "Acrocephalosyndactyly",
+    "bodySystem": "Bone Tissue",
+    "category": "Musculoskeletal",
+    "tags": [
+      "acrocephalosyndactyly",
+      "bone tissue"
+    ],
+    "description": "SpectraLight therapy protocol for acrocephalosyndactyly. Uses specific therapeutic frequencies to support healing and wellness.",
     "protocols": [
       {
-        "id": "prot-008-1",
-        "name": "Blood Pressure Support (XTRA)",
-        "frequencies": "9, 95, 7830, 10000",
+        "id": "prot-9-1",
+        "name": "Acrocephalosyndactyly Protocol 1 (XTRA)",
+        "frequencies": "140, 1220, 2620",
         "source": "XTRA",
         "frequencyPerWeek": 3,
-        "durationMinutes": 25,
-        "recommendedWeeks": 8,
-        "totalSessions": 24
-      },
-      {
-        "id": "prot-008-2",
-        "name": "Cardiovascular Balance (CAFL)",
-        "frequencies": "20, 727, 787, 3176",
-        "source": "CAFL",
-        "frequencyPerWeek": 3,
-        "durationMinutes": 25,
+        "durationMinutes": 30,
         "recommendedWeeks": 8,
         "totalSessions": 24
       }
     ],
-    "suggestedPackageId": "pkg-003"
+    "suggestedPackageId": "pkg-002"
   },
   {
-    "id": "cond-009",
-    "conditionName": "Depression",
-    "bodySystem": "Mental Health",
-    "category": "Mental Health",
-    "tags": ["mood", "sadness", "energy", "motivation", "emotional health"],
-    "description": "Supports emotional well-being and mood balance. Complements other therapeutic approaches.",
-    "protocols": [
-      {
-        "id": "prot-009-1",
-        "name": "Mood Support (XTRA)",
-        "frequencies": "10, 35, 428, 7830",
-        "source": "XTRA",
-        "frequencyPerWeek": 4,
-        "durationMinutes": 30,
-        "recommendedWeeks": 10,
-        "totalSessions": 40
-      },
-      {
-        "id": "prot-009-2",
-        "name": "Emotional Balance (CAFL)",
-        "frequencies": "220, 304, 5000, 10000",
-        "source": "CAFL",
-        "frequencyPerWeek": 4,
-        "durationMinutes": 30,
-        "recommendedWeeks": 10,
-        "totalSessions": 40
-      }
+    "id": "cond-10",
+    "conditionName": "Acromegaly",
+    "bodySystem": "Bone Tissue",
+    "category": "Musculoskeletal",
+    "tags": [
+      "acromegaly",
+      "bone tissue"
     ],
-    "suggestedPackageId": "pkg-003"
-  },
-  {
-    "id": "cond-010",
-    "conditionName": "Diabetes Type 2",
-    "bodySystem": "Metabolic",
-    "category": "Metabolic",
-    "tags": ["blood sugar", "insulin", "metabolism", "energy"],
-    "description": "Supports metabolic health and blood sugar balance. Part of comprehensive diabetes management.",
+    "description": "SpectraLight therapy protocol for acromegaly. Uses specific therapeutic frequencies to support healing and wellness.",
     "protocols": [
       {
-        "id": "prot-010-1",
-        "name": "Metabolic Support (XTRA)",
-        "frequencies": "20, 35, 465, 6800",
+        "id": "prot-10-1",
+        "name": "Acromegaly Protocol 1 (XTRA)",
+        "frequencies": "80, 420, 770, 7910",
         "source": "XTRA",
         "frequencyPerWeek": 3,
         "durationMinutes": 30,
-        "recommendedWeeks": 12,
-        "totalSessions": 36
-      },
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-11",
+    "conditionName": "Actinobacillus",
+    "bodySystem": "Respiratory",
+    "category": "Respiratory",
+    "tags": [
+      "actinobacillus",
+      "respiratory"
+    ],
+    "description": "SpectraLight therapy protocol for actinobacillus. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
       {
-        "id": "prot-010-2",
-        "name": "Blood Sugar Balance (CAFL)",
-        "frequencies": "230, 302, 787, 10000",
+        "id": "prot-11-1",
+        "name": "Actinobacillus Protocol 1 (CAFL)",
+        "frequencies": "488, 565, 672, 674, 678, 766, 768, 773, 776, 777, 778, 787, 822, 885, 887, 9687",
         "source": "CAFL",
         "frequencyPerWeek": 3,
         "durationMinutes": 30,
-        "recommendedWeeks": 12,
-        "totalSessions": 36
+        "recommendedWeeks": 8,
+        "totalSessions": 24
       }
     ],
-    "suggestedPackageId": "pkg-003"
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-12",
+    "conditionName": "Actinomycosis",
+    "bodySystem": "Mouth",
+    "category": "Oral Health",
+    "tags": [
+      "actinomycosis",
+      "mouth"
+    ],
+    "description": "SpectraLight therapy protocol for actinomycosis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-12-1",
+        "name": "Actinomycosis Protocol 1 (CAFL)",
+        "frequencies": "20, 465, 727, 787, 880, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-13",
+    "conditionName": "Adenoids",
+    "bodySystem": "Nose",
+    "category": "Respiratory",
+    "tags": [
+      "adenoids",
+      "nose"
+    ],
+    "description": "SpectraLight therapy protocol for adenoids. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-13-1",
+        "name": "Adenoids Protocol 1 (CAFL)",
+        "frequencies": "2, 14, 20, 333, 428, 444, 444, 588, 660, 727, 776, 780, 787, 802,  810, 880, 1550, 2170, 2720",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-14",
+    "conditionName": "Adenoma Basal Cell",
+    "bodySystem": "Cancer",
+    "category": "Oncology",
+    "tags": [
+      "adenoma",
+      "basal",
+      "cell",
+      "cancer"
+    ],
+    "description": "SpectraLight therapy protocol for adenoma basal cell. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-14-1",
+        "name": "Adenoma Basal Cell Protocol 1 (XTRA)",
+        "frequencies": "40, 5810",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-15",
+    "conditionName": "Adenomatous Polyposis Coli (APC)",
+    "bodySystem": "DNA",
+    "category": "Genetic",
+    "tags": [
+      "adenomatous",
+      "polyposis",
+      "coli",
+      "(apc)",
+      "dna"
+    ],
+    "description": "SpectraLight therapy protocol for adenomatous polyposis coli (apc). Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-15-1",
+        "name": "Adenomatous Polyposis Coli (APC) Protocol 1 (KHZ)",
+        "frequencies": "40, 250, 500, 2500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-16",
+    "conditionName": "Adenomyosis",
+    "bodySystem": "Uterus",
+    "category": "Reproductive",
+    "tags": [
+      "adenomyosis",
+      "uterus"
+    ],
+    "description": "SpectraLight therapy protocol for adenomyosis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-16-1",
+        "name": "Adenomyosis Protocol 1 (XTRA)",
+        "frequencies": "30, 250, 730, 3720, 7500",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-17",
+    "conditionName": "Adenovirus",
+    "bodySystem": "Lungs Stomach Intestines",
+    "category": "Lungs Stomach Intestines",
+    "tags": [
+      "adenovirus",
+      "lungs stomach intestines"
+    ],
+    "description": "SpectraLight therapy protocol for adenovirus. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-17-1",
+        "name": "Adenovirus Protocol 1 (CAFL)",
+        "frequencies": "333, 523, 666, 768, 786, 959, 962",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-18",
+    "conditionName": "Adhesive Capsulitis",
+    "bodySystem": "Shoulder",
+    "category": "Shoulder",
+    "tags": [
+      "adhesive",
+      "capsulitis",
+      "shoulder"
+    ],
+    "description": "SpectraLight therapy protocol for adhesive capsulitis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-18-1",
+        "name": "Adhesive Capsulitis Protocol 1 (XTRA)",
+        "frequencies": "60, 230",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-19",
+    "conditionName": "Adie Syndrome",
+    "bodySystem": "Nerve Eye",
+    "category": "Nerve Eye",
+    "tags": [
+      "adie",
+      "syndrome",
+      "nerve eye"
+    ],
+    "description": "SpectraLight therapy protocol for adie syndrome. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-19-1",
+        "name": "Adie Syndrome Protocol 1 (KHZ)",
+        "frequencies": "170, 460",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-20",
+    "conditionName": "Adnexitis",
+    "bodySystem": "Ovary",
+    "category": "Ovary",
+    "tags": [
+      "adnexitis",
+      "ovary"
+    ],
+    "description": "SpectraLight therapy protocol for adnexitis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-20-1",
+        "name": "Adnexitis Protocol 1 (CAFL)",
+        "frequencies": "440, 441, 522, 572, 3343, 3833, 5312",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-20-2",
+        "name": "Adnexitis Protocol 2 (VEGA)",
+        "frequencies": "440, 441, 522, 572, 3343, 3833, 5312",
+        "source": "VEGA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-20-3",
+        "name": "Adnexitis Protocol 3 (XTRA)",
+        "frequencies": "40, 460",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-21",
+    "conditionName": "Adrenal Gland Balance",
+    "bodySystem": "Adrenals",
+    "category": "Adrenals",
+    "tags": [
+      "adrenal",
+      "gland",
+      "balance",
+      "adrenals"
+    ],
+    "description": "SpectraLight therapy protocol for adrenal gland balance. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-21-1",
+        "name": "Adrenal Gland Balance Protocol 1 (XTRA)",
+        "frequencies": "20, 537, 1335, 2250, 10000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-22",
+    "conditionName": "Adrenal Gland Diseases",
+    "bodySystem": "Adrenals",
+    "category": "Adrenals",
+    "tags": [
+      "adrenal",
+      "gland",
+      "diseases",
+      "adrenals"
+    ],
+    "description": "SpectraLight therapy protocol for adrenal gland diseases. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-22-1",
+        "name": "Adrenal Gland Diseases Protocol 1 (KHZ)",
+        "frequencies": "70, 5500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-23",
+    "conditionName": "Adrenal Gland Fever",
+    "bodySystem": "Adrenals",
+    "category": "Adrenals",
+    "tags": [
+      "adrenal",
+      "gland",
+      "fever",
+      "adrenals"
+    ],
+    "description": "SpectraLight therapy protocol for adrenal gland fever. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-23-1",
+        "name": "Adrenal Gland Fever Protocol 1 (XTRA)",
+        "frequencies": "20, 10000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-24",
+    "conditionName": "Adrenal Gland Stimulant",
+    "bodySystem": "Adrenals",
+    "category": "Adrenals",
+    "tags": [
+      "adrenal",
+      "gland",
+      "stimulant",
+      "adrenals"
+    ],
+    "description": "SpectraLight therapy protocol for adrenal gland stimulant. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-24-1",
+        "name": "Adrenal Gland Stimulant Protocol 1 (CAFL)",
+        "frequencies": "10, 20, 2250",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-25",
+    "conditionName": "Adrenal Gland Toxicity",
+    "bodySystem": "Adrenals",
+    "category": "Adrenals",
+    "tags": [
+      "adrenal",
+      "gland",
+      "toxicity",
+      "adrenals"
+    ],
+    "description": "SpectraLight therapy protocol for adrenal gland toxicity. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-25-1",
+        "name": "Adrenal Gland Toxicity Protocol 1 (XTRA)",
+        "frequencies": "20, 10000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-26",
+    "conditionName": "Adrenal Hyperplasia",
+    "bodySystem": "Adrenals",
+    "category": "Adrenals",
+    "tags": [
+      "adrenal",
+      "hyperplasia",
+      "adrenals"
+    ],
+    "description": "SpectraLight therapy protocol for adrenal hyperplasia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-26-1",
+        "name": "Adrenal Hyperplasia Protocol 1 (KHZ)",
+        "frequencies": "220, 970",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-27",
+    "conditionName": "Afibrinogenemia",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "afibrinogenemia",
+      "blood"
+    ],
+    "description": "SpectraLight therapy protocol for afibrinogenemia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-27-1",
+        "name": "Afibrinogenemia Protocol 1 (KHZ)",
+        "frequencies": "150, 180, 2500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-28",
+    "conditionName": "Aflatoxin",
+    "bodySystem": "Liver",
+    "category": "Liver",
+    "tags": [
+      "aflatoxin",
+      "liver"
+    ],
+    "description": "SpectraLight therapy protocol for aflatoxin. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-28-1",
+        "name": "Aflatoxin Protocol 1 (CAFL)",
+        "frequencies": "344, 474, 476, 510, 568, 943",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-29",
+    "conditionName": "AIDS",
+    "bodySystem": "Immune System",
+    "category": "Immune System",
+    "tags": [
+      "aids",
+      "immune system"
+    ],
+    "description": "SpectraLight therapy protocol for aids. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-29-1",
+        "name": "AIDS Protocol 1 (CAFL)",
+        "frequencies": "727, 787, 880, 2489, 3175, 3275, 3375, 3475, 5000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-29-2",
+        "name": "AIDS Protocol 2 (CAFL)",
+        "frequencies": "465, 727, 787, 880, 1500, 2489",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-29-3",
+        "name": "AIDS Protocol 3 (CAFL)",
+        "frequencies": "249, 418, 727, 787, 880, 1500, 1550, 2489, 3100, 3175, 3475",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-30",
+    "conditionName": "AIDS Secondary",
+    "bodySystem": "Immune System",
+    "category": "Immune System",
+    "tags": [
+      "aids",
+      "secondary",
+      "immune system"
+    ],
+    "description": "SpectraLight therapy protocol for aids secondary. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-30-1",
+        "name": "AIDS Secondary Protocol 1 (CAFL)",
+        "frequencies": "33, 60, 720, 720, 960, 960, 1113, 1113, 1260, 1260, 2128, 2128, 6121, 6121",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-31",
+    "conditionName": "Alcoholism",
+    "bodySystem": "Liver",
+    "category": "Liver",
+    "tags": [
+      "alcoholism",
+      "liver"
+    ],
+    "description": "SpectraLight therapy protocol for alcoholism. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-31-1",
+        "name": "Alcoholism Protocol 1 (CAFL)",
+        "frequencies": "727, 787, 880, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-32",
+    "conditionName": "Alopecia",
+    "bodySystem": "Hair",
+    "category": "Hair",
+    "tags": [
+      "alopecia",
+      "hair"
+    ],
+    "description": "SpectraLight therapy protocol for alopecia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-32-1",
+        "name": "Alopecia Protocol 1 (CAFL)",
+        "frequencies": "20, 146, 465, 727, 787, 800, 880, 1552, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-33",
+    "conditionName": "ALS",
+    "bodySystem": "Nerve",
+    "category": "Nerve",
+    "tags": [
+      "als",
+      "nerve"
+    ],
+    "description": "SpectraLight therapy protocol for als. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-33-1",
+        "name": "ALS Protocol 1 (CAFL)",
+        "frequencies": "254, 470, 484, 610, 644, 690, 790, 864, 986, 1800",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-34",
+    "conditionName": "Alzheimers",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "alzheimers",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for alzheimers. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-34-1",
+        "name": "Alzheimers Protocol 1 (CAFL)",
+        "frequencies": "303, 430, 620, 624, 840, 866, 2213, 5148",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-35",
+    "conditionName": "Amenorrhea",
+    "bodySystem": "Menstruation",
+    "category": "Menstruation",
+    "tags": [
+      "amenorrhea",
+      "menstruation"
+    ],
+    "description": "SpectraLight therapy protocol for amenorrhea. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-35-1",
+        "name": "Amenorrhea Protocol 1 (CAFL)",
+        "frequencies": "20, 465, 727, 760, 787, 802, 880, 1550, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-36",
+    "conditionName": "Amnesia",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "amnesia",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for amnesia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-36-1",
+        "name": "Amnesia Protocol 1 (KHZ)",
+        "frequencies": "70, 2250",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-37",
+    "conditionName": "Amoeba Hepar Abscess",
+    "bodySystem": "Liver",
+    "category": "Liver",
+    "tags": [
+      "amoeba",
+      "hepar",
+      "abscess",
+      "liver"
+    ],
+    "description": "SpectraLight therapy protocol for amoeba hepar abscess. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-37-1",
+        "name": "Amoeba Hepar Abscess Protocol 1 (CAFL)",
+        "frequencies": "344, 605",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-38",
+    "conditionName": "Amoebic Dysentery",
+    "bodySystem": "Intestines",
+    "category": "Intestines",
+    "tags": [
+      "amoebic",
+      "dysentery",
+      "intestines"
+    ],
+    "description": "SpectraLight therapy protocol for amoebic dysentery. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-38-1",
+        "name": "Amoebic Dysentery Protocol 1 (CAFL)",
+        "frequencies": "148, 166, 308, 393, 631, 778",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-39",
+    "conditionName": "Amyotrophic Lateral Sclerosis",
+    "bodySystem": "Nerve",
+    "category": "Nerve",
+    "tags": [
+      "amyotrophic",
+      "lateral",
+      "sclerosis",
+      "nerve"
+    ],
+    "description": "SpectraLight therapy protocol for amyotrophic lateral sclerosis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-39-1",
+        "name": "Amyotrophic Lateral Sclerosis Protocol 1 (CAFL)",
+        "frequencies": "254, 484, 610, 644, 690, 790, 864, 986",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-39-2",
+        "name": "Amyotrophic Lateral Sclerosis Protocol 2 (KHZ)",
+        "frequencies": "20, 2500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-39-3",
+        "name": "Amyotrophic Lateral Sclerosis Protocol 3 (XTRA)",
+        "frequencies": "254, 484, 610, 644, 660, 690, 692, 790, 864, 980, 986, 2900",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-40",
+    "conditionName": "Anal Itching",
+    "bodySystem": "Anus",
+    "category": "Anus",
+    "tags": [
+      "anal",
+      "itching",
+      "anus"
+    ],
+    "description": "SpectraLight therapy protocol for anal itching. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-40-1",
+        "name": "Anal Itching Protocol 1 (CAFL)",
+        "frequencies": "20, 72, 95, 120, 125, 444, 465, 727, 760, 773, 787, 826, 827, 835, 880, 1865, 4152, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-41",
+    "conditionName": "Anemia Aplastic",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "anemia",
+      "aplastic",
+      "blood"
+    ],
+    "description": "SpectraLight therapy protocol for anemia aplastic. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-41-1",
+        "name": "Anemia Aplastic Protocol 1 (KHZ)",
+        "frequencies": "650, 2500, 7500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-42",
+    "conditionName": "Anemia Hemolytic",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "anemia",
+      "hemolytic",
+      "blood"
+    ],
+    "description": "SpectraLight therapy protocol for anemia hemolytic. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-42-1",
+        "name": "Anemia Hemolytic Protocol 1 (KHZ)",
+        "frequencies": "20, 120, 5160",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-43",
+    "conditionName": "Anemia Iron-Deficiency",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "anemia",
+      "iron-deficiency",
+      "blood"
+    ],
+    "description": "SpectraLight therapy protocol for anemia iron-deficiency. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-43-1",
+        "name": "Anemia Iron-Deficiency Protocol 1 (KHZ)",
+        "frequencies": "100, 320, 2500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-44",
+    "conditionName": "Anemia Megaloblastic",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "anemia",
+      "megaloblastic",
+      "blood"
+    ],
+    "description": "SpectraLight therapy protocol for anemia megaloblastic. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-44-1",
+        "name": "Anemia Megaloblastic Protocol 1 (KHZ)",
+        "frequencies": "110, 300, 370",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-45",
+    "conditionName": "Anemia",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "anemia",
+      "blood"
+    ],
+    "description": "SpectraLight therapy protocol for anemia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-45-1",
+        "name": "Anemia Protocol 1 (KHZ)",
+        "frequencies": "80, 550, 5970",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-46",
+    "conditionName": "Anencephaly",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "anencephaly",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for anencephaly. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-46-1",
+        "name": "Anencephaly Protocol 1 (KHZ)",
+        "frequencies": "110, 490, 1000, 2250",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-47",
+    "conditionName": "Aneurysm",
+    "bodySystem": "Veins",
+    "category": "Veins",
+    "tags": [
+      "aneurysm",
+      "veins"
+    ],
+    "description": "SpectraLight therapy protocol for aneurysm. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-47-1",
+        "name": "Aneurysm Protocol 1 (CAFL)",
+        "frequencies": "20, 72, 95, 125, 444, 465, 727, 727, 760, 787, 880, 1865",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-48",
+    "conditionName": "Angina Pectoris",
+    "bodySystem": "Heart",
+    "category": "Heart",
+    "tags": [
+      "angina",
+      "pectoris",
+      "heart"
+    ],
+    "description": "SpectraLight therapy protocol for angina pectoris. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-48-1",
+        "name": "Angina Pectoris Protocol 1 (KHZ)",
+        "frequencies": "100, 680, 830",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-49",
+    "conditionName": "Angina Throat",
+    "bodySystem": "Throat",
+    "category": "Throat",
+    "tags": [
+      "angina",
+      "throat"
+    ],
+    "description": "SpectraLight therapy protocol for angina throat. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-49-1",
+        "name": "Angina Throat Protocol 1 (CAFL)",
+        "frequencies": "333, 428, 465, 660, 727, 776, 787, 804",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-50",
+    "conditionName": "Angina",
+    "bodySystem": "Heart",
+    "category": "Heart",
+    "tags": [
+      "angina",
+      "heart"
+    ],
+    "description": "SpectraLight therapy protocol for angina. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-50-1",
+        "name": "Angina Protocol 1 (CAFL)",
+        "frequencies": "428, 465, 660, 727, 776, 787",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-51",
+    "conditionName": "Angioedema",
+    "bodySystem": "Skin",
+    "category": "Dermatological",
+    "tags": [
+      "angioedema",
+      "skin"
+    ],
+    "description": "SpectraLight therapy protocol for angioedema. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-51-1",
+        "name": "Angioedema Protocol 1 (KHZ)",
+        "frequencies": "120, 520, 800, 5070",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-52",
+    "conditionName": "Angiofibroma",
+    "bodySystem": "Skin",
+    "category": "Dermatological",
+    "tags": [
+      "angiofibroma",
+      "skin"
+    ],
+    "description": "SpectraLight therapy protocol for angiofibroma. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-52-1",
+        "name": "Angiofibroma Protocol 1 (KHZ)",
+        "frequencies": "160, 620, 7500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-53",
+    "conditionName": "Angiolymphoid Hyperplasia with Eosinophilia",
+    "bodySystem": "Skin",
+    "category": "Dermatological",
+    "tags": [
+      "angiolymphoid",
+      "hyperplasia",
+      "with",
+      "eosinophilia",
+      "skin"
+    ],
+    "description": "SpectraLight therapy protocol for angiolymphoid hyperplasia with eosinophilia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-53-1",
+        "name": "Angiolymphoid Hyperplasia with Eosinophilia Protocol 1 (KHZ)",
+        "frequencies": "100, 1000, 5500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-54",
+    "conditionName": "Aniridia",
+    "bodySystem": "Eye",
+    "category": "Eye",
+    "tags": [
+      "aniridia",
+      "eye"
+    ],
+    "description": "SpectraLight therapy protocol for aniridia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-54-1",
+        "name": "Aniridia Protocol 1 (KHZ)",
+        "frequencies": "70, 240, 680, 830, 2500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-55",
+    "conditionName": "Anophthalmos",
+    "bodySystem": "Eye",
+    "category": "Eye",
+    "tags": [
+      "anophthalmos",
+      "eye"
+    ],
+    "description": "SpectraLight therapy protocol for anophthalmos. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-55-1",
+        "name": "Anophthalmos Protocol 1 (KHZ)",
+        "frequencies": "120, 970, 5050, 7000",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-56",
+    "conditionName": "Anosmia",
+    "bodySystem": "Nose",
+    "category": "Respiratory",
+    "tags": [
+      "anosmia",
+      "nose"
+    ],
+    "description": "SpectraLight therapy protocol for anosmia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-56-1",
+        "name": "Anosmia Protocol 1 (CAFL)",
+        "frequencies": "20, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-57",
+    "conditionName": "Anthrax",
+    "bodySystem": "Skin Lungs Intestines",
+    "category": "Skin Lungs Intestines",
+    "tags": [
+      "anthrax",
+      "skin lungs intestines"
+    ],
+    "description": "SpectraLight therapy protocol for anthrax. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-57-1",
+        "name": "Anthrax Protocol 1 (CAFL)",
+        "frequencies": "414, 500, 633, 768, 900, 1365",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-57-2",
+        "name": "Anthrax Protocol 2 (XTRA)",
+        "frequencies": "70, 680, 930, 5500",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-58",
+    "conditionName": "Anti-Glomerular Basement Membrane Disease",
+    "bodySystem": "Lung Kidney",
+    "category": "Lung Kidney",
+    "tags": [
+      "anti-glomerular",
+      "basement",
+      "membrane",
+      "disease",
+      "lung kidney"
+    ],
+    "description": "SpectraLight therapy protocol for anti-glomerular basement membrane disease. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-58-1",
+        "name": "Anti-Glomerular Basement Membrane Disease Protocol 1 (KHZ)",
+        "frequencies": "170, 950, 2500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-59",
+    "conditionName": "Anus Diseases",
+    "bodySystem": "Anus",
+    "category": "Anus",
+    "tags": [
+      "anus",
+      "diseases"
+    ],
+    "description": "SpectraLight therapy protocol for anus diseases. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-59-1",
+        "name": "Anus Diseases Protocol 1 (KHZ)",
+        "frequencies": "50, 600, 2250, 7500",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-60",
+    "conditionName": "Aortic Valve Stenosis",
+    "bodySystem": "Heart",
+    "category": "Heart",
+    "tags": [
+      "aortic",
+      "valve",
+      "stenosis",
+      "heart"
+    ],
+    "description": "SpectraLight therapy protocol for aortic valve stenosis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-60-1",
+        "name": "Aortic Valve Stenosis Protocol 1 (KHZ)",
+        "frequencies": "30, 250, 900",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-61",
+    "conditionName": "Aphasia",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "aphasia",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for aphasia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-61-1",
+        "name": "Aphasia Protocol 1 (KHZ)",
+        "frequencies": "140, 620, 850, 5070",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-62",
+    "conditionName": "Apnea",
+    "bodySystem": "Sleep",
+    "category": "Sleep",
+    "tags": [
+      "apnea",
+      "sleep"
+    ],
+    "description": "SpectraLight therapy protocol for apnea. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-62-1",
+        "name": "Apnea Protocol 1 (KHZ)",
+        "frequencies": "60, 830, 970, 5160",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-63",
+    "conditionName": "Appendicitis",
+    "bodySystem": "Appendix",
+    "category": "Appendix",
+    "tags": [
+      "appendicitis",
+      "appendix"
+    ],
+    "description": "SpectraLight therapy protocol for appendicitis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-63-1",
+        "name": "Appendicitis Protocol 1 (XTRA)",
+        "frequencies": "140, 460, 7500",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-64",
+    "conditionName": "Apraxias",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "apraxias",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for apraxias. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-64-1",
+        "name": "Apraxias Protocol 1 (KHZ)",
+        "frequencies": "600, 1000, 5000",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-65",
+    "conditionName": "Aprosodia",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "aprosodia",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for aprosodia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-65-1",
+        "name": "Aprosodia Protocol 1 (XTRA)",
+        "frequencies": "180, 1070, 4830",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-66",
+    "conditionName": "Arteriosclerosis",
+    "bodySystem": "Veins",
+    "category": "Veins",
+    "tags": [
+      "arteriosclerosis",
+      "veins"
+    ],
+    "description": "SpectraLight therapy protocol for arteriosclerosis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-66-1",
+        "name": "Arteriosclerosis Protocol 1 (CAFL)",
+        "frequencies": "20, 727, 776, 787, 880, 1500, 1600, 1800, 2170, 2720, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-67",
+    "conditionName": "Asian Grippe A",
+    "bodySystem": "Lung",
+    "category": "Lung",
+    "tags": [
+      "asian",
+      "grippe",
+      "a",
+      "lung"
+    ],
+    "description": "SpectraLight therapy protocol for asian grippe a. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-67-1",
+        "name": "Asian Grippe A Protocol 1 (CAFL)",
+        "frequencies": "434, 516, 656",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-68",
+    "conditionName": "Aspergillosis",
+    "bodySystem": "Lung",
+    "category": "Lung",
+    "tags": [
+      "aspergillosis",
+      "lung"
+    ],
+    "description": "SpectraLight therapy protocol for aspergillosis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-68-1",
+        "name": "Aspergillosis Protocol 1 (XTRA)",
+        "frequencies": "120, 830, 5000, 7250",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-69",
+    "conditionName": "Aspergillus Flavus",
+    "bodySystem": "Lung",
+    "category": "Lung",
+    "tags": [
+      "aspergillus",
+      "flavus",
+      "lung"
+    ],
+    "description": "SpectraLight therapy protocol for aspergillus flavus. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-69-1",
+        "name": "Aspergillus Flavus Protocol 1 (CAFL)",
+        "frequencies": "247, 1823, 1972",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-70",
+    "conditionName": "Aspergillus Glaucus",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "aspergillus",
+      "glaucus",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for aspergillus glaucus. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-70-1",
+        "name": "Aspergillus Glaucus Protocol 1 (CAFL)",
+        "frequencies": "524, 758",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-71",
+    "conditionName": "Aspergillus Terreus",
+    "bodySystem": "Lung",
+    "category": "Lung",
+    "tags": [
+      "aspergillus",
+      "terreus",
+      "lung"
+    ],
+    "description": "SpectraLight therapy protocol for aspergillus terreus. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-71-1",
+        "name": "Aspergillus Terreus Protocol 1 (CAFL)",
+        "frequencies": "339, 743",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-72",
+    "conditionName": "Asphyxia",
+    "bodySystem": "Lung",
+    "category": "Lung",
+    "tags": [
+      "asphyxia",
+      "lung"
+    ],
+    "description": "SpectraLight therapy protocol for asphyxia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-72-1",
+        "name": "Asphyxia Protocol 1 (KHZ)",
+        "frequencies": "30, 700, 2500, 5070",
+        "source": "KHZ",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-73",
+    "conditionName": "Asthma",
+    "bodySystem": "Lung",
+    "category": "Lung",
+    "tags": [
+      "asthma",
+      "lung"
+    ],
+    "description": "SpectraLight therapy protocol for asthma. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-73-1",
+        "name": "Asthma Protocol 1 (CAFL)",
+        "frequencies": "1233, 1283",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-73-2",
+        "name": "Asthma Protocol 2 (XTRA)",
+        "frequencies": "20, 72, 95, 125, 146, 444, 522, 727, 787, 880, 1233, 1283, 1500, 1600, 1800, 2170, 2720",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-73-3",
+        "name": "Asthma Protocol 3 (CAFL)",
+        "frequencies": "47, 120, 727, 787, 880, 1234, 3672, 7346, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-73-4",
+        "name": "Asthma Protocol 4 (XTRA)",
+        "frequencies": "1233, 1234, 1283, 3672, 7344",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-73-5",
+        "name": "Asthma Protocol 5 (XTRA)",
+        "frequencies": "727, 787, 880, 1500, 1600, 1800, 2170, 2720",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-74",
+    "conditionName": "Asthma Bronchial",
+    "bodySystem": "Lung",
+    "category": "Lung",
+    "tags": [
+      "asthma",
+      "bronchial",
+      "lung"
+    ],
+    "description": "SpectraLight therapy protocol for asthma bronchial. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-74-1",
+        "name": "Asthma Bronchial Protocol 1 (XTRA)",
+        "frequencies": "8, 548, 943",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-75",
+    "conditionName": "Astrocytoma",
+    "bodySystem": "Brain",
+    "category": "Brain",
+    "tags": [
+      "astrocytoma",
+      "brain"
+    ],
+    "description": "SpectraLight therapy protocol for astrocytoma. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-75-1",
+        "name": "Astrocytoma Protocol 1 (PROV)",
+        "frequencies": "20, 543, 641, 666, 690, 857, 2127, 2170",
+        "source": "PROV",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-76",
+    "conditionName": "Ataxia General",
+    "bodySystem": "Nerve",
+    "category": "Nerve",
+    "tags": [
+      "ataxia",
+      "general",
+      "nerve"
+    ],
+    "description": "SpectraLight therapy protocol for ataxia general. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-76-1",
+        "name": "Ataxia General Protocol 1 (CAFL)",
+        "frequencies": "20, 72, 444, 600, 625, 650, 727, 776, 787,  814, 880, 1500, 1600, 1800, 1865, 2170, 2720",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-77",
+    "conditionName": "Athletes Foot",
+    "bodySystem": "Feet",
+    "category": "Feet",
+    "tags": [
+      "athletes",
+      "foot",
+      "feet"
+    ],
+    "description": "SpectraLight therapy protocol for athletes foot. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-77-1",
+        "name": "Athletes Foot Protocol 1 (CAFL)",
+        "frequencies": "20, 304, 379, 464, 644, 727, 766, 787, 802, 880, 1552, 3176, 5000, 9999",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-78",
+    "conditionName": "Babesia",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "babesia",
+      "blood"
+    ],
+    "description": "SpectraLight therapy protocol for babesia. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-78-1",
+        "name": "Babesia Protocol 1 (PROV)",
+        "frequencies": "76, 432, 570, 753, 1583, 1584, 5776",
+        "source": "PROV",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-79",
+    "conditionName": "Bacillinum",
+    "bodySystem": "Respiratory",
+    "category": "Respiratory",
+    "tags": [
+      "bacillinum",
+      "respiratory"
+    ],
+    "description": "SpectraLight therapy protocol for bacillinum. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-79-1",
+        "name": "Bacillinum Protocol 1 (CAFL)",
+        "frequencies": "132, 423, 432, 785, 853, 854, 921, 1027, 1042, 1932",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-80",
+    "conditionName": "Bacillus Coli Rod Form",
+    "bodySystem": "Intestines",
+    "category": "Intestines",
+    "tags": [
+      "bacillus",
+      "coli",
+      "rod",
+      "form",
+      "intestines"
+    ],
+    "description": "SpectraLight therapy protocol for bacillus coli rod form. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-80-1",
+        "name": "Bacillus Coli Rod Form Protocol 1 (CAFL)",
+        "frequencies": "318, 417, 683, 800, 8020",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-81",
+    "conditionName": "Bacillus Infections",
+    "bodySystem": "Colon",
+    "category": "Colon",
+    "tags": [
+      "bacillus",
+      "infections",
+      "colon"
+    ],
+    "description": "SpectraLight therapy protocol for bacillus infections. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-81-1",
+        "name": "Bacillus Infections Protocol 1 (CAFL)",
+        "frequencies": "727, 787, 800, 802, 880, 1552",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-82",
+    "conditionName": "Backache",
+    "bodySystem": "Back",
+    "category": "Back",
+    "tags": [
+      "backache",
+      "back"
+    ],
+    "description": "SpectraLight therapy protocol for backache. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-82-1",
+        "name": "Backache Protocol 1 (CAFL)",
+        "frequencies": "300, 360, 360, 727, 760, 787, 802, 880, 1550, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-82-2",
+        "name": "Backache Protocol 2 (CAFL)",
+        "frequencies": "3, 432, 465, 727, 728, 776, 784, 787",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-83",
+    "conditionName": "Backache and Spasms",
+    "bodySystem": "Back",
+    "category": "Back",
+    "tags": [
+      "backache",
+      "and",
+      "spasms",
+      "back"
+    ],
+    "description": "SpectraLight therapy protocol for backache and spasms. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-83-1",
+        "name": "Backache and Spasms Protocol 1 (CAFL)",
+        "frequencies": "120, 212, 240, 424, 465, 528, 727, 760, 787, 880, 1550, 2112, 5000, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-84",
+    "conditionName": "Bacteria Lactis Nosode",
+    "bodySystem": "Back",
+    "category": "Back",
+    "tags": [
+      "bacteria",
+      "lactis",
+      "nosode",
+      "back"
+    ],
+    "description": "SpectraLight therapy protocol for bacteria lactis nosode. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-84-1",
+        "name": "Bacteria Lactis Nosode Protocol 1 (CAFL)",
+        "frequencies": "512, 526, 798, 951, 5412",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-85",
+    "conditionName": "Bacterium Coli",
+    "bodySystem": "Intestines",
+    "category": "Intestines",
+    "tags": [
+      "bacterium",
+      "coli",
+      "intestines"
+    ],
+    "description": "SpectraLight therapy protocol for bacterium coli. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-85-1",
+        "name": "Bacterium Coli Protocol 1 (CAFL)",
+        "frequencies": "358, 539, 642",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-86",
+    "conditionName": "Bacteroides Fragilis",
+    "bodySystem": "Respiratory",
+    "category": "Respiratory",
+    "tags": [
+      "bacteroides",
+      "fragilis",
+      "respiratory"
+    ],
+    "description": "SpectraLight therapy protocol for bacteroides fragilis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-86-1",
+        "name": "Bacteroides Fragilis Protocol 1 (CAFL)",
+        "frequencies": "633, 634, 635, 636, 637",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-87",
+    "conditionName": "Bad Breath",
+    "bodySystem": "Mouth",
+    "category": "Oral Health",
+    "tags": [
+      "bad",
+      "breath",
+      "mouth"
+    ],
+    "description": "SpectraLight therapy protocol for bad breath. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-87-1",
+        "name": "Bad Breath Protocol 1 (CAFL)",
+        "frequencies": "20, 727, 787, 802, 880, 1550",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-88",
+    "conditionName": "Bell's Palsy",
+    "bodySystem": "Nerve",
+    "category": "Nerve",
+    "tags": [
+      "bell's",
+      "palsy",
+      "nerve"
+    ],
+    "description": "SpectraLight therapy protocol for bell's palsy. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-88-1",
+        "name": "Bell's Palsy Protocol 1 (CAFL)",
+        "frequencies": "3, 20, 33, 35, 40, 72, 110, 125, 194, 222, 304, 464, 600, 625, 650, 727, 776, 787, 833, 880, 1250",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-89",
+    "conditionName": "Biliousness",
+    "bodySystem": "Gallbladder",
+    "category": "Gallbladder",
+    "tags": [
+      "biliousness",
+      "gallbladder"
+    ],
+    "description": "SpectraLight therapy protocol for biliousness. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-89-1",
+        "name": "Biliousness Protocol 1 (CAFL)",
+        "frequencies": "465, 727, 787, 802, 832, 880, 1550, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-90",
+    "conditionName": "Bilirubin",
+    "bodySystem": "Liver",
+    "category": "Liver",
+    "tags": [
+      "bilirubin",
+      "liver"
+    ],
+    "description": "SpectraLight therapy protocol for bilirubin. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-90-1",
+        "name": "Bilirubin Protocol 1 (CAFL)",
+        "frequencies": "649, 717, 726, 731, 734, 863, 9305",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-91",
+    "conditionName": "Bladder and Prostate Complaints",
+    "bodySystem": "Bladder",
+    "category": "Bladder",
+    "tags": [
+      "bladder",
+      "and",
+      "prostate",
+      "complaints"
+    ],
+    "description": "SpectraLight therapy protocol for bladder and prostate complaints. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-91-1",
+        "name": "Bladder and Prostate Complaints Protocol 1 (CAFL)",
+        "frequencies": "20, 465, 727, 787, 802, 880, 1550",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-92",
+    "conditionName": "Bladder TBC",
+    "bodySystem": "Bladder",
+    "category": "Bladder",
+    "tags": [
+      "bladder",
+      "tbc"
+    ],
+    "description": "SpectraLight therapy protocol for bladder tbc. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-92-1",
+        "name": "Bladder TBC Protocol 1 (CAFL)",
+        "frequencies": "360, 724, 726, 642, 771",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-93",
+    "conditionName": "Bladder",
+    "bodySystem": "Bladder",
+    "category": "Bladder",
+    "tags": [
+      "bladder"
+    ],
+    "description": "SpectraLight therapy protocol for bladder. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-93-1",
+        "name": "Bladder Protocol 1 (CAFL)",
+        "frequencies": "727, 787, 800, 880",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-94",
+    "conditionName": "Blastocystis Hominis",
+    "bodySystem": "Intestines",
+    "category": "Intestines",
+    "tags": [
+      "blastocystis",
+      "hominis",
+      "intestines"
+    ],
+    "description": "SpectraLight therapy protocol for blastocystis hominis. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-94-1",
+        "name": "Blastocystis Hominis Protocol 1 (CAFL)",
+        "frequencies": "365, 595, 844, 848, 1201, 1243, 5777",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-95",
+    "conditionName": "Blood Cleanser",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "blood",
+      "cleanser"
+    ],
+    "description": "SpectraLight therapy protocol for blood cleanser. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-95-1",
+        "name": "Blood Cleanser Protocol 1 (PROV)",
+        "frequencies": "727, 787, 880, 2008, 2127, 5000",
+        "source": "PROV",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-96",
+    "conditionName": "Blood Diseases",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "blood",
+      "diseases"
+    ],
+    "description": "SpectraLight therapy protocol for blood diseases. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-96-1",
+        "name": "Blood Diseases Protocol 1 (CAFL)",
+        "frequencies": "727, 787, 880, 5000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-97",
+    "conditionName": "Blood Pressure High",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "blood",
+      "pressure",
+      "high"
+    ],
+    "description": "SpectraLight therapy protocol for blood pressure high. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-97-1",
+        "name": "Blood Pressure High Protocol 1 (CAFL)",
+        "frequencies": "6, 20, 304, 727, 728, 787, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-98",
+    "conditionName": "Blood Pressure Low",
+    "bodySystem": "Blood",
+    "category": "Blood",
+    "tags": [
+      "blood",
+      "pressure",
+      "low"
+    ],
+    "description": "SpectraLight therapy protocol for blood pressure low. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-98-1",
+        "name": "Blood Pressure Low Protocol 1 (CAFL)",
+        "frequencies": "20, 727, 787, 880",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-99",
+    "conditionName": "Bone Disease Periodontal Disease",
+    "bodySystem": "Oral Cavity",
+    "category": "Oral Cavity",
+    "tags": [
+      "bone",
+      "disease",
+      "periodontal",
+      "oral cavity"
+    ],
+    "description": "SpectraLight therapy protocol for bone disease periodontal disease. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-99-1",
+        "name": "Bone Disease Periodontal Disease Protocol 1 (CAFL)",
+        "frequencies": "600, 625, 650, 727, 776, 787, 880, 1600, 1800",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-100",
+    "conditionName": "Bone Regeneration",
+    "bodySystem": "Bone",
+    "category": "Bone",
+    "tags": [
+      "bone",
+      "regeneration"
+    ],
+    "description": "SpectraLight therapy protocol for bone regeneration. Uses specific therapeutic frequencies to support healing and wellness.",
+    "protocols": [
+      {
+        "id": "prot-100-1",
+        "name": "Bone Regeneration Protocol 1 (CAFL)",
+        "frequencies": "2720, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
   }
 ]
