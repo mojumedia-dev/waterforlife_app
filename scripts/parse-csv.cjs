@@ -87,6 +87,5 @@ const conditions = Object.values(conditionMap).map((cond, idx) => {
   };
 });
 
-// Output first 100 conditions
-const output = conditions.slice(0, 100);
-console.log(JSON.stringify(output, null, 2));
+// Output ALL conditions
+console.log(JSON.stringify(conditions, null, 2));
