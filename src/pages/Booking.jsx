@@ -18,12 +18,16 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     setShowConfirmation(true);
   };
 
+  const handleContinueToShopify = () => {
+    window.location.href = 'https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking';
+  };
+
   if (showConfirmation) {
     return (
       <div className="page booking-page">
         <div className="confirmation-card card">
-          <div className="success-icon">✅</div>
-          <h2>Booking Confirmed!</h2>
+          <div className="success-icon">📋</div>
+          <h2>Review Your Booking Details</h2>
           <div className="confirmation-details">
             {condition && (
               <div className="detail-row">
@@ -69,28 +73,32 @@ function Booking({ condition, protocol, availability, location, navigate }) {
 
           <div className="confirmation-message">
             <p>
-              A confirmation email has been sent to your email address. 
-              You will receive a reminder 24 hours before your appointment.
+              <strong>Ready to complete your booking!</strong>
             </p>
             <p>
-              <strong>Location:</strong><br />
+              Click the button below to finalize your appointment on our secure Shopify booking system. 
+              You'll be able to confirm your preferred time slot and complete the booking process.
+            </p>
+            <p style={{ marginTop: '1rem', padding: '1rem', background: 'var(--background)', borderRadius: 'var(--radius-md)' }}>
+              <strong>📍 Location:</strong><br />
+              {location.name}<br />
               {location.address}<br />
-              {location.phone}
+              📞 {location.phone}
             </p>
           </div>
 
           <div className="action-buttons">
             <button 
               className="btn primary large"
-              onClick={() => navigate('dashboard')}
+              onClick={handleContinueToShopify}
             >
-              Return to Dashboard
+              Continue to Shopify to Complete Booking →
             </button>
             <button 
               className="btn secondary large"
-              onClick={() => navigate('packages')}
+              onClick={() => navigate('wellness')}
             >
-              View Session Packages
+              ← Back to Wellness Guide
             </button>
           </div>
         </div>
