@@ -1,0 +1,34 @@
+[
+  {
+    "id": "pkg-001",
+    "locationId": "loc-001",
+    "name": "Starter Package",
+    "sessionsIncluded": 5,
+    "priceDisplay": "$275",
+    "priceValue": 275,
+    "description": "Perfect for trying light therapy or addressing acute conditions",
+    "perSessionPrice": "$55"
+  },
+  {
+    "id": "pkg-002",
+    "locationId": "loc-001",
+    "name": "Health Optimizer",
+    "sessionsIncluded": 10,
+    "priceDisplay": "$500",
+    "priceValue": 500,
+    "description": "Most popular choice for chronic conditions and wellness maintenance",
+    "perSessionPrice": "$50",
+    "badge": "MOST POPULAR"
+  },
+  {
+    "id": "pkg-003",
+    "locationId": "loc-001",
+    "name": "Complete Wellness",
+    "sessionsIncluded": 20,
+    "priceDisplay": "$900",
+    "priceValue": 900,
+    "description": "Best value for comprehensive treatment programs and long-term healing",
+    "perSessionPrice": "$45",
+    "badge": "BEST VALUE"
+  }
+]

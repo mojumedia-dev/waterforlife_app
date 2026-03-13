@@ -1,0 +1,24 @@
+{
+  "id": "user-001",
+  "firstName": "Sarah",
+  "lastName": "Johnson",
+  "email": "sarah.johnson@example.com",
+  "phone": "(602) 555-0234",
+  "selectedLocationId": "loc-001",
+  "sessionsRemaining": 7,
+  "currentPackage": {
+    "id": "pkg-002",
+    "name": "Health Optimizer",
+    "purchasedDate": "2026-02-15",
+    "sessionsIncluded": 10,
+    "sessionsUsed": 3
+  },
+  "upcomingAppointment": {
+    "id": "appt-001",
+    "date": "2026-03-15",
+    "time": "10:00 AM",
+    "therapyType": "Arthritis Relief Protocol",
+    "duration": 30,
+    "locationId": "loc-001"
+  }
+}

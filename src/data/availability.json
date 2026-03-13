@@ -1,0 +1,40 @@
+{
+  "locationId": "loc-001",
+  "availableSlots": [
+    {
+      "date": "2026-03-17",
+      "dayOfWeek": "Monday",
+      "slots": ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"]
+    },
+    {
+      "date": "2026-03-18",
+      "dayOfWeek": "Tuesday",
+      "slots": ["9:00 AM", "10:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM"]
+    },
+    {
+      "date": "2026-03-19",
+      "dayOfWeek": "Wednesday",
+      "slots": ["9:00 AM", "10:00 AM", "11:00 AM", "2:00 PM", "3:00 PM", "4:00 PM"]
+    },
+    {
+      "date": "2026-03-20",
+      "dayOfWeek": "Thursday",
+      "slots": ["10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"]
+    },
+    {
+      "date": "2026-03-21",
+      "dayOfWeek": "Friday",
+      "slots": ["9:00 AM", "10:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM"]
+    },
+    {
+      "date": "2026-03-24",
+      "dayOfWeek": "Monday",
+      "slots": ["9:00 AM", "10:00 AM", "11:00 AM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM"]
+    },
+    {
+      "date": "2026-03-25",
+      "dayOfWeek": "Tuesday",
+      "slots": ["9:00 AM", "11:00 AM", "12:00 PM", "1:00 PM", "3:00 PM", "4:00 PM"]
+    }
+  ]
+}
