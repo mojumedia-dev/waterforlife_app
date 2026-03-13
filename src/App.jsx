@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import Dashboard from './pages/Dashboard';
 import WellnessGuide from './pages/WellnessGuide';
-import ProtocolDetail from './pages/ProtocolDetail';
+import ConditionDetail from './pages/ConditionDetail';
 import Booking from './pages/Booking';
 import Packages from './pages/Packages';
 import Account from './pages/Account';
@@ -11,23 +11,30 @@ import Account from './pages/Account';
 import locationData from './data/location.json';
 import userProfileData from './data/userProfile.json';
 import packagesData from './data/packages.json';
-import protocolsData from './data/protocols.json';
+import conditionsData from './data/conditions.json';
 import availabilityData from './data/availability.json';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
+  const [selectedCondition, setSelectedCondition] = useState(null);
   const [selectedProtocol, setSelectedProtocol] = useState(null);
   const [location] = useState(locationData);
   const [userProfile] = useState(userProfileData);
   const [packages] = useState(packagesData);
-  const [protocols] = useState(protocolsData);
+  const [conditions] = useState(conditionsData);
   const [availability] = useState(availabilityData);
 
   const navigate = (page, data = null) => {
-    if (data) {
-      setSelectedProtocol(data);
+    if (page === 'condition' && data) {
+      setSelectedCondition(data);
+      setCurrentPage('condition');
+    } else if (page === 'booking' && data) {
+      setSelectedCondition(data.condition || null);
+      setSelectedProtocol(data.protocol || null);
+      setCurrentPage('booking');
+    } else {
+      setCurrentPage(page);
     }
-    setCurrentPage(page);
     window.scrollTo(0, 0);
   };
 
@@ -41,17 +48,18 @@ function App() {
         />;
       case 'wellness':
         return <WellnessGuide 
-          protocols={protocols}
+          conditions={conditions}
           navigate={navigate}
         />;
-      case 'protocol':
-        return <ProtocolDetail 
-          protocol={selectedProtocol}
+      case 'condition':
+        return <ConditionDetail 
+          condition={selectedCondition}
           packages={packages}
           navigate={navigate}
         />;
       case 'booking':
         return <Booking 
+          condition={selectedCondition}
           protocol={selectedProtocol}
           availability={availability}
           location={location}

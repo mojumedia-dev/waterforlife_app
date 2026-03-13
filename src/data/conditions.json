@@ -1,0 +1,312 @@
+[
+  {
+    "id": "cond-001",
+    "conditionName": "Arthritis",
+    "bodySystem": "Musculoskeletal",
+    "category": "Musculoskeletal",
+    "tags": ["joint pain", "inflammation", "mobility", "chronic pain", "stiffness"],
+    "description": "Helps reduce inflammation and improve joint mobility. Best results with consistent treatment schedule.",
+    "protocols": [
+      {
+        "id": "prot-001-1",
+        "name": "Arthritis General Protocol (XTRA)",
+        "frequencies": "50, 750, 900, 9000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-001-2",
+        "name": "Arthritis Alternative (CAFL)",
+        "frequencies": "120, 250, 700, 870, 1000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-003"
+  },
+  {
+    "id": "cond-002",
+    "conditionName": "Migraine",
+    "bodySystem": "Neurological",
+    "category": "Neurological",
+    "tags": ["headache", "pain", "tension", "stress", "nausea"],
+    "description": "Can help reduce frequency and intensity of migraines. Most effective when started at onset of symptoms.",
+    "protocols": [
+      {
+        "id": "prot-002-1",
+        "name": "Migraine Primary (XTRA)",
+        "frequencies": "160, 550, 950, 7500",
+        "source": "XTRA",
+        "frequencyPerWeek": 2,
+        "durationMinutes": 20,
+        "recommendedWeeks": 6,
+        "totalSessions": 12
+      },
+      {
+        "id": "prot-002-2",
+        "name": "Migraine Tension (CAFL)",
+        "frequencies": "520, 650, 3000, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 2,
+        "durationMinutes": 20,
+        "recommendedWeeks": 6,
+        "totalSessions": 12
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-003",
+    "conditionName": "Insomnia",
+    "bodySystem": "Sleep Disorders",
+    "category": "Sleep Disorders",
+    "tags": ["sleep", "rest", "relaxation", "anxiety", "stress"],
+    "description": "Promotes relaxation and supports natural sleep cycles. Best used 30-60 minutes before bedtime.",
+    "protocols": [
+      {
+        "id": "prot-003-1",
+        "name": "Insomnia Relaxation (XTRA)",
+        "frequencies": "10, 120, 465, 3170",
+        "source": "XTRA",
+        "frequencyPerWeek": 4,
+        "durationMinutes": 25,
+        "recommendedWeeks": 4,
+        "totalSessions": 16
+      },
+      {
+        "id": "prot-003-2",
+        "name": "Sleep Support (CAFL)",
+        "frequencies": "304, 496, 1550, 3000",
+        "source": "CAFL",
+        "frequencyPerWeek": 4,
+        "durationMinutes": 25,
+        "recommendedWeeks": 4,
+        "totalSessions": 16
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-004",
+    "conditionName": "Back Pain (Lower)",
+    "bodySystem": "Musculoskeletal",
+    "category": "Musculoskeletal",
+    "tags": ["chronic pain", "sciatica", "spinal", "muscle pain", "inflammation"],
+    "description": "Addresses chronic lower back pain, muscle tension, and inflammation. Effective for sciatica and spinal issues.",
+    "protocols": [
+      {
+        "id": "prot-004-1",
+        "name": "Lower Back Pain (XTRA)",
+        "frequencies": "120, 212, 832, 5000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 10,
+        "totalSessions": 30
+      },
+      {
+        "id": "prot-004-2",
+        "name": "Spinal Support (CAFL)",
+        "frequencies": "100, 400, 787, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 10,
+        "totalSessions": 30
+      }
+    ],
+    "suggestedPackageId": "pkg-003"
+  },
+  {
+    "id": "cond-005",
+    "conditionName": "Anxiety",
+    "bodySystem": "Mental Health",
+    "category": "Mental Health",
+    "tags": ["stress", "worry", "panic", "tension", "nervousness"],
+    "description": "Supports emotional balance and reduces anxiety symptoms. Promotes calm and relaxation.",
+    "protocols": [
+      {
+        "id": "prot-005-1",
+        "name": "Anxiety Relief (XTRA)",
+        "frequencies": "30, 95, 3000, 10000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 25,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-005-2",
+        "name": "Calm & Balance (CAFL)",
+        "frequencies": "522, 680, 870, 7830",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 25,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-003"
+  },
+  {
+    "id": "cond-006",
+    "conditionName": "Fibromyalgia",
+    "bodySystem": "Musculoskeletal",
+    "category": "Musculoskeletal",
+    "tags": ["chronic pain", "fatigue", "muscle pain", "tender points", "sleep issues"],
+    "description": "Comprehensive support for fibromyalgia symptoms including pain, fatigue, and sleep disturbances.",
+    "protocols": [
+      {
+        "id": "prot-006-1",
+        "name": "Fibromyalgia Primary (XTRA)",
+        "frequencies": "120, 140, 304, 464, 728",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 12,
+        "totalSessions": 36
+      },
+      {
+        "id": "prot-006-2",
+        "name": "Fibro Pain Relief (CAFL)",
+        "frequencies": "328, 880, 5000, 7280",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 12,
+        "totalSessions": 36
+      }
+    ],
+    "suggestedPackageId": "pkg-003"
+  },
+  {
+    "id": "cond-007",
+    "conditionName": "Allergies",
+    "bodySystem": "Immune System",
+    "category": "Immune System",
+    "tags": ["seasonal", "hay fever", "sinus", "congestion", "inflammation"],
+    "description": "Helps reduce allergic responses and supports immune balance. Effective for seasonal and environmental allergies.",
+    "protocols": [
+      {
+        "id": "prot-007-1",
+        "name": "Allergy Relief (XTRA)",
+        "frequencies": "10, 120, 727, 3000",
+        "source": "XTRA",
+        "frequencyPerWeek": 2,
+        "durationMinutes": 20,
+        "recommendedWeeks": 6,
+        "totalSessions": 12
+      },
+      {
+        "id": "prot-007-2",
+        "name": "Immune Support (CAFL)",
+        "frequencies": "333, 444, 880, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 2,
+        "durationMinutes": 20,
+        "recommendedWeeks": 6,
+        "totalSessions": 12
+      }
+    ],
+    "suggestedPackageId": "pkg-002"
+  },
+  {
+    "id": "cond-008",
+    "conditionName": "Hypertension (High Blood Pressure)",
+    "bodySystem": "Cardiovascular",
+    "category": "Cardiovascular",
+    "tags": ["blood pressure", "heart health", "circulation", "stress"],
+    "description": "Supports cardiovascular health and promotes healthy blood pressure levels.",
+    "protocols": [
+      {
+        "id": "prot-008-1",
+        "name": "Blood Pressure Support (XTRA)",
+        "frequencies": "9, 95, 7830, 10000",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 25,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      },
+      {
+        "id": "prot-008-2",
+        "name": "Cardiovascular Balance (CAFL)",
+        "frequencies": "20, 727, 787, 3176",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 25,
+        "recommendedWeeks": 8,
+        "totalSessions": 24
+      }
+    ],
+    "suggestedPackageId": "pkg-003"
+  },
+  {
+    "id": "cond-009",
+    "conditionName": "Depression",
+    "bodySystem": "Mental Health",
+    "category": "Mental Health",
+    "tags": ["mood", "sadness", "energy", "motivation", "emotional health"],
+    "description": "Supports emotional well-being and mood balance. Complements other therapeutic approaches.",
+    "protocols": [
+      {
+        "id": "prot-009-1",
+        "name": "Mood Support (XTRA)",
+        "frequencies": "10, 35, 428, 7830",
+        "source": "XTRA",
+        "frequencyPerWeek": 4,
+        "durationMinutes": 30,
+        "recommendedWeeks": 10,
+        "totalSessions": 40
+      },
+      {
+        "id": "prot-009-2",
+        "name": "Emotional Balance (CAFL)",
+        "frequencies": "220, 304, 5000, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 4,
+        "durationMinutes": 30,
+        "recommendedWeeks": 10,
+        "totalSessions": 40
+      }
+    ],
+    "suggestedPackageId": "pkg-003"
+  },
+  {
+    "id": "cond-010",
+    "conditionName": "Diabetes Type 2",
+    "bodySystem": "Metabolic",
+    "category": "Metabolic",
+    "tags": ["blood sugar", "insulin", "metabolism", "energy"],
+    "description": "Supports metabolic health and blood sugar balance. Part of comprehensive diabetes management.",
+    "protocols": [
+      {
+        "id": "prot-010-1",
+        "name": "Metabolic Support (XTRA)",
+        "frequencies": "20, 35, 465, 6800",
+        "source": "XTRA",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 12,
+        "totalSessions": 36
+      },
+      {
+        "id": "prot-010-2",
+        "name": "Blood Sugar Balance (CAFL)",
+        "frequencies": "230, 302, 787, 10000",
+        "source": "CAFL",
+        "frequencyPerWeek": 3,
+        "durationMinutes": 30,
+        "recommendedWeeks": 12,
+        "totalSessions": 36
+      }
+    ],
+    "suggestedPackageId": "pkg-003"
+  }
+]

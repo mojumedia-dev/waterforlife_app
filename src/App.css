@@ -449,6 +449,196 @@ body {
 }
 
 /* ============================================
+   CONDITION CARDS
+   ============================================ */
+.condition-card {
+  cursor: pointer;
+}
+
+.condition-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.protocol-info {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.info-item .icon {
+  font-size: 1.125rem;
+}
+
+/* ============================================
+   CONDITION DETAIL PAGE
+   ============================================ */
+.condition-overview {
+  margin-bottom: var(--spacing-xl);
+}
+
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.overview-item {
+  text-align: center;
+}
+
+.overview-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.overview-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.tags-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.protocols-section {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.section-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.protocol-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+.protocol-option-card {
+  border: 2px solid var(--border);
+  transition: all 0.2s;
+}
+
+.protocol-option-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.protocol-option-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-lg);
+}
+
+.protocol-option-header h3 {
+  flex: 1;
+  margin: 0;
+}
+
+.source-badge {
+  background: var(--accent);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.protocol-frequencies {
+  background: var(--background);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.freq-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.freq-values {
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.protocol-schedule {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.schedule-item .icon {
+  font-size: 1.125rem;
+}
+
+/* ============================================
+   BOOKING CONTEXT
+   ============================================ */
+.booking-context {
+  background: linear-gradient(to bottom right, #EFF6FF, var(--surface));
+  border: 2px solid var(--info);
+  margin-bottom: var(--spacing-xl);
+}
+
+.booking-protocol-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.protocol-separator {
+  color: var(--text-muted);
+}
+
+.protocol-source {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.protocol-frequencies-info {
+  background: var(--background);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+}
+
+.protocol-frequencies-info strong {
+  color: var(--text-secondary);
+}
+
+/* ============================================
    WELLNESS GUIDE PAGE
    ============================================ */
 .search-section {
@@ -1236,6 +1426,14 @@ body {
   }
   
   .summary-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .overview-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .protocol-schedule {
     grid-template-columns: repeat(4, 1fr);
   }
   
