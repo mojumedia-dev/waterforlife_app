@@ -41,7 +41,7 @@ function WellnessGuide({ conditions, navigate }) {
     <div className="page wellness-guide-page">
       <div className="page-header">
         <h2>🔍 Wellness Guide</h2>
-        <p className="subtitle">Find your personalized healing protocol</p>
+        <p className="subtitle">Search 424 conditions and frequency protocols</p>
       </div>
 
       <div className="search-section">
