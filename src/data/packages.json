@@ -4,31 +4,31 @@
     "locationId": "loc-001",
     "name": "Starter Package",
     "sessionsIncluded": 5,
-    "priceDisplay": "$275",
-    "priceValue": 275,
-    "description": "Perfect for trying light therapy or addressing acute conditions",
-    "perSessionPrice": "$55"
+    "priceDisplay": "$295",
+    "priceValue": 295,
+    "description": "Perfect for trying SpectraLight therapy or addressing acute conditions. Save 9% compared to single sessions.",
+    "perSessionPrice": "$59"
   },
   {
     "id": "pkg-002",
     "locationId": "loc-001",
-    "name": "Health Optimizer",
+    "name": "Wellness Builder",
     "sessionsIncluded": 10,
-    "priceDisplay": "$500",
-    "priceValue": 500,
-    "description": "Most popular choice for chronic conditions and wellness maintenance",
-    "perSessionPrice": "$50",
+    "priceDisplay": "$550",
+    "priceValue": 550,
+    "description": "Most popular choice for chronic conditions and wellness maintenance. Save 15% with our 10-session package!",
+    "perSessionPrice": "$55",
     "badge": "MOST POPULAR"
   },
   {
     "id": "pkg-003",
     "locationId": "loc-001",
-    "name": "Complete Wellness",
+    "name": "Complete Healing",
     "sessionsIncluded": 20,
-    "priceDisplay": "$900",
-    "priceValue": 900,
-    "description": "Best value for comprehensive treatment programs and long-term healing",
-    "perSessionPrice": "$45",
+    "priceDisplay": "$1,000",
+    "priceValue": 1000,
+    "description": "Best value for comprehensive treatment programs and long-term healing. Save 23% - maximum savings!",
+    "perSessionPrice": "$50",
     "badge": "BEST VALUE"
   }
 ]

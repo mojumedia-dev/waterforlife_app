@@ -8,11 +8,11 @@
 }
 
 :root {
-  /* Brand Colors */
-  --primary: #2563EB;
-  --primary-dark: #1D4ED8;
-  --secondary: #10B981;
-  --accent: #F59E0B;
+  /* Brand Colors - Water & Light For Health */
+  --primary: #0891B2;
+  --primary-dark: #0E7490;
+  --secondary: #FB923C;
+  --accent: #F97316;
   
   /* Neutral Colors */
   --background: #F9FAFB;

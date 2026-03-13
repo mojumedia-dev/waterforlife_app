@@ -82,7 +82,7 @@ function App() {
     <div className="app">
       <header className="app-header">
         <div className="header-content">
-          <h1 className="logo">💡 Water For Life</h1>
+          <h1 className="logo">💧✨ Water & Light</h1>
           <button className="location-btn" onClick={() => navigate('account')}>
             <span className="location-icon">📍</span>
             <span className="location-name">{location.city}</span>
