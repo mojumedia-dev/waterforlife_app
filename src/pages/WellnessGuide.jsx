@@ -19,14 +19,18 @@ function WellnessGuide({ conditions, navigate }) {
       filtered = filtered.filter(c => c.category === selectedCategory);
     }
 
-    // Filter by search term
+    // Filter by search term (including frequencies)
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase();
       filtered = filtered.filter(c => 
         c.conditionName.toLowerCase().includes(term) ||
         c.bodySystem.toLowerCase().includes(term) ||
         c.category.toLowerCase().includes(term) ||
-        c.tags.some(tag => tag.toLowerCase().includes(term))
+        c.tags.some(tag => tag.toLowerCase().includes(term)) ||
+        // Search within frequency values
+        c.protocols.some(protocol => 
+          protocol.frequencies.toLowerCase().includes(term)
+        )
       );
     }
 
@@ -41,7 +45,7 @@ function WellnessGuide({ conditions, navigate }) {
     <div className="page wellness-guide-page">
       <div className="page-header">
         <h2>🔍 Wellness Guide</h2>
-        <p className="subtitle">Search 424 conditions and frequency protocols</p>
+        <p className="subtitle">Search by condition, symptom, or frequency (Hz)</p>
       </div>
 
       <div className="search-section">
@@ -49,7 +53,7 @@ function WellnessGuide({ conditions, navigate }) {
           <span className="search-icon">🔍</span>
           <input
             type="text"
-            placeholder="Search conditions, symptoms, or keywords..."
+            placeholder="Search conditions, symptoms, frequencies (Hz), or keywords..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
