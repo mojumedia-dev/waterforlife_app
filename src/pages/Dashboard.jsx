@@ -9,17 +9,22 @@ function Dashboard({ userProfile, location, navigate }) {
     freq4: ''
   });
   const [selectedCondition, setSelectedCondition] = useState('');
+  const [lastBookedProtocol, setLastBookedProtocol] = useState(null);
 
   // Load saved frequencies and condition from localStorage on mount
   useEffect(() => {
     const savedFreqs = localStorage.getItem('sessionFrequencies');
     const savedCondition = localStorage.getItem('selectedCondition');
+    const bookedProtocol = localStorage.getItem('lastBookedProtocol');
     
     if (savedFreqs) {
       setFrequencies(JSON.parse(savedFreqs));
     }
     if (savedCondition) {
       setSelectedCondition(savedCondition);
+    }
+    if (bookedProtocol) {
+      setLastBookedProtocol(JSON.parse(bookedProtocol));
     }
   }, []);
 
@@ -130,6 +135,29 @@ function Dashboard({ userProfile, location, navigate }) {
             ))}
           </select>
         </div>
+
+        {lastBookedProtocol && selectedCondition === lastBookedProtocol.protocolId && (
+          <div className="booking-sync-notice" style={{
+            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+            color: 'white',
+            padding: '1rem',
+            borderRadius: 'var(--radius-md)',
+            marginTop: '1rem',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem'
+          }}>
+            <span style={{ fontSize: '1.5rem' }}>✨</span>
+            <div>
+              <div style={{ fontWeight: '600', marginBottom: '0.25rem' }}>
+                Synced with Your Booking
+              </div>
+              <div style={{ fontSize: '0.9rem', opacity: '0.95' }}>
+                These frequencies match your upcoming appointment for {lastBookedProtocol.conditionName}
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="frequency-inputs">
           <div className="frequency-input-group">

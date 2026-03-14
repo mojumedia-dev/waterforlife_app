@@ -15,6 +15,36 @@ function Booking({ condition, protocol, availability, location, navigate }) {
   };
 
   const handleConfirmBooking = () => {
+    // Save booked protocol frequencies to dashboard
+    if (protocol && protocol.frequencies) {
+      const freqArray = protocol.frequencies.split(',').map(f => f.trim());
+      const frequencies = {
+        freq1: freqArray[0] || '',
+        freq2: freqArray[1] || '',
+        freq3: freqArray[2] || '',
+        freq4: freqArray[3] || ''
+      };
+      
+      // Save to localStorage for dashboard
+      localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
+      
+      // Save the protocol ID as selected condition
+      if (protocol.id) {
+        localStorage.setItem('selectedCondition', protocol.id);
+      }
+      
+      // Save booking info for future reference
+      localStorage.setItem('lastBookedProtocol', JSON.stringify({
+        protocolId: protocol.id,
+        protocolName: protocol.name,
+        conditionName: condition?.conditionName,
+        frequencies: protocol.frequencies,
+        date: selectedDate.date,
+        time: selectedTime,
+        bookedAt: new Date().toISOString()
+      }));
+    }
+    
     setShowConfirmation(true);
   };
 
@@ -79,6 +109,21 @@ function Booking({ condition, protocol, availability, location, navigate }) {
               Click the button below to finalize your appointment on our secure Shopify booking system. 
               You'll be able to confirm your preferred time slot and complete the booking process.
             </p>
+            
+            {protocol && (
+              <div style={{ 
+                marginTop: '1rem', 
+                padding: '1rem', 
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: 'var(--radius-md)',
+                color: 'white'
+              }}>
+                <strong>✨ Dashboard Updated!</strong><br />
+                Your session frequencies have been automatically saved to your dashboard. 
+                Visit your dashboard anytime to review the frequencies for this protocol.
+              </div>
+            )}
+            
             <p style={{ marginTop: '1rem', padding: '1rem', background: 'var(--background)', borderRadius: 'var(--radius-md)' }}>
               <strong>📍 Location:</strong><br />
               {location.name}<br />
