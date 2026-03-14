@@ -54,7 +54,7 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     window.open(buildBookingUrl(), '_blank');
   };
 
-  // Build booking URL - links to specific duration page
+  // Build booking URL - uses existing product page with variant parameter
   const buildBookingUrl = () => {
     // Determine duration from protocol (default to 30 if not set)
     const duration = protocol?.durationMinutes || 30;
@@ -65,11 +65,24 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     else if (duration <= 30) selectedDuration = 30;
     else selectedDuration = 60;
     
-    // Build URL based on booking type and duration
-    const baseUrl = 'https://waterlightforhealth.com/pages';
-    const type = bookingType === 'package' ? 'package' : 'single';
+    // Variant IDs for each booking type and duration
+    const variants = {
+      single: {
+        15: '52544178225522',
+        30: '52544178258290',
+        60: '52544178291058'
+      },
+      package: {
+        15: '60768399753586',
+        30: '60768399786354',
+        60: '60768399819122'
+      }
+    };
     
-    return `${baseUrl}/book-${type}-${selectedDuration}min`;
+    const variantId = variants[bookingType][selectedDuration];
+    
+    // Use existing product page with variant parameter
+    return `https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking?variant=${variantId}`;
   };
 
   // Show booking type selector (skip date/time for MVP)
