@@ -49,187 +49,22 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     setShowConfirmation(true);
   };
 
-  const [showBookingEmbed, setShowBookingEmbed] = useState(false);
-
   const handleContinueToBooking = () => {
-    // Show embedded booking widget
-    setShowBookingEmbed(true);
+    // Open Shopify booking page in new tab
+    window.open(buildBookingUrl(), '_blank');
   };
 
-  // Event configuration for Easy Appointment Booking
-  const getEventConfig = () => {
-    // Determine duration from protocol (default to 30 if not set)
-    const duration = protocol?.durationMinutes || 30;
-    
-    // Map to closest available duration (15, 30, or 60)
-    let selectedDuration = 30; // default
-    if (duration <= 15) selectedDuration = 15;
-    else if (duration <= 30) selectedDuration = 30;
-    else selectedDuration = 60;
-    
-    // Event configurations for each booking type and duration
-    const events = {
-      single: {
-        15: { product: '1477172625450', event: '5c916847-3084-4130-8143-8e7e1b9330eb', variant: '52544178225522' },
-        30: { product: '1477172625450', event: '84cb48cb-0415-4cea-a89e-c44ab1525b46', variant: '52544178258290' },
-        60: { product: '1477172625450', event: '09ef3036-0812-47dc-adcb-c496a5ec0760', variant: '52544178291058' }
-      },
-      package: {
-        15: { product: '1477172625450', event: '2950a7c2-bc18-42f1-b475-e7d82624d2f1', variant: '60768399753586' },
-        30: { product: '1477172625445', event: '870ab5f1-299d-4066-96f1-be892d817e83', variant: '60768399786354' },
-        60: { product: '1477172625445', event: '2552a6f7-9383-4370-8eb2-3e09168cfccd', variant: '60768399819122' }
-      }
-    };
-    
-    return events[bookingType][selectedDuration];
-  };
-
-  // Build booking URL with protocol data for Easy Appointment Booking
+  // Build booking URL - links to Shopify pages with embedded calendars
   const buildBookingUrl = () => {
-    const eventConfig = getEventConfig();
-    
-    // Build Servicify booking URL
-    const baseUrl = 'https://waterlightforhealth.com/servicify-calendar';
-    const params = new URLSearchParams({
-      'servicify-product': eventConfig.product,
-      'servicify-event': eventConfig.event,
-      'servicify-variant': eventConfig.variant
-    });
-    
-    // Add protocol data as notes (if Easy Appointment Booking supports it)
-    if (protocol && condition) {
-      const bookingNotes = [
-        `Protocol: ${protocol.name}`,
-        `Condition: ${condition.conditionName}`,
-        `Frequencies: ${protocol.frequencies} Hz`,
-        `Duration: ${protocol.durationMinutes} minutes`,
-        `Recommended: ${protocol.frequencyPerWeek}x/week for ${protocol.recommendedWeeks} weeks`,
-        `Source: Water & Light Wellness App`
-      ].join(' | ');
-      
-      // Try adding as parameter (may or may not work depending on Easy Appointment Booking)
-      params.append('notes', bookingNotes);
+    // Link to the appropriate Shopify page based on booking type
+    if (bookingType === 'package') {
+      // Package holder booking page (free sessions)
+      return 'https://waterlightforhealth.com/pages/book-package-session';
+    } else {
+      // Single session booking page (paid)
+      return 'https://waterlightforhealth.com/pages/book-single-session';
     }
-    
-    return `${baseUrl}?${params.toString()}`;
   };
-
-  // Show embedded booking widget
-  if (showBookingEmbed) {
-    return (
-      <div className="page booking-page">
-        <button className="back-btn" onClick={() => setShowBookingEmbed(false)}>
-          ← Back to Booking Details
-        </button>
-
-        <div className="page-header">
-          <h2>📅 Complete Your Booking</h2>
-          <p className="subtitle">Finalize your appointment details below</p>
-        </div>
-
-        {protocol && (
-          <div className="booking-context card" style={{ marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <div>
-                <strong>{protocol.name}</strong>
-                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
-                  {condition?.conditionName} • {protocol.durationMinutes} min • {protocol.frequencies} Hz
-                </div>
-              </div>
-              <div style={{
-                padding: '0.5rem 1rem',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                color: 'white',
-                borderRadius: 'var(--radius-md)',
-                fontSize: '0.9rem',
-                fontWeight: '600'
-              }}>
-                ✨ Frequencies Saved
-              </div>
-            </div>
-          </div>
-        )}
-
-        <div className="booking-embed-container card">
-          <iframe
-            src={buildBookingUrl()}
-            width="100%"
-            height="800"
-            frameBorder="0"
-            title="Book Your Appointment"
-            sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
-            style={{
-              borderRadius: 'var(--radius-md)',
-              minHeight: '800px'
-            }}
-            onError={() => {
-              // Fallback if iframe doesn't work (Shopify sometimes blocks iframes)
-              console.log('Iframe blocked, opening in new window');
-              window.open(buildBookingUrl(), '_blank');
-              setShowBookingEmbed(false);
-            }}
-          />
-        </div>
-        
-        <div style={{
-          marginTop: '1rem',
-          padding: '1rem',
-          background: '#fffbeb',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid #fbbf24'
-        }}>
-          <div style={{ marginBottom: '0.5rem', fontWeight: '600', color: '#92400e' }}>
-            ⚠️ Booking widget not loading?
-          </div>
-          <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: '#92400e' }}>
-            Some browsers block embedded Shopify pages for security. If you see a blank space above:
-          </p>
-          <button 
-            onClick={() => window.open(buildBookingUrl(), '_blank')}
-            className="btn primary"
-            style={{ width: '100%' }}
-          >
-            Open Booking Page in New Tab →
-          </button>
-        </div>
-
-        <div style={{
-          marginTop: '1rem',
-          padding: '1rem',
-          background: '#f0f9ff',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid #bfdbfe'
-        }}>
-          <div style={{ fontSize: '0.9rem', color: '#1e3a8a' }}>
-            <strong>📋 Your protocol details will be included:</strong>
-            <ul style={{ marginTop: '0.5rem', marginBottom: 0, paddingLeft: '1.5rem' }}>
-              {protocol && (
-                <>
-                  <li>Protocol: {protocol.name}</li>
-                  <li>Frequencies: {protocol.frequencies} Hz</li>
-                  <li>Duration: {protocol.durationMinutes} minutes</li>
-                </>
-              )}
-            </ul>
-          </div>
-        </div>
-
-        <div style={{
-          marginTop: '1rem',
-          padding: '1rem',
-          background: '#f0f9ff',
-          borderRadius: 'var(--radius-md)',
-          border: '1px solid #bfdbfe',
-          textAlign: 'center'
-        }}>
-          <p style={{ margin: 0, fontSize: '0.9rem', color: '#1e3a8a' }}>
-            💡 <strong>Tip:</strong> Your selected frequencies have been saved to your dashboard. 
-            Visit your dashboard anytime to review them.
-          </p>
-        </div>
-      </div>
-    );
-  }
 
   // Show booking type selector (skip date/time for MVP)
   if (!bookingType) {
