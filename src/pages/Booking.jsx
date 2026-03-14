@@ -56,23 +56,47 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     setShowBookingEmbed(true);
   };
 
+  // Event configuration for Easy Appointment Booking
+  const getEventConfig = () => {
+    // Determine duration from protocol (default to 30 if not set)
+    const duration = protocol?.durationMinutes || 30;
+    
+    // Map to closest available duration (15, 30, or 60)
+    let selectedDuration = 30; // default
+    if (duration <= 15) selectedDuration = 15;
+    else if (duration <= 30) selectedDuration = 30;
+    else selectedDuration = 60;
+    
+    // Event configurations for each booking type and duration
+    const events = {
+      single: {
+        15: { product: '1477172625450', event: '5c916847-3084-4130-8143-8e7e1b9330eb', variant: '52544178225522' },
+        30: { product: '1477172625450', event: '84cb48cb-0415-4cea-a89e-c44ab1525b46', variant: '52544178258290' },
+        60: { product: '1477172625450', event: '09ef3036-0812-47dc-adcb-c496a5ec0760', variant: '52544178291058' }
+      },
+      package: {
+        15: { product: '1477172625450', event: '2950a7c2-bc18-42f1-b475-e7d82624d2f1', variant: '60768399753586' },
+        30: { product: '1477172625445', event: '870ab5f1-299d-4066-96f1-be892d817e83', variant: '60768399786354' },
+        60: { product: '1477172625445', event: '2552a6f7-9383-4370-8eb2-3e09168cfccd', variant: '60768399819122' }
+      }
+    };
+    
+    return events[bookingType][selectedDuration];
+  };
+
   // Build booking URL with protocol data for Easy Appointment Booking
   const buildBookingUrl = () => {
-    // Different URLs based on booking type
-    let baseUrl;
+    const eventConfig = getEventConfig();
     
-    if (bookingType === 'package') {
-      // Package holder booking (no payment)
-      baseUrl = 'https://waterlightforhealth.com/products/spectralight-session-package-holder';
-    } else {
-      // Single session booking (with payment)
-      baseUrl = 'https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking';
-    }
+    // Build Servicify booking URL
+    const baseUrl = 'https://waterlightforhealth.com/servicify-calendar';
+    const params = new URLSearchParams({
+      'servicify-product': eventConfig.product,
+      'servicify-event': eventConfig.event,
+      'servicify-variant': eventConfig.variant
+    });
     
-    // Build booking notes with all protocol details
-    // This will appear in the customer notes field
-    const params = new URLSearchParams();
-    
+    // Add protocol data as notes (if Easy Appointment Booking supports it)
     if (protocol && condition) {
       const bookingNotes = [
         `Protocol: ${protocol.name}`,
@@ -83,12 +107,11 @@ function Booking({ condition, protocol, availability, location, navigate }) {
         `Source: Water & Light Wellness App`
       ].join(' | ');
       
-      // Add notes parameter - Easy Appointment Booking may pick this up
-      params.append('checkout[note]', bookingNotes);
+      // Try adding as parameter (may or may not work depending on Easy Appointment Booking)
+      params.append('notes', bookingNotes);
     }
     
-    const queryString = params.toString();
-    return queryString ? `${baseUrl}?${queryString}` : baseUrl;
+    return `${baseUrl}?${params.toString()}`;
   };
 
   // Show embedded booking widget
@@ -340,6 +363,31 @@ function Booking({ condition, protocol, availability, location, navigate }) {
         <div className="confirmation-card card">
           <div className="success-icon">📋</div>
           <h2>Review Your Booking Details</h2>
+          
+          <div style={{ 
+            marginBottom: '1.5rem', 
+            padding: '0.75rem 1rem',
+            background: bookingType === 'package' 
+              ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' 
+              : 'linear-gradient(135deg, #0891b2 0%, #0e7490 100%)',
+            color: 'white',
+            borderRadius: 'var(--radius-md)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            fontSize: '0.9rem',
+            fontWeight: '600'
+          }}>
+            <span style={{ fontSize: '1.2rem' }}>
+              {bookingType === 'package' ? '📦' : '💳'}
+            </span>
+            <span>
+              {bookingType === 'package' 
+                ? 'Package Holder Booking (No Payment)' 
+                : 'Single Session (Payment Required)'}
+            </span>
+          </div>
+          
           <div className="confirmation-details">
             {condition && (
               <div className="detail-row">
