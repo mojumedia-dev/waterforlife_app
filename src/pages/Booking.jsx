@@ -57,31 +57,30 @@ function Booking({ condition, protocol, availability, location, navigate }) {
 
   // Build booking URL with protocol data for Easy Appointment Booking
   const buildBookingUrl = () => {
-    // Your Shopify booking page
+    // Your Shopify product with Easy Appointment Booking
+    // This should be your SpectraLight service product URL
     const baseUrl = 'https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking';
+    
+    // Build booking notes with all protocol details
+    // This will appear in the customer notes field
     const params = new URLSearchParams();
     
-    // Build booking notes with protocol details
-    let bookingNotes = '';
     if (protocol && condition) {
-      bookingNotes = `PROTOCOL: ${protocol.name}\nCONDITION: ${condition.conditionName}\nFREQUENCIES: ${protocol.frequencies} Hz\nDURATION: ${protocol.durationMinutes} minutes\nSource: Water & Light Wellness App`;
+      const bookingNotes = [
+        `Protocol: ${protocol.name}`,
+        `Condition: ${condition.conditionName}`,
+        `Frequencies: ${protocol.frequencies} Hz`,
+        `Duration: ${protocol.durationMinutes} minutes`,
+        `Recommended: ${protocol.frequencyPerWeek}x/week for ${protocol.recommendedWeeks} weeks`,
+        `Source: Water & Light Wellness App`
+      ].join(' | ');
+      
+      // Add notes parameter - Easy Appointment Booking may pick this up
+      params.append('checkout[note]', bookingNotes);
     }
     
-    // Try common parameter names that booking apps accept
-    if (bookingNotes) {
-      params.append('note', bookingNotes);
-      params.append('notes', bookingNotes);
-      params.append('message', bookingNotes);
-      params.append('comments', bookingNotes);
-    }
-    
-    // Try to pre-select variant/service if possible
-    if (protocol) {
-      params.append('service', protocol.name);
-      params.append('variant', protocol.name);
-    }
-    
-    return `${baseUrl}?${params.toString()}`;
+    const queryString = params.toString();
+    return queryString ? `${baseUrl}?${queryString}` : baseUrl;
   };
 
   // Show embedded booking widget
@@ -146,26 +145,42 @@ function Booking({ condition, protocol, availability, location, navigate }) {
           padding: '1rem',
           background: '#fffbeb',
           borderRadius: 'var(--radius-md)',
-          border: '1px solid #fbbf24',
-          textAlign: 'center'
+          border: '1px solid #fbbf24'
         }}>
-          <p style={{ margin: 0, fontSize: '0.9rem', color: '#92400e' }}>
-            ⚠️ <strong>Not loading?</strong> Some browsers block embedded Shopify pages.{' '}
-            <button 
-              onClick={() => window.open(buildBookingUrl(), '_blank')}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#0891B2',
-                textDecoration: 'underline',
-                cursor: 'pointer',
-                fontSize: '0.9rem',
-                padding: 0
-              }}
-            >
-              Open in new tab instead →
-            </button>
+          <div style={{ marginBottom: '0.5rem', fontWeight: '600', color: '#92400e' }}>
+            ⚠️ Booking widget not loading?
+          </div>
+          <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: '#92400e' }}>
+            Some browsers block embedded Shopify pages for security. If you see a blank space above:
           </p>
+          <button 
+            onClick={() => window.open(buildBookingUrl(), '_blank')}
+            className="btn primary"
+            style={{ width: '100%' }}
+          >
+            Open Booking Page in New Tab →
+          </button>
+        </div>
+
+        <div style={{
+          marginTop: '1rem',
+          padding: '1rem',
+          background: '#f0f9ff',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid #bfdbfe'
+        }}>
+          <div style={{ fontSize: '0.9rem', color: '#1e3a8a' }}>
+            <strong>📋 Your protocol details will be included:</strong>
+            <ul style={{ marginTop: '0.5rem', marginBottom: 0, paddingLeft: '1.5rem' }}>
+              {protocol && (
+                <>
+                  <li>Protocol: {protocol.name}</li>
+                  <li>Frequencies: {protocol.frequencies} Hz</li>
+                  <li>Duration: {protocol.durationMinutes} minutes</li>
+                </>
+              )}
+            </ul>
+          </div>
         </div>
 
         <div style={{
