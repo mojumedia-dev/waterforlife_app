@@ -1,4 +1,28 @@
+import { useState, useEffect } from 'react';
+
 function Dashboard({ userProfile, location, navigate }) {
+  const [frequencies, setFrequencies] = useState({
+    freq1: '',
+    freq2: '',
+    freq3: '',
+    freq4: ''
+  });
+
+  // Load saved frequencies from localStorage on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('sessionFrequencies');
+    if (saved) {
+      setFrequencies(JSON.parse(saved));
+    }
+  }, []);
+
+  // Save frequencies to localStorage whenever they change
+  const handleFrequencyChange = (field, value) => {
+    const updated = { ...frequencies, [field]: value };
+    setFrequencies(updated);
+    localStorage.setItem('sessionFrequencies', JSON.stringify(updated));
+  };
+
   return (
     <div className="page dashboard-page">
       <div className="welcome-section">
@@ -18,34 +42,95 @@ function Dashboard({ userProfile, location, navigate }) {
       </div>
 
       {userProfile.upcomingAppointment && (
-        <div className="card upcoming-appointment">
-          <div className="card-header">
-            <h3>Next Appointment</h3>
-            <span className="badge upcoming">Upcoming</span>
+        <>
+          <div className="card upcoming-appointment">
+            <div className="card-header">
+              <h3>Next Appointment</h3>
+              <span className="badge upcoming">Upcoming</span>
+            </div>
+            <div className="appointment-details">
+              <div className="detail-row">
+                <span className="icon">📅</span>
+                <span className="label">Date:</span>
+                <span className="value">{new Date(userProfile.upcomingAppointment.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
+              </div>
+              <div className="detail-row">
+                <span className="icon">🕐</span>
+                <span className="label">Time:</span>
+                <span className="value">{userProfile.upcomingAppointment.time}</span>
+              </div>
+              <div className="detail-row">
+                <span className="icon">💡</span>
+                <span className="label">Protocol:</span>
+                <span className="value">{userProfile.upcomingAppointment.therapyType}</span>
+              </div>
+              <div className="detail-row">
+                <span className="icon">⏱️</span>
+                <span className="label">Duration:</span>
+                <span className="value">{userProfile.upcomingAppointment.duration} minutes</span>
+              </div>
+            </div>
           </div>
-          <div className="appointment-details">
-            <div className="detail-row">
-              <span className="icon">📅</span>
-              <span className="label">Date:</span>
-              <span className="value">{new Date(userProfile.upcomingAppointment.date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
+
+          <div className="card session-frequencies">
+            <div className="card-header">
+              <h3>Session Frequencies</h3>
+              <span className="badge info">Hz</span>
             </div>
-            <div className="detail-row">
-              <span className="icon">🕐</span>
-              <span className="label">Time:</span>
-              <span className="value">{userProfile.upcomingAppointment.time}</span>
+            <p className="frequency-help">Enter the 4 frequencies you'll use for this session</p>
+            <div className="frequency-inputs">
+              <div className="frequency-input-group">
+                <label htmlFor="freq1">Frequency 1</label>
+                <input
+                  type="number"
+                  id="freq1"
+                  placeholder="e.g., 528"
+                  value={frequencies.freq1}
+                  onChange={(e) => handleFrequencyChange('freq1', e.target.value)}
+                  className="frequency-input"
+                />
+                <span className="unit">Hz</span>
+              </div>
+              <div className="frequency-input-group">
+                <label htmlFor="freq2">Frequency 2</label>
+                <input
+                  type="number"
+                  id="freq2"
+                  placeholder="e.g., 432"
+                  value={frequencies.freq2}
+                  onChange={(e) => handleFrequencyChange('freq2', e.target.value)}
+                  className="frequency-input"
+                />
+                <span className="unit">Hz</span>
+              </div>
+              <div className="frequency-input-group">
+                <label htmlFor="freq3">Frequency 3</label>
+                <input
+                  type="number"
+                  id="freq3"
+                  placeholder="e.g., 396"
+                  value={frequencies.freq3}
+                  onChange={(e) => handleFrequencyChange('freq3', e.target.value)}
+                  className="frequency-input"
+                />
+                <span className="unit">Hz</span>
+              </div>
+              <div className="frequency-input-group">
+                <label htmlFor="freq4">Frequency 4</label>
+                <input
+                  type="number"
+                  id="freq4"
+                  placeholder="e.g., 741"
+                  value={frequencies.freq4}
+                  onChange={(e) => handleFrequencyChange('freq4', e.target.value)}
+                  className="frequency-input"
+                />
+                <span className="unit">Hz</span>
+              </div>
             </div>
-            <div className="detail-row">
-              <span className="icon">💡</span>
-              <span className="label">Protocol:</span>
-              <span className="value">{userProfile.upcomingAppointment.therapyType}</span>
-            </div>
-            <div className="detail-row">
-              <span className="icon">⏱️</span>
-              <span className="label">Duration:</span>
-              <span className="value">{userProfile.upcomingAppointment.duration} minutes</span>
-            </div>
+            <p className="auto-save-note">✓ Saved automatically</p>
           </div>
-        </div>
+        </>
       )}
 
       <div className="current-package-card card">
