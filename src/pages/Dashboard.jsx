@@ -20,9 +20,30 @@ function Dashboard({ userProfile, location, navigate }) {
     if (savedFreqs) {
       setFrequencies(JSON.parse(savedFreqs));
     }
+    
     if (savedCondition) {
-      setSelectedCondition(savedCondition);
+      // Try to find protocol by ID first
+      let protocol = protocolsData.find(p => p.id === savedCondition);
+      
+      // If not found by ID, try matching by ailmentName (fallback for name-based saves)
+      if (!protocol) {
+        protocol = protocolsData.find(
+          p => p.ailmentName.toLowerCase() === savedCondition.toLowerCase()
+        );
+        
+        // If found by name, update localStorage with the proper ID
+        if (protocol) {
+          localStorage.setItem('selectedCondition', protocol.id);
+          setSelectedCondition(protocol.id);
+        } else {
+          // Keep the saved value even if no match (user might have entered custom)
+          setSelectedCondition(savedCondition);
+        }
+      } else {
+        setSelectedCondition(savedCondition);
+      }
     }
+    
     if (bookedProtocol) {
       setLastBookedProtocol(JSON.parse(bookedProtocol));
     }
@@ -42,8 +63,15 @@ function Dashboard({ userProfile, location, navigate }) {
     localStorage.setItem('selectedCondition', conditionId);
 
     if (conditionId) {
-      // Find the selected protocol
-      const protocol = protocolsData.find(p => p.id === conditionId);
+      // Find the selected protocol by ID or by ailmentName (fallback)
+      let protocol = protocolsData.find(p => p.id === conditionId);
+      
+      // If not found by ID, try matching by ailmentName
+      if (!protocol) {
+        protocol = protocolsData.find(
+          p => p.ailmentName.toLowerCase() === conditionId.toLowerCase()
+        );
+      }
       
       if (protocol && protocol.frequencies) {
         // Parse frequencies from comma-separated string

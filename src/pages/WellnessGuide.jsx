@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react';
+import protocolsData from '../data/protocols.json';
 
 function WellnessGuide({ conditions, navigate }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -55,9 +56,22 @@ function WellnessGuide({ conditions, navigate }) {
       freq4: freqArray[3] || ''
     };
     
+    // Find matching protocol in protocols.json by ailmentName
+    // This ensures the Dashboard dropdown can find and select it
+    const matchingProtocol = protocolsData.find(
+      p => p.ailmentName.toLowerCase() === condition.conditionName.toLowerCase()
+    );
+    
     // Save to localStorage
     localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
-    localStorage.setItem('selectedCondition', protocol.id);
+    
+    // Save the protocol ID from protocols.json if found, otherwise save the condition name
+    if (matchingProtocol) {
+      localStorage.setItem('selectedCondition', matchingProtocol.id);
+    } else {
+      // Fallback: save condition name for manual matching
+      localStorage.setItem('selectedCondition', condition.conditionName);
+    }
     
     // Show confirmation message
     setSavedConditionId(condition.id);
