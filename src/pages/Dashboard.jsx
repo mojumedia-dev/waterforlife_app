@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import protocolsData from '../data/protocols.json';
+import storage from '../utils/storage';
 
 function Dashboard({ userProfile, location, navigate }) {
   const [frequencies, setFrequencies] = useState({
@@ -13,9 +14,9 @@ function Dashboard({ userProfile, location, navigate }) {
 
   // Load saved frequencies and condition from localStorage on mount
   useEffect(() => {
-    const savedFreqs = localStorage.getItem('sessionFrequencies');
-    const savedCondition = localStorage.getItem('selectedCondition');
-    const bookedProtocol = localStorage.getItem('lastBookedProtocol');
+    const savedFreqs = storage.getItem('sessionFrequencies');
+    const savedCondition = storage.getItem('selectedCondition');
+    const bookedProtocol = storage.getItem('lastBookedProtocol');
     
     if (savedFreqs) {
       setFrequencies(JSON.parse(savedFreqs));
@@ -33,7 +34,7 @@ function Dashboard({ userProfile, location, navigate }) {
         
         // If found by name, update localStorage with the proper ID
         if (protocol) {
-          localStorage.setItem('selectedCondition', protocol.id);
+          storage.setItem('selectedCondition', protocol.id);
           setSelectedCondition(protocol.id);
         } else {
           // Keep the saved value even if no match (user might have entered custom)
@@ -53,14 +54,14 @@ function Dashboard({ userProfile, location, navigate }) {
   const handleFrequencyChange = (field, value) => {
     const updated = { ...frequencies, [field]: value };
     setFrequencies(updated);
-    localStorage.setItem('sessionFrequencies', JSON.stringify(updated));
+    storage.setItem('sessionFrequencies', JSON.stringify(updated));
   };
 
   // Handle condition selection and auto-populate frequencies
   const handleConditionChange = (e) => {
     const conditionId = e.target.value;
     setSelectedCondition(conditionId);
-    localStorage.setItem('selectedCondition', conditionId);
+    storage.setItem('selectedCondition', conditionId);
 
     if (conditionId) {
       // Find the selected protocol by ID or by ailmentName (fallback)
@@ -86,7 +87,7 @@ function Dashboard({ userProfile, location, navigate }) {
         };
         
         setFrequencies(updated);
-        localStorage.setItem('sessionFrequencies', JSON.stringify(updated));
+        storage.setItem('sessionFrequencies', JSON.stringify(updated));
       }
     }
   };

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import storage from '../utils/storage';
 
 function ProtocolDetail({ protocol, packages, navigate }) {
   const [savedMessage, setSavedMessage] = useState('');
@@ -14,8 +15,8 @@ function ProtocolDetail({ protocol, packages, navigate }) {
     };
     
     // Save to localStorage
-    localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
-    localStorage.setItem('selectedCondition', protocol.id);
+    storage.setItem('sessionFrequencies', JSON.stringify(frequencies));
+    storage.setItem('selectedCondition', protocol.id);
     
     // Show confirmation message
     setSavedMessage('✓ Frequencies saved to dashboard!');

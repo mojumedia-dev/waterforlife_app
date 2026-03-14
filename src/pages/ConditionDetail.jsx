@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import protocolsData from '../data/protocols.json';
+import storage from '../utils/storage';
 
 function ConditionDetail({ condition, packages, navigate }) {
   const [savedProtocolId, setSavedProtocolId] = useState(null);
@@ -21,14 +22,14 @@ function ConditionDetail({ condition, packages, navigate }) {
     );
     
     // Save to localStorage
-    localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
+    storage.setItem('sessionFrequencies', JSON.stringify(frequencies));
     
     // Save the protocol ID from protocols.json if found, otherwise save the condition name
     if (matchingProtocol) {
-      localStorage.setItem('selectedCondition', matchingProtocol.id);
+      storage.setItem('selectedCondition', matchingProtocol.id);
     } else {
       // Fallback: save condition name for manual matching
-      localStorage.setItem('selectedCondition', condition.conditionName);
+      storage.setItem('selectedCondition', condition.conditionName);
     }
     
     // Show confirmation message

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import storage from '../utils/storage';
 
 function Booking({ condition, protocol, availability, location, navigate }) {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -27,15 +28,15 @@ function Booking({ condition, protocol, availability, location, navigate }) {
       };
       
       // Save to localStorage for dashboard
-      localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
+      storage.setItem('sessionFrequencies', JSON.stringify(frequencies));
       
       // Save the protocol ID as selected condition
       if (protocol.id) {
-        localStorage.setItem('selectedCondition', protocol.id);
+        storage.setItem('selectedCondition', protocol.id);
       }
       
       // Save booking info for future reference
-      localStorage.setItem('lastBookedProtocol', JSON.stringify({
+      storage.setItem('lastBookedProtocol', JSON.stringify({
         protocolId: protocol.id,
         protocolName: protocol.name,
         conditionName: condition?.conditionName,
