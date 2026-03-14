@@ -1440,6 +1440,36 @@ body {
   margin-bottom: var(--spacing-lg);
 }
 
+.condition-select-group {
+  margin-bottom: var(--spacing-xl);
+}
+
+.condition-select-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.condition-select {
+  width: 100%;
+  padding: var(--spacing-md);
+  font-size: 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.condition-select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+}
+
 .frequency-inputs {
   display: grid;
   grid-template-columns: 1fr;
