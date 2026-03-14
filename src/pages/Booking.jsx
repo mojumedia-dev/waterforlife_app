@@ -48,14 +48,102 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     setShowConfirmation(true);
   };
 
+  const [showBookingEmbed, setShowBookingEmbed] = useState(false);
+
   const handleContinueToBooking = () => {
-    // Option 1: Open in new tab (users can easily return)
-    window.open('https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking', '_blank');
-    
-    // Option 2: Add protocol info to URL for Easy Appointments
-    // const bookingUrl = `https://waterlightforhealth.com/book?protocol=${protocol?.id}&condition=${condition?.conditionName}`;
-    // window.open(bookingUrl, '_blank');
+    // Show embedded booking widget
+    setShowBookingEmbed(true);
   };
+
+  // Build Easy Appointments embed URL with protocol data
+  const buildBookingUrl = () => {
+    const baseUrl = 'https://waterlightforhealth.com/easy-appointments';
+    const params = new URLSearchParams();
+    
+    if (protocol) {
+      params.append('service', protocol.name);
+      params.append('duration', protocol.durationMinutes);
+      params.append('frequencies', protocol.frequencies);
+    }
+    if (condition) {
+      params.append('condition', condition.conditionName);
+    }
+    if (selectedDate) {
+      params.append('date', selectedDate.date);
+    }
+    if (selectedTime) {
+      params.append('time', selectedTime);
+    }
+    
+    return `${baseUrl}?${params.toString()}`;
+  };
+
+  // Show embedded booking widget
+  if (showBookingEmbed) {
+    return (
+      <div className="page booking-page">
+        <button className="back-btn" onClick={() => setShowBookingEmbed(false)}>
+          ← Back to Booking Details
+        </button>
+
+        <div className="page-header">
+          <h2>📅 Complete Your Booking</h2>
+          <p className="subtitle">Finalize your appointment details below</p>
+        </div>
+
+        {protocol && (
+          <div className="booking-context card" style={{ marginBottom: '1rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <strong>{protocol.name}</strong>
+                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginTop: '0.25rem' }}>
+                  {condition?.conditionName} • {protocol.durationMinutes} min • {protocol.frequencies} Hz
+                </div>
+              </div>
+              <div style={{
+                padding: '0.5rem 1rem',
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                color: 'white',
+                borderRadius: 'var(--radius-md)',
+                fontSize: '0.9rem',
+                fontWeight: '600'
+              }}>
+                ✨ Frequencies Saved
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="booking-embed-container card">
+          <iframe
+            src={buildBookingUrl()}
+            width="100%"
+            height="800"
+            frameBorder="0"
+            title="Book Your Appointment"
+            style={{
+              borderRadius: 'var(--radius-md)',
+              minHeight: '800px'
+            }}
+          />
+        </div>
+
+        <div style={{
+          marginTop: '1rem',
+          padding: '1rem',
+          background: '#f0f9ff',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid #bfdbfe',
+          textAlign: 'center'
+        }}>
+          <p style={{ margin: 0, fontSize: '0.9rem', color: '#1e3a8a' }}>
+            💡 <strong>Tip:</strong> Your selected frequencies have been saved to your dashboard. 
+            Visit your dashboard anytime to review them.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   if (showConfirmation) {
     return (
@@ -111,8 +199,7 @@ function Booking({ condition, protocol, availability, location, navigate }) {
               <strong>Ready to complete your booking!</strong>
             </p>
             <p>
-              Click the button below to finalize your appointment on our secure Shopify booking system. 
-              You'll be able to confirm your preferred time slot and complete the booking process.
+              Your session details have been prepared. Click below to finalize your appointment time and complete the booking.
             </p>
             
             {protocol && (
@@ -123,9 +210,9 @@ function Booking({ condition, protocol, availability, location, navigate }) {
                 borderRadius: 'var(--radius-md)',
                 color: 'white'
               }}>
-                <strong>✨ Dashboard Updated!</strong><br />
-                Your session frequencies have been automatically saved to your dashboard. 
-                Visit your dashboard anytime to review the frequencies for this protocol.
+                <strong>✨ Frequencies Saved to Dashboard!</strong><br />
+                Your session frequencies ({protocol.frequencies} Hz) have been automatically saved. 
+                Visit your dashboard anytime to review them.
               </div>
             )}
             
@@ -137,28 +224,12 @@ function Booking({ condition, protocol, availability, location, navigate }) {
             </p>
           </div>
 
-          <div style={{
-            marginBottom: '1.5rem',
-            padding: '1rem',
-            background: '#f0f9ff',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid #bfdbfe'
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-              <span style={{ fontSize: '1.2rem' }}>ℹ️</span>
-              <strong style={{ color: '#1e40af' }}>Booking will open in a new tab</strong>
-            </div>
-            <p style={{ margin: 0, fontSize: '0.9rem', color: '#1e3a8a' }}>
-              You'll stay logged in here. Complete your booking in the new tab, then return to view your dashboard.
-            </p>
-          </div>
-
           <div className="action-buttons">
             <button 
               className="btn primary large"
               onClick={handleContinueToBooking}
             >
-              Open Booking System in New Tab →
+              Continue to Booking Calendar →
             </button>
             <button 
               className="btn secondary large"

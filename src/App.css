@@ -1603,6 +1603,44 @@ body {
 }
 
 /* ============================================
+   BOOKING EMBED
+   ============================================ */
+.booking-embed-container {
+  padding: 0;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.booking-embed-container iframe {
+  display: block;
+  width: 100%;
+  border: none;
+  border-radius: var(--radius-md);
+}
+
+/* Mobile responsive iframe */
+@media (max-width: 768px) {
+  .booking-embed-container iframe {
+    min-height: 700px;
+  }
+}
+
+/* Tablet responsive iframe */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .booking-embed-container iframe {
+    min-height: 750px;
+  }
+}
+
+/* Desktop responsive iframe */
+@media (min-width: 1024px) {
+  .booking-embed-container iframe {
+    min-height: 800px;
+  }
+}
+
+/* ============================================
    RESPONSIVE - DESKTOP
    ============================================ */
 @media (min-width: 1024px) {
