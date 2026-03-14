@@ -55,35 +55,31 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     setShowBookingEmbed(true);
   };
 
-  // Build Servicify booking widget URL with protocol data
+  // Build booking URL with protocol data for Easy Appointment Booking
   const buildBookingUrl = () => {
-    // Servicify embed widget URL - update with your actual Servicify URL
-    const baseUrl = 'https://waterlightforhealth.getservicify.com/book';
+    // Your Shopify booking page
+    const baseUrl = 'https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking';
     const params = new URLSearchParams();
     
-    if (protocol) {
-      // Servicify parameters
-      params.append('service', protocol.name);
-      params.append('duration', protocol.durationMinutes);
-      params.append('notes', `Protocol: ${protocol.name} | Frequencies: ${protocol.frequencies} Hz`);
-    }
-    if (condition) {
-      params.append('category', condition.conditionName);
-    }
-    if (selectedDate) {
-      params.append('preferred_date', selectedDate.date);
-    }
-    if (selectedTime) {
-      params.append('preferred_time', selectedTime);
+    // Build booking notes with protocol details
+    let bookingNotes = '';
+    if (protocol && condition) {
+      bookingNotes = `PROTOCOL: ${protocol.name}\nCONDITION: ${condition.conditionName}\nFREQUENCIES: ${protocol.frequencies} Hz\nDURATION: ${protocol.durationMinutes} minutes\nSource: Water & Light Wellness App`;
     }
     
-    // Add custom fields for tracking
-    params.append('source', 'wellness_app');
-    params.append('custom_data', JSON.stringify({
-      protocolId: protocol?.id,
-      frequencies: protocol?.frequencies,
-      conditionName: condition?.conditionName
-    }));
+    // Try common parameter names that booking apps accept
+    if (bookingNotes) {
+      params.append('note', bookingNotes);
+      params.append('notes', bookingNotes);
+      params.append('message', bookingNotes);
+      params.append('comments', bookingNotes);
+    }
+    
+    // Try to pre-select variant/service if possible
+    if (protocol) {
+      params.append('service', protocol.name);
+      params.append('variant', protocol.name);
+    }
     
     return `${baseUrl}?${params.toString()}`;
   };
@@ -131,11 +127,45 @@ function Booking({ condition, protocol, availability, location, navigate }) {
             height="800"
             frameBorder="0"
             title="Book Your Appointment"
+            sandbox="allow-same-origin allow-scripts allow-forms allow-popups"
             style={{
               borderRadius: 'var(--radius-md)',
               minHeight: '800px'
             }}
+            onError={() => {
+              // Fallback if iframe doesn't work (Shopify sometimes blocks iframes)
+              console.log('Iframe blocked, opening in new window');
+              window.open(buildBookingUrl(), '_blank');
+              setShowBookingEmbed(false);
+            }}
           />
+        </div>
+        
+        <div style={{
+          marginTop: '1rem',
+          padding: '1rem',
+          background: '#fffbeb',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid #fbbf24',
+          textAlign: 'center'
+        }}>
+          <p style={{ margin: 0, fontSize: '0.9rem', color: '#92400e' }}>
+            ⚠️ <strong>Not loading?</strong> Some browsers block embedded Shopify pages.{' '}
+            <button 
+              onClick={() => window.open(buildBookingUrl(), '_blank')}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#0891B2',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                padding: 0
+              }}
+            >
+              Open in new tab instead →
+            </button>
+          </p>
         </div>
 
         <div style={{
