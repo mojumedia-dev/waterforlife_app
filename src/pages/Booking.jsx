@@ -55,25 +55,35 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     setShowBookingEmbed(true);
   };
 
-  // Build Easy Appointments embed URL with protocol data
+  // Build Servicify booking widget URL with protocol data
   const buildBookingUrl = () => {
-    const baseUrl = 'https://waterlightforhealth.com/easy-appointments';
+    // Servicify embed widget URL - update with your actual Servicify URL
+    const baseUrl = 'https://waterlightforhealth.getservicify.com/book';
     const params = new URLSearchParams();
     
     if (protocol) {
+      // Servicify parameters
       params.append('service', protocol.name);
       params.append('duration', protocol.durationMinutes);
-      params.append('frequencies', protocol.frequencies);
+      params.append('notes', `Protocol: ${protocol.name} | Frequencies: ${protocol.frequencies} Hz`);
     }
     if (condition) {
-      params.append('condition', condition.conditionName);
+      params.append('category', condition.conditionName);
     }
     if (selectedDate) {
-      params.append('date', selectedDate.date);
+      params.append('preferred_date', selectedDate.date);
     }
     if (selectedTime) {
-      params.append('time', selectedTime);
+      params.append('preferred_time', selectedTime);
     }
+    
+    // Add custom fields for tracking
+    params.append('source', 'wellness_app');
+    params.append('custom_data', JSON.stringify({
+      protocolId: protocol?.id,
+      frequencies: protocol?.frequencies,
+      conditionName: condition?.conditionName
+    }));
     
     return `${baseUrl}?${params.toString()}`;
   };
