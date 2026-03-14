@@ -4,6 +4,7 @@ function Booking({ condition, protocol, availability, location, navigate }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [bookingType, setBookingType] = useState(null); // 'single' or 'package'
 
   const handleDateSelect = (dateSlot) => {
     setSelectedDate(dateSlot);
@@ -57,9 +58,16 @@ function Booking({ condition, protocol, availability, location, navigate }) {
 
   // Build booking URL with protocol data for Easy Appointment Booking
   const buildBookingUrl = () => {
-    // Your Shopify product with Easy Appointment Booking
-    // This should be your SpectraLight service product URL
-    const baseUrl = 'https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking';
+    // Different URLs based on booking type
+    let baseUrl;
+    
+    if (bookingType === 'package') {
+      // Package holder booking (no payment)
+      baseUrl = 'https://waterlightforhealth.com/products/spectralight-session-package-holder';
+    } else {
+      // Single session booking (with payment)
+      baseUrl = 'https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking';
+    }
     
     // Build booking notes with all protocol details
     // This will appear in the customer notes field
@@ -200,9 +208,135 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     );
   }
 
-  if (showConfirmation) {
+  // Show booking type selector first
+  if (showConfirmation && !bookingType) {
     return (
       <div className="page booking-page">
+        <button className="back-btn" onClick={() => setShowConfirmation(false)}>
+          ← Back to Date/Time Selection
+        </button>
+
+        <div className="page-header">
+          <h2>📋 Choose Your Booking Type</h2>
+          <p className="subtitle">Select how you'd like to book this session</p>
+        </div>
+
+        {protocol && (
+          <div className="card" style={{ marginBottom: '1.5rem', background: 'var(--background)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+              <strong style={{ color: 'var(--primary)' }}>{protocol.name}</strong>
+              <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                {protocol.frequencies} Hz
+              </span>
+            </div>
+            {selectedDate && selectedTime && (
+              <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                {selectedDate.dayOfWeek}, {new Date(selectedDate.date).toLocaleDateString()} at {selectedTime}
+              </div>
+            )}
+          </div>
+        )}
+
+        <div className="booking-type-cards">
+          <div 
+            className="card booking-type-option"
+            onClick={() => setBookingType('single')}
+            style={{ cursor: 'pointer', border: '2px solid var(--border)', transition: 'all 0.2s' }}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
+            onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
+          >
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>💳</div>
+            <h3 style={{ marginBottom: '0.5rem' }}>Single Session</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>
+              Pay now for one session
+            </p>
+            <div style={{ 
+              padding: '0.75rem', 
+              background: 'var(--background)', 
+              borderRadius: 'var(--radius-md)',
+              marginBottom: '1rem'
+            }}>
+              <div style={{ fontWeight: '600', color: 'var(--primary)' }}>Perfect for:</div>
+              <ul style={{ margin: '0.5rem 0 0 0', paddingLeft: '1.25rem', fontSize: '0.85rem' }}>
+                <li>First-time visitors</li>
+                <li>Trying a new protocol</li>
+                <li>One-time treatment</li>
+              </ul>
+            </div>
+            <button className="btn primary large" style={{ width: '100%' }}>
+              Book & Pay Now →
+            </button>
+          </div>
+
+          <div 
+            className="card booking-type-option"
+            onClick={() => setBookingType('package')}
+            style={{ cursor: 'pointer', border: '2px solid var(--border)', transition: 'all 0.2s' }}
+            onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--primary)'}
+            onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
+          >
+            <div style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>📦</div>
+            <h3 style={{ marginBottom: '0.5rem' }}>Package Holder</h3>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '1rem' }}>
+              Book without payment (already purchased package)
+            </p>
+            <div style={{ 
+              padding: '0.75rem', 
+              background: 'var(--background)', 
+              borderRadius: 'var(--radius-md)',
+              marginBottom: '1rem'
+            }}>
+              <div style={{ fontWeight: '600', color: 'var(--primary)' }}>Perfect for:</div>
+              <ul style={{ margin: '0.5rem 0 0 0', paddingLeft: '1.25rem', fontSize: '0.85rem' }}>
+                <li>Package holders</li>
+                <li>Multi-session protocols</li>
+                <li>Already paid customers</li>
+              </ul>
+            </div>
+            <button className="btn secondary large" style={{ width: '100%' }}>
+              Book Session (No Payment) →
+            </button>
+          </div>
+        </div>
+
+        <div style={{
+          marginTop: '1.5rem',
+          padding: '1rem',
+          background: '#f0f9ff',
+          borderRadius: 'var(--radius-md)',
+          border: '1px solid #bfdbfe',
+          textAlign: 'center'
+        }}>
+          <p style={{ margin: 0, fontSize: '0.9rem', color: '#1e3a8a' }}>
+            💡 <strong>Need a package?</strong> Visit our{' '}
+            <button 
+              onClick={() => navigate('packages')}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: 'var(--primary)',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                padding: 0
+              }}
+            >
+              packages page
+            </button>
+            {' '}to save with bulk sessions!
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (showConfirmation && bookingType) {
+    return (
+      <div className="page booking-page">
+        <button className="back-btn" onClick={() => setBookingType(null)}>
+          ← Change Booking Type
+        </button>
+
         <div className="confirmation-card card">
           <div className="success-icon">📋</div>
           <h2>Review Your Booking Details</h2>
@@ -253,9 +387,17 @@ function Booking({ condition, protocol, availability, location, navigate }) {
             <p>
               <strong>Ready to complete your booking!</strong>
             </p>
-            <p>
-              Your session details have been prepared. Click below to finalize your appointment time and complete the booking.
-            </p>
+            {bookingType === 'package' ? (
+              <p>
+                As a package holder, you can book this session without payment. 
+                Click below to confirm your appointment time.
+              </p>
+            ) : (
+              <p>
+                Your session details have been prepared. Click below to finalize your appointment 
+                time and complete payment.
+              </p>
+            )}
             
             {protocol && (
               <div style={{ 
@@ -284,7 +426,9 @@ function Booking({ condition, protocol, availability, location, navigate }) {
               className="btn primary large"
               onClick={handleContinueToBooking}
             >
-              Continue to Booking Calendar →
+              {bookingType === 'package' 
+                ? 'Continue to Book Session (No Payment) →' 
+                : 'Continue to Book & Pay →'}
             </button>
             <button 
               className="btn secondary large"

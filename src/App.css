@@ -1603,6 +1603,27 @@ body {
 }
 
 /* ============================================
+   BOOKING TYPE SELECTION
+   ============================================ */
+.booking-type-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.booking-type-option:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+@media (min-width: 768px) {
+  .booking-type-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ============================================
    BOOKING EMBED
    ============================================ */
 .booking-embed-container {
