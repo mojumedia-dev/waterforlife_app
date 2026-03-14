@@ -54,16 +54,22 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     window.open(buildBookingUrl(), '_blank');
   };
 
-  // Build booking URL - links to Shopify pages with embedded calendars
+  // Build booking URL - links to specific duration page
   const buildBookingUrl = () => {
-    // Link to the appropriate Shopify page based on booking type
-    if (bookingType === 'package') {
-      // Package holder booking page (free sessions)
-      return 'https://waterlightforhealth.com/pages/book-package-session';
-    } else {
-      // Single session booking page (paid)
-      return 'https://waterlightforhealth.com/pages/book-single-session';
-    }
+    // Determine duration from protocol (default to 30 if not set)
+    const duration = protocol?.durationMinutes || 30;
+    
+    // Map to closest available duration (15, 30, or 60)
+    let selectedDuration = 30; // default
+    if (duration <= 15) selectedDuration = 15;
+    else if (duration <= 30) selectedDuration = 30;
+    else selectedDuration = 60;
+    
+    // Build URL based on booking type and duration
+    const baseUrl = 'https://waterlightforhealth.com/pages';
+    const type = bookingType === 'package' ? 'package' : 'single';
+    
+    return `${baseUrl}/book-${type}-${selectedDuration}min`;
   };
 
   // Show booking type selector (skip date/time for MVP)
