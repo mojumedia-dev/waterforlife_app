@@ -48,8 +48,13 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     setShowConfirmation(true);
   };
 
-  const handleContinueToShopify = () => {
-    window.location.href = 'https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking';
+  const handleContinueToBooking = () => {
+    // Option 1: Open in new tab (users can easily return)
+    window.open('https://waterlightforhealth.com/products/spectralight-therapy-bed-appointment-booking', '_blank');
+    
+    // Option 2: Add protocol info to URL for Easy Appointments
+    // const bookingUrl = `https://waterlightforhealth.com/book?protocol=${protocol?.id}&condition=${condition?.conditionName}`;
+    // window.open(bookingUrl, '_blank');
   };
 
   if (showConfirmation) {
@@ -132,18 +137,34 @@ function Booking({ condition, protocol, availability, location, navigate }) {
             </p>
           </div>
 
+          <div style={{
+            marginBottom: '1.5rem',
+            padding: '1rem',
+            background: '#f0f9ff',
+            borderRadius: 'var(--radius-md)',
+            border: '1px solid #bfdbfe'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              <span style={{ fontSize: '1.2rem' }}>ℹ️</span>
+              <strong style={{ color: '#1e40af' }}>Booking will open in a new tab</strong>
+            </div>
+            <p style={{ margin: 0, fontSize: '0.9rem', color: '#1e3a8a' }}>
+              You'll stay logged in here. Complete your booking in the new tab, then return to view your dashboard.
+            </p>
+          </div>
+
           <div className="action-buttons">
             <button 
               className="btn primary large"
-              onClick={handleContinueToShopify}
+              onClick={handleContinueToBooking}
             >
-              Continue to Shopify to Complete Booking →
+              Open Booking System in New Tab →
             </button>
             <button 
               className="btn secondary large"
-              onClick={() => navigate('wellness')}
+              onClick={() => navigate('dashboard')}
             >
-              ← Back to Wellness Guide
+              ← Return to Dashboard
             </button>
           </div>
         </div>
