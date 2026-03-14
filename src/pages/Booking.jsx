@@ -3,7 +3,7 @@ import { useState } from 'react';
 function Booking({ condition, protocol, availability, location, navigate }) {
   const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState(null);
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(true); // Skip directly to booking type
   const [bookingType, setBookingType] = useState(null); // 'single' or 'package'
 
   const handleDateSelect = (dateSlot) => {
@@ -231,12 +231,12 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     );
   }
 
-  // Show booking type selector first
-  if (showConfirmation && !bookingType) {
+  // Show booking type selector (skip date/time for MVP)
+  if (!bookingType) {
     return (
       <div className="page booking-page">
-        <button className="back-btn" onClick={() => setShowConfirmation(false)}>
-          ← Back to Date/Time Selection
+        <button className="back-btn" onClick={() => navigate('wellness')}>
+          ← Back to Wellness Guide
         </button>
 
         <div className="page-header">
@@ -353,7 +353,8 @@ function Booking({ condition, protocol, availability, location, navigate }) {
     );
   }
 
-  if (showConfirmation && bookingType) {
+  // Show confirmation screen after booking type selected
+  if (bookingType) {
     return (
       <div className="page booking-page">
         <button className="back-btn" onClick={() => setBookingType(null)}>
@@ -485,6 +486,24 @@ function Booking({ condition, protocol, availability, location, navigate }) {
               ← Return to Dashboard
             </button>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // If no protocol data, show error
+  if (!protocol) {
+    return (
+      <div className="page booking-page">
+        <button className="back-btn" onClick={() => navigate('wellness')}>
+          ← Back to Wellness Guide
+        </button>
+        <div className="card" style={{ textAlign: 'center', padding: '2rem' }}>
+          <h2>⚠️ No Protocol Selected</h2>
+          <p>Please select a protocol from the Wellness Guide to book a session.</p>
+          <button className="btn primary" onClick={() => navigate('wellness')}>
+            Browse Protocols
+          </button>
         </div>
       </div>
     );
