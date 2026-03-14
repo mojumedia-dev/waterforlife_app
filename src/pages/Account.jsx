@@ -1,4 +1,9 @@
+import storage from '../utils/storage';
+
 function Account({ userProfile, location, navigate }) {
+  const userEmail = storage.getItem('userEmail') || '';
+  const username = userEmail.split('@')[0] || 'User';
+  
   return (
     <div className="page account-page">
       <div className="page-header">
@@ -9,12 +14,11 @@ function Account({ userProfile, location, navigate }) {
       <div className="profile-section card">
         <div className="profile-header">
           <div className="profile-avatar">
-            {userProfile.firstName.charAt(0)}{userProfile.lastName.charAt(0)}
+            {username.charAt(0).toUpperCase()}
           </div>
           <div className="profile-info">
-            <h3>{userProfile.firstName} {userProfile.lastName}</h3>
-            <p>{userProfile.email}</p>
-            <p>{userProfile.phone}</p>
+            <h3>{username}</h3>
+            <p>{userEmail}</p>
           </div>
         </div>
       </div>

@@ -1,24 +1,11 @@
 {
-  "id": "user-001",
-  "firstName": "Sarah",
-  "lastName": "Johnson",
-  "email": "sarah.johnson@example.com",
-  "phone": "(801) 555-0234",
+  "id": "",
+  "firstName": "",
+  "lastName": "",
+  "email": "",
+  "phone": "",
   "selectedLocationId": "loc-001",
-  "sessionsRemaining": 7,
-  "currentPackage": {
-    "id": "pkg-002",
-    "name": "Wellness Builder",
-    "purchasedDate": "2026-02-15",
-    "sessionsIncluded": 10,
-    "sessionsUsed": 3
-  },
-  "upcomingAppointment": {
-    "id": "appt-001",
-    "date": "2026-03-15",
-    "time": "10:00 AM",
-    "therapyType": "SpectraLight Session - Arthritis Relief",
-    "duration": 30,
-    "locationId": "loc-001"
-  }
+  "sessionsRemaining": 0,
+  "currentPackage": null,
+  "upcomingAppointment": null
 }
