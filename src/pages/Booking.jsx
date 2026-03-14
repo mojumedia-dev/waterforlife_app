@@ -301,30 +301,9 @@ function Booking({ condition, protocol, availability, location, navigate }) {
                 time and complete payment.
               </p>
             )}
-            
-            {protocol && (
-              <div style={{ 
-                marginTop: '1rem', 
-                padding: '1rem', 
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                borderRadius: 'var(--radius-md)',
-                color: 'white'
-              }}>
-                <strong>✨ Frequencies Saved to Dashboard!</strong><br />
-                Your session frequencies ({protocol.frequencies} Hz) have been automatically saved. 
-                Visit your dashboard anytime to review them.
-              </div>
-            )}
-            
-            <p style={{ marginTop: '1rem', padding: '1rem', background: 'var(--background)', borderRadius: 'var(--radius-md)' }}>
-              <strong>📍 Location:</strong><br />
-              {location.name}<br />
-              {location.address}<br />
-              📞 {location.phone}
-            </p>
           </div>
 
-          <div className="action-buttons">
+          <div className="action-buttons" style={{ marginTop: '1rem' }}>
             <button 
               className="btn primary large"
               onClick={handleContinueToBooking}
@@ -339,6 +318,29 @@ function Booking({ condition, protocol, availability, location, navigate }) {
             >
               ← Return to Dashboard
             </button>
+          </div>
+
+          <div style={{ marginTop: '1.5rem' }}>
+            {protocol && (
+              <div style={{ 
+                padding: '1rem', 
+                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                borderRadius: 'var(--radius-md)',
+                color: 'white',
+                marginBottom: '1rem'
+              }}>
+                <strong>✨ Frequencies Saved to Dashboard!</strong><br />
+                Your session frequencies ({protocol.frequencies} Hz) have been automatically saved. 
+                Visit your dashboard anytime to review them.
+              </div>
+            )}
+            
+            <p style={{ padding: '1rem', background: 'var(--background)', borderRadius: 'var(--radius-md)', margin: 0 }}>
+              <strong>📍 Location:</strong><br />
+              {location.name}<br />
+              {location.address}<br />
+              📞 {location.phone}
+            </p>
           </div>
         </div>
       </div>
