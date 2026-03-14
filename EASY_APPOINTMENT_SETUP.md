@@ -78,13 +78,26 @@ POST /api/bookings
 }
 ```
 
-### Option C: Webhook Integration
+### Option C: Webhook Integration ⭐ (Ultimate Plan - SUPPORTED!)
 
-Set up webhooks to sync bookings back to your app:
-1. Easy Appointment Booking → Settings → Webhooks
-2. Add endpoint: `https://your-api.com/booking-webhook`
-3. Trigger on: Booking Created, Updated, Cancelled
-4. Payload includes all booking and custom field data
+**Easy Appointment Booking supports webhooks!** They send real-time booking events as JSON.
+
+**Webhook Payload Includes:**
+- `booking_id` - Unique booking identifier
+- `customer_email`, `customer_phone` - Customer contact info
+- `first_name`, `last_name` - Customer name
+- `service_name`, `date`, `time`, `duration` - Booking details
+- `notes` - Contains your protocol data!
+- `event` - booking.created, booking.rescheduled, booking.cancelled
+
+**See `WEBHOOK_INTEGRATION.md` for complete implementation guide.**
+
+Quick Setup:
+1. Easy Appointment Booking → Settings → Integrations → Webhooks
+2. Add endpoint URL (Netlify Function or Railway API)
+3. Select events: booking.created, booking.rescheduled, booking.cancelled
+4. Parse protocol data from `notes` field
+5. Save to database → Update dashboard in real-time
 
 ## 📋 Current Data Being Passed
 
