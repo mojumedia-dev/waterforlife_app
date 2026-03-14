@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react';
 function WellnessGuide({ conditions, navigate }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [savedConditionId, setSavedConditionId] = useState(null);
 
   // Get unique categories
   const categories = useMemo(() => {
@@ -39,6 +40,28 @@ function WellnessGuide({ conditions, navigate }) {
 
   const handleConditionClick = (condition) => {
     navigate('condition', condition);
+  };
+
+  const handleSaveToDashboard = (e, condition) => {
+    e.stopPropagation(); // Prevent card click navigation
+    
+    // Save the first protocol's frequencies
+    const protocol = condition.protocols[0];
+    const freqArray = protocol.frequencies.split(',').map(f => f.trim());
+    const frequencies = {
+      freq1: freqArray[0] || '',
+      freq2: freqArray[1] || '',
+      freq3: freqArray[2] || '',
+      freq4: freqArray[3] || ''
+    };
+    
+    // Save to localStorage
+    localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
+    localStorage.setItem('selectedCondition', protocol.id);
+    
+    // Show confirmation message
+    setSavedConditionId(condition.id);
+    setTimeout(() => setSavedConditionId(null), 2500);
   };
 
   return (
@@ -130,9 +153,35 @@ function WellnessGuide({ conditions, navigate }) {
                   ))}
                 </div>
                 
-                <div className="protocol-footer">
+                {savedConditionId === condition.id && (
+                  <div style={{
+                    padding: '0.75rem',
+                    background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                    color: 'white',
+                    borderRadius: 'var(--radius-md)',
+                    textAlign: 'center',
+                    fontWeight: '600',
+                    marginTop: '0.75rem',
+                    fontSize: '0.85rem'
+                  }}>
+                    ✓ Saved to dashboard!
+                  </div>
+                )}
+
+                <div className="protocol-footer" style={{ marginTop: savedConditionId === condition.id ? '0.5rem' : '0' }}>
+                  <button 
+                    className="btn secondary"
+                    onClick={(e) => handleSaveToDashboard(e, condition)}
+                    style={{ 
+                      padding: '0.5rem 1rem',
+                      fontSize: '0.85rem',
+                      marginRight: '0.5rem'
+                    }}
+                  >
+                    💾 Save
+                  </button>
                   <span className="sessions-total">
-                    View protocols & book session
+                    View protocols & book
                   </span>
                   <span className="arrow">→</span>
                 </div>

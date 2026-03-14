@@ -1,4 +1,27 @@
+import { useState } from 'react';
+
 function ProtocolDetail({ protocol, packages, navigate }) {
+  const [savedMessage, setSavedMessage] = useState('');
+
+  const handleSaveToDashboard = () => {
+    // Parse frequencies and save to dashboard
+    const freqArray = protocol.frequencies.split(',').map(f => f.trim());
+    const frequencies = {
+      freq1: freqArray[0] || '',
+      freq2: freqArray[1] || '',
+      freq3: freqArray[2] || '',
+      freq4: freqArray[3] || ''
+    };
+    
+    // Save to localStorage
+    localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
+    localStorage.setItem('selectedCondition', protocol.id);
+    
+    // Show confirmation message
+    setSavedMessage('✓ Frequencies saved to dashboard!');
+    setTimeout(() => setSavedMessage(''), 3000);
+  };
+
   if (!protocol) {
     return (
       <div className="page protocol-detail-page">
@@ -108,12 +131,33 @@ function ProtocolDetail({ protocol, packages, navigate }) {
         </div>
       )}
 
+      {savedMessage && (
+        <div style={{
+          padding: '1rem',
+          background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+          color: 'white',
+          borderRadius: 'var(--radius-md)',
+          textAlign: 'center',
+          fontWeight: '600',
+          marginBottom: '1rem',
+          animation: 'slideIn 0.3s ease-out'
+        }}>
+          {savedMessage}
+        </div>
+      )}
+
       <div className="action-buttons">
         <button 
           className="btn primary large"
           onClick={() => navigate('booking', protocol)}
         >
           Book This Protocol →
+        </button>
+        <button 
+          className="btn secondary large"
+          onClick={handleSaveToDashboard}
+        >
+          💾 Save to Dashboard
         </button>
         <button 
           className="btn secondary large"

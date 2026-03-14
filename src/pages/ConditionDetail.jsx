@@ -1,4 +1,27 @@
+import { useState } from 'react';
+
 function ConditionDetail({ condition, packages, navigate }) {
+  const [savedProtocolId, setSavedProtocolId] = useState(null);
+
+  const handleSaveToDashboard = (protocol) => {
+    // Parse frequencies and save to dashboard
+    const freqArray = protocol.frequencies.split(',').map(f => f.trim());
+    const frequencies = {
+      freq1: freqArray[0] || '',
+      freq2: freqArray[1] || '',
+      freq3: freqArray[2] || '',
+      freq4: freqArray[3] || ''
+    };
+    
+    // Save to localStorage
+    localStorage.setItem('sessionFrequencies', JSON.stringify(frequencies));
+    localStorage.setItem('selectedCondition', protocol.id);
+    
+    // Show confirmation message
+    setSavedProtocolId(protocol.id);
+    setTimeout(() => setSavedProtocolId(null), 3000);
+  };
+
   if (!condition) {
     return (
       <div className="page">
@@ -98,12 +121,37 @@ function ConditionDetail({ condition, packages, navigate }) {
                 </div>
               </div>
 
-              <button 
-                className="btn primary large"
-                onClick={() => handleBookProtocol(protocol)}
-              >
-                Book This Protocol
-              </button>
+              {savedProtocolId === protocol.id && (
+                <div style={{
+                  padding: '0.75rem',
+                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                  color: 'white',
+                  borderRadius: 'var(--radius-md)',
+                  textAlign: 'center',
+                  fontWeight: '600',
+                  marginBottom: '0.75rem',
+                  fontSize: '0.9rem'
+                }}>
+                  ✓ Frequencies saved to dashboard!
+                </div>
+              )}
+
+              <div style={{ display: 'flex', gap: '0.5rem' }}>
+                <button 
+                  className="btn primary large"
+                  onClick={() => handleBookProtocol(protocol)}
+                  style={{ flex: 1 }}
+                >
+                  Book This Protocol
+                </button>
+                <button 
+                  className="btn secondary large"
+                  onClick={() => handleSaveToDashboard(protocol)}
+                  style={{ flex: 1 }}
+                >
+                  💾 Save to Dashboard
+                </button>
+              </div>
             </div>
           ))}
         </div>
