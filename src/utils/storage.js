@@ -19,43 +19,57 @@ class Storage {
     }
   }
 
+  // Build user-specific key (email-prefixed)
+  getUserKey(key) {
+    const userEmail = this.isLocalStorageAvailable ? localStorage.getItem('userEmail') : null;
+    // Global keys that shouldn't be user-specific
+    if (key === 'userEmail') {
+      return key;
+    }
+    // User-specific keys
+    return userEmail ? `${userEmail}_${key}` : key;
+  }
+
   getItem(key) {
+    const fullKey = this.getUserKey(key);
     if (this.isLocalStorageAvailable) {
       try {
-        return localStorage.getItem(key);
+        return localStorage.getItem(fullKey);
       } catch (e) {
         console.error('Error reading from localStorage:', e);
-        return this.memoryStorage[key] || null;
+        return this.memoryStorage[fullKey] || null;
       }
     }
-    return this.memoryStorage[key] || null;
+    return this.memoryStorage[fullKey] || null;
   }
 
   setItem(key, value) {
+    const fullKey = this.getUserKey(key);
     if (this.isLocalStorageAvailable) {
       try {
-        localStorage.setItem(key, value);
+        localStorage.setItem(fullKey, value);
         return true;
       } catch (e) {
         // Quota exceeded or other error - fallback to memory
         console.warn('localStorage.setItem failed, using in-memory storage:', e);
-        this.memoryStorage[key] = value;
+        this.memoryStorage[fullKey] = value;
         return false;
       }
     }
-    this.memoryStorage[key] = value;
+    this.memoryStorage[fullKey] = value;
     return false;
   }
 
   removeItem(key) {
+    const fullKey = this.getUserKey(key);
     if (this.isLocalStorageAvailable) {
       try {
-        localStorage.removeItem(key);
+        localStorage.removeItem(fullKey);
       } catch (e) {
         console.error('Error removing from localStorage:', e);
       }
     }
-    delete this.memoryStorage[key];
+    delete this.memoryStorage[fullKey];
   }
 
   clear() {

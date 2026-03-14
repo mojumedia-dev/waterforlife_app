@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Dashboard from './pages/Dashboard';
 import WellnessGuide from './pages/WellnessGuide';
@@ -6,6 +6,8 @@ import ConditionDetail from './pages/ConditionDetail';
 import Booking from './pages/Booking';
 import Packages from './pages/Packages';
 import Account from './pages/Account';
+import EmailGate from './components/EmailGate';
+import storage from './utils/storage';
 
 // Mock data imports
 import locationData from './data/location.json';
@@ -15,6 +17,8 @@ import conditionsData from './data/conditions.json';
 import availabilityData from './data/availability.json';
 
 function App() {
+  const [userEmail, setUserEmail] = useState(null);
+  const [showEmailGate, setShowEmailGate] = useState(true);
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [selectedCondition, setSelectedCondition] = useState(null);
   const [selectedProtocol, setSelectedProtocol] = useState(null);
@@ -23,6 +27,28 @@ function App() {
   const [packages] = useState(packagesData);
   const [conditions] = useState(conditionsData);
   const [availability] = useState(availabilityData);
+
+  // Check for existing email on mount
+  useEffect(() => {
+    const savedEmail = storage.getItem('userEmail');
+    if (savedEmail) {
+      setUserEmail(savedEmail);
+      setShowEmailGate(false);
+    }
+  }, []);
+
+  const handleEmailSubmit = (email) => {
+    setUserEmail(email);
+    setShowEmailGate(false);
+  };
+
+  const handleSwitchUser = () => {
+    if (window.confirm('Switch user? Your current data will remain saved for this email.')) {
+      storage.removeItem('userEmail');
+      setUserEmail(null);
+      setShowEmailGate(true);
+    }
+  };
 
   const navigate = (page, data = null) => {
     if (page === 'condition' && data) {
@@ -88,13 +114,38 @@ function App() {
 
   return (
     <div className="app">
+      {showEmailGate && <EmailGate onEmailSubmit={handleEmailSubmit} />}
+      
       <header className="app-header">
         <div className="header-content">
           <h1 className="logo">💧✨ Water & Light</h1>
-          <button className="location-btn" onClick={() => navigate('account')}>
-            <span className="location-icon">📍</span>
-            <span className="location-name">{location.city}</span>
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            {userEmail && (
+              <button 
+                onClick={handleSwitchUser}
+                style={{
+                  background: 'rgba(255,255,255,0.1)',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  color: 'white',
+                  padding: '0.5rem 0.75rem',
+                  borderRadius: '0.5rem',
+                  fontSize: '0.85rem',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.25rem'
+                }}
+                title={`Logged in as ${userEmail}`}
+              >
+                <span>{userEmail.split('@')[0]}</span>
+                <span style={{ opacity: 0.7 }}>⚙️</span>
+              </button>
+            )}
+            <button className="location-btn" onClick={() => navigate('account')}>
+              <span className="location-icon">📍</span>
+              <span className="location-name">{location.city}</span>
+            </button>
+          </div>
         </div>
       </header>
 
