@@ -162,11 +162,14 @@ function App() {
           <span className="nav-label">Dashboard</span>
         </button>
         <button 
-          className={`nav-btn ${currentPage === 'booking' ? 'active' : ''}`}
-          onClick={() => navigate('booking')}
+          className="nav-btn"
+          onClick={() => {
+            const feedbackEmail = `mailto:mojumedia@gmail.com?subject=Water%20%26%20Light%20App%20Feedback&body=Logged%20in%20as%3A%20${encodeURIComponent(userEmail || 'Not logged in')}%0A%0A---%0APlease%20share%20your%20feedback%20below%3A%0A%0A`;
+            window.location.href = feedbackEmail;
+          }}
         >
-          <span className="nav-icon">📅</span>
-          <span className="nav-label">Book</span>
+          <span className="nav-icon">💬</span>
+          <span className="nav-label">Feedback</span>
         </button>
         <button 
           className={`nav-btn ${currentPage === 'wellness' ? 'active' : ''}`}
