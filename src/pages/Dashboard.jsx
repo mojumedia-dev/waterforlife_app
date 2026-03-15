@@ -204,27 +204,6 @@ function Dashboard({ userProfile, location, navigate }) {
         <p className="auto-save-note">✓ Saved automatically</p>
       </div>
 
-      <div className="current-package-card card">
-        <h3>Current Package</h3>
-        <div className="package-info">
-          <div className="package-name">{userProfile.currentPackage.name}</div>
-          <div className="package-progress">
-            <div className="progress-bar">
-              <div 
-                className="progress-fill" 
-                style={{ width: `${(userProfile.currentPackage.sessionsUsed / userProfile.currentPackage.sessionsIncluded) * 100}%` }}
-              ></div>
-            </div>
-            <div className="progress-text">
-              {userProfile.currentPackage.sessionsUsed} of {userProfile.currentPackage.sessionsIncluded} sessions used
-            </div>
-          </div>
-          <div className="package-purchased">
-            Purchased {new Date(userProfile.currentPackage.purchasedDate).toLocaleDateString()}
-          </div>
-        </div>
-      </div>
-
       <div className="quick-actions">
         <button className="action-btn primary" onClick={() => navigate('booking')}>
           <span className="btn-icon">📅</span>
