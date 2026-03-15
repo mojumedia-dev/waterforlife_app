@@ -69,6 +69,33 @@ function Account({ userProfile, location, navigate }) {
         </div>
       </div>
 
+      <div className="feedback-section card">
+        <h3>💬 Help & Feedback</h3>
+        <p style={{ marginBottom: '1rem', color: 'var(--text-secondary)' }}>
+          We'd love to hear from you! Share your experience, report bugs, or suggest improvements.
+        </p>
+        <a 
+          href={`mailto:mojumedia@gmail.com?subject=Water%20%26%20Light%20App%20Feedback&body=Logged%20in%20as%3A%20${encodeURIComponent(userEmail)}%0A%0A---%0APlease%20share%20your%20feedback%20below%3A%0A%0A`}
+          className="btn primary large"
+          style={{ 
+            display: 'block',
+            textAlign: 'center',
+            textDecoration: 'none',
+            width: '100%'
+          }}
+        >
+          📧 Send Feedback via Email
+        </a>
+        <p style={{ 
+          marginTop: '0.75rem', 
+          fontSize: '0.85rem', 
+          color: 'var(--text-secondary)',
+          textAlign: 'center'
+        }}>
+          Opens your email app with pre-filled subject
+        </p>
+      </div>
+
       <div className="prototype-notice card highlight">
         <h3>ℹ️ Prototype Note</h3>
         <p>
