@@ -7,38 +7,33 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [savedConditionId, setSavedConditionId] = useState(null);
 
-  // Get unique categories from structured conditions
+  // Get unique categories from protocols
   const categories = useMemo(() => {
-    const cats = ['all', ...new Set(conditions.map(c => c.category))];
+    const cats = ['all', ...new Set(protocolsData.map(p => p.category))];
     return cats;
-  }, [conditions]);
+  }, []);
 
-  // Filter conditions based on search and category
-  const filteredConditions = useMemo(() => {
-    let filtered = conditions;
+  // Filter protocols based on search and category
+  const filteredProtocols = useMemo(() => {
+    let filtered = protocolsData;
 
     // Filter by category
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(c => c.category === selectedCategory);
+      filtered = filtered.filter(p => p.category === selectedCategory);
     }
 
     // Filter by search term (including frequencies)
     if (searchTerm.trim()) {
       const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(c => 
-        c.conditionName.toLowerCase().includes(term) ||
-        c.bodySystem.toLowerCase().includes(term) ||
-        c.category.toLowerCase().includes(term) ||
-        c.tags.some(tag => tag.toLowerCase().includes(term)) ||
-        // Search within frequency values
-        c.protocols.some(protocol => 
-          protocol.frequencies.toLowerCase().includes(term)
-        )
+      filtered = filtered.filter(p => 
+        p.ailmentName.toLowerCase().includes(term) ||
+        p.category.toLowerCase().includes(term) ||
+        p.frequencies.toLowerCase().includes(term)
       );
     }
 
     return filtered;
-  }, [conditions, searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory]);
 
   // Search frequency database
   const frequencyResults = useMemo(() => {
@@ -51,21 +46,21 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
     ).slice(0, 50); // Limit to 50 results
   }, [frequencyDatabase, searchTerm]);
 
-  // Combine results - show structured conditions first, then frequency database matches
+  // Combine results - show protocols first, then frequency database matches
   const allResults = useMemo(() => {
     const results = [];
     
-    // Add structured conditions
-    filteredConditions.forEach(cond => {
-      results.push({ type: 'condition', data: cond });
+    // Add protocols
+    filteredProtocols.forEach(protocol => {
+      results.push({ type: 'protocol', data: protocol });
     });
     
-    // Add frequency database results that don't match structured conditions
+    // Add frequency database results that don't match protocols
     if (searchTerm.trim()) {
       frequencyResults.forEach(freqEntry => {
-        // Check if this condition already exists in structured results
-        const alreadyExists = filteredConditions.some(c => 
-          c.conditionName.toLowerCase() === freqEntry.condition.toLowerCase()
+        // Check if this condition already exists in protocol results
+        const alreadyExists = filteredProtocols.some(p => 
+          p.ailmentName.toLowerCase() === freqEntry.condition.toLowerCase()
         );
         
         if (!alreadyExists) {
@@ -75,16 +70,11 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
     }
     
     return results;
-  }, [filteredConditions, frequencyResults, searchTerm]);
+  }, [filteredProtocols, frequencyResults, searchTerm]);
 
-  const handleConditionClick = (condition) => {
-    navigate('condition', condition);
-  };
-
-  const handleSaveToDashboard = (e, condition) => {
+  const handleProtocolSave = (e, protocol) => {
     e.stopPropagation();
     
-    const protocol = condition.protocols[0];
     const freqArray = protocol.frequencies.split(',').map(f => f.trim());
     const channels = Array(8).fill(null).map((_, i) => ({
       freq: freqArray[i] || '',
@@ -92,16 +82,10 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
       duration: ''
     }));
     
-    const matchingProtocol = protocolsData.find(
-      p => p.ailmentName.toLowerCase() === condition.conditionName.toLowerCase()
-    );
-    
-    const conditionToSave = matchingProtocol ? matchingProtocol.id : condition.conditionName;
-    
     storage.setItem('sessionChannels', JSON.stringify(channels));
-    storage.setItem('selectedCondition', conditionToSave);
+    storage.setItem('selectedCondition', protocol.id);
     
-    setSavedConditionId(condition.id);
+    setSavedConditionId(protocol.id);
     setTimeout(() => setSavedConditionId(null), 2500);
   };
 
@@ -126,7 +110,7 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
     <div className="page wellness-guide-page">
       <div className="page-header">
         <h2>🔍 Wellness Guide</h2>
-        <p className="subtitle">Search 6,000+ conditions, symptoms, or frequencies (Hz)</p>
+        <p className="subtitle">Search 6,400+ conditions, protocols, and frequencies (Hz)</p>
       </div>
 
       <div className="search-section">
@@ -178,43 +162,44 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
         ) : (
           <div className="protocols-list">
             {allResults.map((result, index) => {
-              if (result.type === 'condition') {
-                const condition = result.data;
+              if (result.type === 'protocol') {
+                const protocol = result.data;
+                const freqArray = protocol.frequencies.split(',').map(f => f.trim());
+                
                 return (
                   <div 
-                    key={`cond-${condition.id}`}
-                    className="protocol-card condition-card"
-                    onClick={() => handleConditionClick(condition)}
+                    key={`prot-${protocol.id}`}
+                    className="protocol-card"
                   >
                     <div className="protocol-header">
-                      <h3 className="protocol-name">{condition.conditionName}</h3>
+                      <h3 className="protocol-name">{protocol.ailmentName}</h3>
                       <span className="protocol-category">Protocol</span>
                     </div>
                     
-                    <p className="condition-description">{condition.description}</p>
+                    <p className="condition-description">{protocol.description}</p>
                     
-                    <div className="protocol-info">
-                      <div className="info-item">
-                        <span className="icon">📊</span>
-                        <span>{condition.protocols.length} protocol{condition.protocols.length > 1 ? 's' : ''}</span>
-                      </div>
-                      <div className="info-item">
-                        <span className="icon">⏱️</span>
-                        <span>{condition.protocols[0].durationMinutes} min sessions</span>
-                      </div>
-                      <div className="info-item">
-                        <span className="icon">📅</span>
-                        <span>{condition.protocols[0].frequencyPerWeek}x per week</span>
+                    <div className="frequency-list">
+                      <div className="frequency-list-label">Frequencies (Hz):</div>
+                      <div className="frequency-chips">
+                        {freqArray.map((freq, i) => (
+                          <span key={i} className="frequency-chip">{freq}</span>
+                        ))}
                       </div>
                     </div>
-
-                    <div className="protocol-tags">
-                      {condition.tags.slice(0, 4).map((tag, i) => (
-                        <span key={i} className="tag">{tag}</span>
-                      ))}
+                    
+                    <div className="protocol-recommendations">
+                      <div className="recommendation-item">
+                        <strong>Intensity:</strong> {protocol.intensity}
+                      </div>
+                      <div className="recommendation-item">
+                        <strong>Sessions:</strong> {protocol.sessionsPerWeek}x per week
+                      </div>
+                      <div className="recommendation-item">
+                        <strong>Notes:</strong> {protocol.notes}
+                      </div>
                     </div>
                     
-                    {savedConditionId === condition.id && (
+                    {savedConditionId === protocol.id && (
                       <div className="saved-notice">
                         ✓ Saved to dashboard!
                       </div>
@@ -223,14 +208,10 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
                     <div className="protocol-footer">
                       <button 
                         className="btn secondary"
-                        onClick={(e) => handleSaveToDashboard(e, condition)}
+                        onClick={(e) => handleProtocolSave(e, protocol)}
                       >
                         💾 Save
                       </button>
-                      <span className="sessions-total">
-                        View protocols & book
-                      </span>
-                      <span className="arrow">→</span>
                     </div>
                   </div>
                 );
