@@ -1597,6 +1597,119 @@ body {
   font-size: 0.875rem;
 }
 
+.save-session-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: white;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-session-btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+.saved-sessions {
+  margin-bottom: var(--spacing-lg);
+}
+
+.sessions-scroll {
+  display: flex;
+  gap: var(--spacing-md);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-md);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.sessions-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.sessions-scroll::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 3px;
+}
+
+.sessions-scroll::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.sessions-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.session-card {
+  min-width: 280px;
+  max-width: 280px;
+  padding: var(--spacing-md);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  scroll-snap-align: start;
+}
+
+.session-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.session-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-sm);
+  gap: var(--spacing-sm);
+}
+
+.session-condition {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.session-date {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.session-preview {
+  margin-top: var(--spacing-md);
+}
+
+.preview-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.preview-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.preview-freq {
+  font-size: 0.7rem;
+  padding: 0.125rem 0.5rem;
+  background: var(--background);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
 .badge.info {
   background-color: var(--info);
 }

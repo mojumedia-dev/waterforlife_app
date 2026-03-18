@@ -86,12 +86,12 @@ function Dashboard({ userProfile, location, navigate }) {
         // Parse frequencies from comma-separated string
         const freqArray = protocol.frequencies.split(',').map(f => f.trim());
         
-        // Populate all 8 channels with frequencies
-        // Duration from protocol applies to all channels
+        // Populate all 8 channels with frequencies only
+        // Keep duty and duration empty (user fills these)
         const updated = channels.map((channel, idx) => ({
           freq: freqArray[idx] || '',
-          duty: channel.duty, // Keep existing duty values
-          duration: protocol.durationMinutes ? protocol.durationMinutes.toString() : channel.duration
+          duty: channel.duty,
+          duration: channel.duration
         }));
         
         setChannels(updated);
@@ -99,6 +99,64 @@ function Dashboard({ userProfile, location, navigate }) {
       }
     }
   };
+
+  // Save current session to history
+  const saveSession = () => {
+    // Get existing history
+    const historyRaw = storage.getItem('sessionHistory');
+    const history = historyRaw ? JSON.parse(historyRaw) : [];
+    
+    // Get condition name
+    const protocol = protocolsData.find(p => p.id === selectedCondition);
+    const conditionName = protocol ? protocol.ailmentName : selectedCondition || 'Custom';
+    
+    // Create session object
+    const session = {
+      id: Date.now(),
+      date: new Date().toISOString(),
+      condition: conditionName,
+      channels: channels
+    };
+    
+    // Add to beginning of array
+    history.unshift(session);
+    
+    // Keep only last 10
+    const trimmed = history.slice(0, 10);
+    
+    // Save back
+    storage.setItem('sessionHistory', JSON.stringify(trimmed));
+    
+    // Reload history
+    loadHistory();
+  };
+
+  // Load a saved session
+  const loadSession = (session) => {
+    setChannels(session.channels);
+    storage.setItem('sessionChannels', JSON.stringify(session.channels));
+    
+    // Try to find matching condition
+    const protocol = protocolsData.find(p => p.ailmentName === session.condition);
+    if (protocol) {
+      setSelectedCondition(protocol.id);
+      storage.setItem('selectedCondition', protocol.id);
+    }
+  };
+
+  // Load history
+  const [sessionHistory, setSessionHistory] = useState([]);
+  
+  const loadHistory = () => {
+    const historyRaw = storage.getItem('sessionHistory');
+    if (historyRaw) {
+      setSessionHistory(JSON.parse(historyRaw));
+    }
+  };
+
+  useEffect(() => {
+    loadHistory();
+  }, []);
 
   return (
     <div className="page dashboard-page">
@@ -109,10 +167,41 @@ function Dashboard({ userProfile, location, navigate }) {
 
 
 
+      {sessionHistory.length > 0 && (
+        <div className="card saved-sessions">
+          <div className="card-header">
+            <h3>Saved Sessions</h3>
+            <span className="badge">{sessionHistory.length}/10</span>
+          </div>
+          <div className="sessions-scroll">
+            {sessionHistory.map((session) => (
+              <div key={session.id} className="session-card" onClick={() => loadSession(session)}>
+                <div className="session-card-header">
+                  <div className="session-condition">{session.condition}</div>
+                  <div className="session-date">
+                    {new Date(session.date).toLocaleDateString()}
+                  </div>
+                </div>
+                <div className="session-preview">
+                  <div className="preview-label">Frequencies:</div>
+                  <div className="preview-values">
+                    {session.channels.filter(ch => ch.freq).map((ch, i) => (
+                      <span key={i} className="preview-freq">{ch.freq} Hz</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className="card session-frequencies">
         <div className="card-header">
           <h3>Session Frequencies</h3>
-          <span className="badge info">Hz</span>
+          <button onClick={saveSession} className="save-session-btn">
+            Save Session
+          </button>
         </div>
         <p className="frequency-help">Select a condition to auto-fill frequencies, or enter manually</p>
         
@@ -177,7 +266,7 @@ function Dashboard({ userProfile, location, navigate }) {
                   <input
                     type="number"
                     id={`duty-${idx}`}
-                    placeholder="0-100"
+                    placeholder=""
                     value={channel.duty}
                     onChange={(e) => handleChannelChange(idx, 'duty', e.target.value)}
                     className="channel-input"
