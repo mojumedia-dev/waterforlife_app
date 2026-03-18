@@ -216,12 +216,13 @@ function Dashboard({ userProfile, location, navigate }) {
                   </div>
                 </div>
                 <div className="session-preview">
-                  <div className="preview-label">Frequencies:</div>
-                  <div className="preview-values">
-                    {session.channels.filter(ch => ch.freq).map((ch, i) => (
-                      <span key={i} className="preview-freq">{ch.freq} Hz</span>
-                    ))}
-                  </div>
+                  {session.channels.filter(ch => ch.freq).map((ch, i) => (
+                    <div key={i} className="preview-channel">
+                      <span className="preview-freq">{ch.freq} Hz</span>
+                      {ch.duty && <span className="preview-duty">D: {ch.duty}</span>}
+                      {ch.duration && <span className="preview-duration">{ch.duration}m</span>}
+                    </div>
+                  ))}
                 </div>
               </div>
             ))}
