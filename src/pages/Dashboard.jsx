@@ -194,8 +194,13 @@ function Dashboard({ userProfile, location, navigate }) {
   return (
     <div className="page dashboard-page">
       <div className="welcome-section">
-        <h2>Welcome back, {username}! 👋</h2>
-        <p className="subtitle">Your wellness journey continues</p>
+        <div className="welcome-header">
+          <img src="/assets/logo.jpg" alt="Water & Light for Health" className="brand-logo" />
+          <div className="welcome-text">
+            <h2>Welcome back, {username}! 👋</h2>
+            <p className="subtitle">Your wellness journey continues</p>
+          </div>
+        </div>
       </div>
 
 
