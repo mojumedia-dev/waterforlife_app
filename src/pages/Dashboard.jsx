@@ -22,6 +22,49 @@ function Dashboard({ userProfile, location, navigate }) {
   const [lastBookedProtocol, setLastBookedProtocol] = useState(null);
   const [conditionFilter, setConditionFilter] = useState('');
   const [showConditionResults, setShowConditionResults] = useState(false);
+  const [frequencyDatabase, setFrequencyDatabase] = useState([]);
+
+  // Load frequency database CSV on mount
+  useEffect(() => {
+    fetch('/assets/frequency_database.csv')
+      .then(response => response.text())
+      .then(csvText => {
+        const lines = csvText.split('\n');
+        const data = [];
+        
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (!line) continue;
+          
+          const fields = [];
+          let currentField = '';
+          let inQuotes = false;
+          
+          for (let j = 0; j < line.length; j++) {
+            const char = line[j];
+            if (char === '"') {
+              inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+              fields.push(currentField);
+              currentField = '';
+            } else {
+              currentField += char;
+            }
+          }
+          fields.push(currentField);
+          
+          if (fields.length >= 2) {
+            data.push({
+              condition: fields[0].replace(/^"|"$/g, ''),
+              frequencies: fields[1].replace(/^"|"$/g, '')
+            });
+          }
+        }
+        
+        setFrequencyDatabase(data);
+      })
+      .catch(err => console.error('Failed to load frequency database:', err));
+  }, []);
 
   // Load saved channels and condition from localStorage on mount
   useEffect(() => {
@@ -268,7 +311,21 @@ function Dashboard({ userProfile, location, navigate }) {
               <div className="selected-condition-text">
                 {(() => {
                   const protocol = protocolsData.find(p => p.id === selectedCondition);
-                  return protocol ? protocol.ailmentName : `${selectedCondition} (Custom)`;
+                  if (protocol) {
+                    return (
+                      <>
+                        <span className="selected-badge protocol-badge-inline">Protocol</span>
+                        {protocol.ailmentName}
+                      </>
+                    );
+                  } else {
+                    return (
+                      <>
+                        <span className="selected-badge condition-badge-inline">Condition</span>
+                        {selectedCondition}
+                      </>
+                    );
+                  }
                 })()}
               </div>
               <button 
@@ -309,31 +366,84 @@ function Dashboard({ userProfile, location, navigate }) {
               
               {showConditionResults && (
                 <div className="condition-results">
-                  {protocolsData
-                    .filter(protocol => {
-                      if (!conditionFilter.trim()) return true;
-                      return protocol.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase());
-                    })
-                    .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
-                    .slice(0, 50) // Show max 50 results
-                    .map(protocol => (
-                      <div
-                        key={protocol.id}
-                        className="condition-result-item"
-                        onClick={() => {
-                          handleConditionChange({ target: { value: protocol.id } });
-                          setShowConditionResults(false);
-                          setConditionFilter('');
-                        }}
-                      >
-                        <div className="condition-result-name">{protocol.ailmentName}</div>
-                        <div className="condition-result-category">{protocol.category}</div>
-                      </div>
-                    ))}
+                  {(() => {
+                    const term = conditionFilter.toLowerCase().trim();
+                    const results = [];
+                    
+                    // Add matching protocols first
+                    const matchingProtocols = protocolsData
+                      .filter(p => !term || p.ailmentName.toLowerCase().includes(term))
+                      .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
+                      .map(p => ({ type: 'protocol', data: p }));
+                    
+                    // Add matching database conditions
+                    const matchingConditions = frequencyDatabase
+                      .filter(c => !term || c.condition.toLowerCase().includes(term))
+                      .filter(c => !protocolsData.some(p => 
+                        p.ailmentName.toLowerCase() === c.condition.toLowerCase()
+                      ))
+                      .sort((a, b) => a.condition.localeCompare(b.condition))
+                      .map(c => ({ type: 'condition', data: c }));
+                    
+                    // Combine: protocols first, then database conditions
+                    results.push(...matchingProtocols, ...matchingConditions);
+                    
+                    return results.slice(0, 100).map((result, index) => {
+                      if (result.type === 'protocol') {
+                        const protocol = result.data;
+                        return (
+                          <div
+                            key={`p-${protocol.id}`}
+                            className="condition-result-item"
+                            onClick={() => {
+                              handleConditionChange({ target: { value: protocol.id } });
+                              setShowConditionResults(false);
+                              setConditionFilter('');
+                            }}
+                          >
+                            <div className="condition-result-name">{protocol.ailmentName}</div>
+                            <div className="condition-result-category">
+                              <span className="protocol-badge">Protocol</span> {protocol.category}
+                            </div>
+                          </div>
+                        );
+                      } else {
+                        const condition = result.data;
+                        return (
+                          <div
+                            key={`c-${index}`}
+                            className="condition-result-item"
+                            onClick={() => {
+                              // Save database condition
+                              const freqArray = condition.frequencies.split(',').map(f => f.trim());
+                              const newChannels = Array(8).fill(null).map((_, i) => ({
+                                freq: freqArray[i] || '',
+                                duty: '',
+                                duration: ''
+                              }));
+                              
+                              setChannels(newChannels);
+                              setSelectedCondition(condition.condition);
+                              storage.setItem('sessionChannels', JSON.stringify(newChannels));
+                              storage.setItem('selectedCondition', condition.condition);
+                              
+                              setShowConditionResults(false);
+                              setConditionFilter('');
+                            }}
+                          >
+                            <div className="condition-result-name">{condition.condition}</div>
+                            <div className="condition-result-category">
+                              <span className="condition-badge">Condition</span> Database
+                            </div>
+                          </div>
+                        );
+                      }
+                    });
+                  })()}
                   
-                  {conditionFilter && protocolsData.filter(p => 
-                    p.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase())
-                  ).length === 0 && (
+                  {conditionFilter && 
+                    protocolsData.filter(p => p.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase())).length === 0 &&
+                    frequencyDatabase.filter(c => c.condition.toLowerCase().includes(conditionFilter.toLowerCase())).length === 0 && (
                     <div className="no-condition-results">
                       No matches found. Try different keywords.
                     </div>

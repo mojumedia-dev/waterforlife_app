@@ -1573,6 +1573,28 @@ body {
 .selected-condition-text {
   flex: 1;
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selected-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.protocol-badge-inline {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.condition-badge-inline {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
 }
 
 .change-condition-btn {
@@ -1624,6 +1646,33 @@ body {
 .condition-result-category {
   font-size: 0.75rem;
   color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.protocol-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  background: var(--primary);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.condition-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  background: #6366f1;
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .no-condition-results {
