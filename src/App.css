@@ -1519,6 +1519,7 @@ body {
 
 .condition-select-group {
   margin-bottom: var(--spacing-xl);
+  position: relative;
 }
 
 .condition-select-group label {
@@ -1529,23 +1530,13 @@ body {
   margin-bottom: var(--spacing-sm);
 }
 
-.condition-filter-input {
+.condition-input-wrapper {
   position: relative;
-  margin-bottom: var(--spacing-md);
 }
 
-.condition-filter-input .filter-icon {
-  position: absolute;
-  left: var(--spacing-md);
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-secondary);
-  pointer-events: none;
-}
-
-.condition-filter {
+.condition-input {
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 2.5rem;
+  padding: var(--spacing-md);
   font-size: 0.95rem;
   border: 2px solid var(--border);
   border-radius: var(--radius-md);
@@ -1554,17 +1545,17 @@ body {
   transition: all 0.2s ease;
 }
 
-.condition-filter:focus {
+.condition-input:focus {
   outline: none;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
 }
 
-.condition-filter::placeholder {
+.condition-input::placeholder {
   color: var(--text-muted);
 }
 
-.clear-filter-btn {
+.clear-input-btn {
   position: absolute;
   right: var(--spacing-md);
   top: 50%;
@@ -1579,127 +1570,71 @@ body {
   transition: color 0.2s;
 }
 
-.clear-filter-btn:hover {
+.clear-input-btn:hover {
   color: var(--text-primary);
 }
 
-.selected-condition-display {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-  padding: var(--spacing-md);
-  background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
-  border-radius: var(--radius-md);
-  color: white;
-}
-
-.selected-condition-text {
-  flex: 1;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.selected-badge {
-  padding: 0.25rem 0.5rem;
-  border-radius: var(--radius-sm);
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.protocol-badge-inline {
-  background: rgba(255, 255, 255, 0.3);
-  color: white;
-}
-
-.condition-badge-inline {
-  background: rgba(255, 255, 255, 0.3);
-  color: white;
-}
-
-.change-condition-btn {
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: var(--radius-sm);
-  color: white;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.change-condition-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.condition-results {
-  max-height: 400px;
+.condition-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 300px;
   overflow-y: auto;
+  background: var(--surface);
   border: 2px solid var(--border);
   border-radius: var(--radius-md);
-  background: var(--surface);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
+  margin-top: 0.25rem;
+  z-index: 100;
 }
 
-.condition-result-item {
-  padding: var(--spacing-md);
-  border-bottom: 1px solid var(--border);
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
   cursor: pointer;
   transition: background 0.15s;
+  border-bottom: 1px solid var(--border);
 }
 
-.condition-result-item:last-child {
+.suggestion-item:last-child {
   border-bottom: none;
 }
 
-.condition-result-item:hover {
+.suggestion-item:hover {
   background: var(--background);
 }
 
-.condition-result-name {
-  font-weight: 500;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
-}
-
-.condition-result-category {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.protocol-badge {
+.suggestion-badge {
   display: inline-block;
-  padding: 0.125rem 0.5rem;
+  padding: 0.125rem 0.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.suggestion-badge.protocol-badge {
   background: var(--primary);
   color: white;
-  border-radius: var(--radius-sm);
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-.condition-badge {
-  display: inline-block;
-  padding: 0.125rem 0.5rem;
+.suggestion-badge.condition-badge {
   background: #6366f1;
   color: white;
-  border-radius: var(--radius-sm);
-  font-size: 0.7rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
 }
 
-.no-condition-results {
-  padding: var(--spacing-xl);
+.suggestion-name {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+}
+
+.no-suggestions {
+  padding: var(--spacing-md);
   text-align: center;
   color: var(--text-secondary);
   font-size: 0.875rem;

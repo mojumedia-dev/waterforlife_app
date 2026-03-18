@@ -47,12 +47,15 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
         if (protocol) {
           storage.setItem('selectedCondition', protocol.id);
           setSelectedCondition(protocol.id);
+          setConditionFilter(protocol.ailmentName);
         } else {
           // Keep the saved value even if no match (user might have entered custom)
           setSelectedCondition(savedCondition);
+          setConditionFilter(savedCondition);
         }
       } else {
         setSelectedCondition(savedCondition);
+        setConditionFilter(protocol.ailmentName);
       }
     }
     
@@ -260,154 +263,134 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
         <p className="frequency-help">Select a condition to auto-fill frequencies, or enter manually</p>
         
         <div className="condition-select-group">
-          <label htmlFor="condition">Select Condition or Protocol</label>
+          <label htmlFor="condition">Condition or Protocol</label>
           
-          {/* Show selected condition */}
-          {selectedCondition && !showConditionResults ? (
-            <div className="selected-condition-display">
-              <div className="selected-condition-text">
-                {(() => {
-                  const protocol = protocolsData.find(p => p.id === selectedCondition);
-                  if (protocol) {
-                    return (
-                      <>
-                        <span className="selected-badge protocol-badge-inline">Protocol</span>
-                        {protocol.ailmentName}
-                      </>
-                    );
-                  } else {
-                    return (
-                      <>
-                        <span className="selected-badge condition-badge-inline">Condition</span>
-                        {selectedCondition}
-                      </>
-                    );
-                  }
-                })()}
-              </div>
-              <button 
-                className="change-condition-btn"
-                onClick={() => {
+          <div className="condition-input-wrapper">
+            <input
+              type="text"
+              placeholder="Type condition name or search..."
+              value={conditionFilter}
+              onChange={(e) => {
+                setConditionFilter(e.target.value);
+                setShowConditionResults(e.target.value.trim().length > 0);
+              }}
+              onFocus={() => {
+                if (conditionFilter.trim()) {
                   setShowConditionResults(true);
+                }
+              }}
+              onBlur={() => {
+                // Small delay to allow click on results
+                setTimeout(() => setShowConditionResults(false), 200);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && conditionFilter.trim()) {
+                  // Use typed value as custom condition
+                  setSelectedCondition(conditionFilter.trim());
+                  storage.setItem('selectedCondition', conditionFilter.trim());
+                  setShowConditionResults(false);
+                }
+              }}
+              className="condition-input"
+            />
+            {conditionFilter && (
+              <button 
+                className="clear-input-btn"
+                onClick={() => {
                   setConditionFilter('');
+                  setSelectedCondition('');
+                  storage.removeItem('selectedCondition');
+                  setShowConditionResults(false);
                 }}
               >
-                Change
+                ✕
               </button>
-            </div>
-          ) : (
-            <>
-              <div className="condition-filter-input">
-                <span className="filter-icon">🔍</span>
-                <input
-                  type="text"
-                  placeholder="Type to search conditions..."
-                  value={conditionFilter}
-                  onChange={(e) => {
-                    setConditionFilter(e.target.value);
-                    setShowConditionResults(true);
-                  }}
-                  onFocus={() => setShowConditionResults(true)}
-                  className="condition-filter"
-                  autoFocus
-                />
-                {conditionFilter && (
-                  <button 
-                    className="clear-filter-btn"
-                    onClick={() => setConditionFilter('')}
-                  >
-                    ✕
-                  </button>
-                )}
-              </div>
-              
-              {showConditionResults && (
-                <div className="condition-results">
-                  {(() => {
-                    const term = conditionFilter.toLowerCase().trim();
-                    const results = [];
-                    
-                    // Add matching protocols first
-                    const matchingProtocols = protocolsData
-                      .filter(p => !term || p.ailmentName.toLowerCase().includes(term))
-                      .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
-                      .map(p => ({ type: 'protocol', data: p }));
-                    
-                    // Add matching database conditions
-                    const matchingConditions = frequencyDatabase
-                      .filter(c => !term || c.condition.toLowerCase().includes(term))
-                      .filter(c => !protocolsData.some(p => 
-                        p.ailmentName.toLowerCase() === c.condition.toLowerCase()
-                      ))
-                      .sort((a, b) => a.condition.localeCompare(b.condition))
-                      .map(c => ({ type: 'condition', data: c }));
-                    
-                    // Combine: protocols first, then database conditions
-                    results.push(...matchingProtocols, ...matchingConditions);
-                    
-                    return results.slice(0, 100).map((result, index) => {
-                      if (result.type === 'protocol') {
-                        const protocol = result.data;
-                        return (
-                          <div
-                            key={`p-${protocol.id}`}
-                            className="condition-result-item"
-                            onClick={() => {
-                              handleConditionChange({ target: { value: protocol.id } });
-                              setShowConditionResults(false);
-                              setConditionFilter('');
-                            }}
-                          >
-                            <div className="condition-result-name">{protocol.ailmentName}</div>
-                            <div className="condition-result-category">
-                              <span className="protocol-badge">Protocol</span> {protocol.category}
-                            </div>
-                          </div>
-                        );
-                      } else {
-                        const condition = result.data;
-                        return (
-                          <div
-                            key={`c-${index}`}
-                            className="condition-result-item"
-                            onClick={() => {
-                              // Save database condition
-                              const freqArray = condition.frequencies.split(',').map(f => f.trim());
-                              const newChannels = Array(8).fill(null).map((_, i) => ({
-                                freq: freqArray[i] || '',
-                                duty: '',
-                                duration: ''
-                              }));
-                              
-                              setChannels(newChannels);
-                              setSelectedCondition(condition.condition);
-                              storage.setItem('sessionChannels', JSON.stringify(newChannels));
-                              storage.setItem('selectedCondition', condition.condition);
-                              
-                              setShowConditionResults(false);
-                              setConditionFilter('');
-                            }}
-                          >
-                            <div className="condition-result-name">{condition.condition}</div>
-                            <div className="condition-result-category">
-                              <span className="condition-badge">Condition</span> Database
-                            </div>
-                          </div>
-                        );
-                      }
-                    });
-                  })()}
-                  
-                  {conditionFilter && 
-                    protocolsData.filter(p => p.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase())).length === 0 &&
-                    frequencyDatabase.filter(c => c.condition.toLowerCase().includes(conditionFilter.toLowerCase())).length === 0 && (
-                    <div className="no-condition-results">
-                      No matches found. Try different keywords.
+            )}
+          </div>
+          
+          {showConditionResults && conditionFilter.trim() && (
+            <div className="condition-suggestions">
+              {(() => {
+                const term = conditionFilter.toLowerCase().trim();
+                const results = [];
+                
+                // Add matching protocols first
+                const matchingProtocols = protocolsData
+                  .filter(p => p.ailmentName.toLowerCase().includes(term))
+                  .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
+                  .slice(0, 50)
+                  .map(p => ({ type: 'protocol', data: p }));
+                
+                // Add matching database conditions
+                const matchingConditions = frequencyDatabase
+                  .filter(c => c.condition.toLowerCase().includes(term))
+                  .filter(c => !protocolsData.some(p => 
+                    p.ailmentName.toLowerCase() === c.condition.toLowerCase()
+                  ))
+                  .sort((a, b) => a.condition.localeCompare(b.condition))
+                  .slice(0, 50)
+                  .map(c => ({ type: 'condition', data: c }));
+                
+                results.push(...matchingProtocols, ...matchingConditions);
+                
+                if (results.length === 0) {
+                  return (
+                    <div className="no-suggestions">
+                      No matches. Press Enter to use "{conditionFilter}" as custom condition.
                     </div>
-                  )}
-                </div>
-              )}
-            </>
+                  );
+                }
+                
+                return results.map((result, index) => {
+                  if (result.type === 'protocol') {
+                    const protocol = result.data;
+                    return (
+                      <div
+                        key={`p-${protocol.id}`}
+                        className="suggestion-item"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          handleConditionChange({ target: { value: protocol.id } });
+                          setConditionFilter(protocol.ailmentName);
+                          setShowConditionResults(false);
+                        }}
+                      >
+                        <span className="suggestion-badge protocol-badge">Protocol</span>
+                        <span className="suggestion-name">{protocol.ailmentName}</span>
+                      </div>
+                    );
+                  } else {
+                    const condition = result.data;
+                    return (
+                      <div
+                        key={`c-${index}`}
+                        className="suggestion-item"
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          // Save database condition
+                          const freqArray = condition.frequencies.split(',').map(f => f.trim());
+                          const newChannels = Array(8).fill(null).map((_, i) => ({
+                            freq: freqArray[i] || '',
+                            duty: '',
+                            duration: ''
+                          }));
+                          
+                          setChannels(newChannels);
+                          setSelectedCondition(condition.condition);
+                          setConditionFilter(condition.condition);
+                          storage.setItem('sessionChannels', JSON.stringify(newChannels));
+                          storage.setItem('selectedCondition', condition.condition);
+                          setShowConditionResults(false);
+                        }}
+                      >
+                        <span className="suggestion-badge condition-badge">Condition</span>
+                        <span className="suggestion-name">{condition.condition}</span>
+                      </div>
+                    );
+                  }
+                });
+              })()}
+            </div>
           )}
         </div>
 
