@@ -21,6 +21,7 @@ function Dashboard({ userProfile, location, navigate }) {
   const [editingSessionId, setEditingSessionId] = useState(null);
   const [lastBookedProtocol, setLastBookedProtocol] = useState(null);
   const [conditionFilter, setConditionFilter] = useState('');
+  const [showConditionResults, setShowConditionResults] = useState(false);
 
   // Load saved channels and condition from localStorage on mount
   useEffect(() => {
@@ -261,53 +262,86 @@ function Dashboard({ userProfile, location, navigate }) {
         <div className="condition-select-group">
           <label htmlFor="condition">Select Condition or Protocol</label>
           
-          <div className="condition-filter-input">
-            <span className="filter-icon">🔍</span>
-            <input
-              type="text"
-              placeholder="Type to filter conditions..."
-              value={conditionFilter}
-              onChange={(e) => setConditionFilter(e.target.value)}
-              className="condition-filter"
-            />
-            {conditionFilter && (
+          {/* Show selected condition */}
+          {selectedCondition && !showConditionResults ? (
+            <div className="selected-condition-display">
+              <div className="selected-condition-text">
+                {(() => {
+                  const protocol = protocolsData.find(p => p.id === selectedCondition);
+                  return protocol ? protocol.ailmentName : `${selectedCondition} (Custom)`;
+                })()}
+              </div>
               <button 
-                className="clear-filter-btn"
-                onClick={() => setConditionFilter('')}
+                className="change-condition-btn"
+                onClick={() => {
+                  setShowConditionResults(true);
+                  setConditionFilter('');
+                }}
               >
-                ✕
+                Change
               </button>
-            )}
-          </div>
-          
-          <select
-            id="condition"
-            value={selectedCondition}
-            onChange={handleConditionChange}
-            className="condition-select"
-          >
-            <option value="">Select a condition...</option>
-            
-            {/* Show custom condition if it's not in protocolsData */}
-            {selectedCondition && !protocolsData.find(p => p.id === selectedCondition) && (
-              <option value={selectedCondition}>
-                {selectedCondition} (Custom)
-              </option>
-            )}
-            
-            {protocolsData
-              .filter(protocol => {
-                if (!conditionFilter.trim()) return true;
-                return protocol.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase());
-              })
-              .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
-              .map(protocol => (
-                <option key={protocol.id} value={protocol.id}>
-                  {protocol.ailmentName}
-                </option>
-              ))
-            }
-          </select>
+            </div>
+          ) : (
+            <>
+              <div className="condition-filter-input">
+                <span className="filter-icon">🔍</span>
+                <input
+                  type="text"
+                  placeholder="Type to search conditions..."
+                  value={conditionFilter}
+                  onChange={(e) => {
+                    setConditionFilter(e.target.value);
+                    setShowConditionResults(true);
+                  }}
+                  onFocus={() => setShowConditionResults(true)}
+                  className="condition-filter"
+                  autoFocus
+                />
+                {conditionFilter && (
+                  <button 
+                    className="clear-filter-btn"
+                    onClick={() => setConditionFilter('')}
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+              
+              {showConditionResults && (
+                <div className="condition-results">
+                  {protocolsData
+                    .filter(protocol => {
+                      if (!conditionFilter.trim()) return true;
+                      return protocol.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase());
+                    })
+                    .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
+                    .slice(0, 50) // Show max 50 results
+                    .map(protocol => (
+                      <div
+                        key={protocol.id}
+                        className="condition-result-item"
+                        onClick={() => {
+                          handleConditionChange({ target: { value: protocol.id } });
+                          setShowConditionResults(false);
+                          setConditionFilter('');
+                        }}
+                      >
+                        <div className="condition-result-name">{protocol.ailmentName}</div>
+                        <div className="condition-result-category">{protocol.category}</div>
+                      </div>
+                    ))}
+                  
+                  {conditionFilter && protocolsData.filter(p => 
+                    p.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase())
+                  ).length === 0 && (
+                    <div className="no-condition-results">
+                      No matches found. Try different keywords.
+                    </div>
+                  )}
+                </div>
+              )}
+            </>
+          )}
         </div>
 
         {lastBookedProtocol && selectedCondition === lastBookedProtocol.protocolId && (
