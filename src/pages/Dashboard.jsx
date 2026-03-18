@@ -20,6 +20,7 @@ function Dashboard({ userProfile, location, navigate }) {
   const [sessionDate, setSessionDate] = useState(new Date().toISOString().split('T')[0]);
   const [editingSessionId, setEditingSessionId] = useState(null);
   const [lastBookedProtocol, setLastBookedProtocol] = useState(null);
+  const [conditionFilter, setConditionFilter] = useState('');
 
   // Load saved channels and condition from localStorage on mount
   useEffect(() => {
@@ -258,7 +259,27 @@ function Dashboard({ userProfile, location, navigate }) {
         <p className="frequency-help">Select a condition to auto-fill frequencies, or enter manually</p>
         
         <div className="condition-select-group">
-          <label htmlFor="condition">Condition/Protocol</label>
+          <label htmlFor="condition">Select Condition or Protocol</label>
+          
+          <div className="condition-filter-input">
+            <span className="filter-icon">🔍</span>
+            <input
+              type="text"
+              placeholder="Type to filter conditions..."
+              value={conditionFilter}
+              onChange={(e) => setConditionFilter(e.target.value)}
+              className="condition-filter"
+            />
+            {conditionFilter && (
+              <button 
+                className="clear-filter-btn"
+                onClick={() => setConditionFilter('')}
+              >
+                ✕
+              </button>
+            )}
+          </div>
+          
           <select
             id="condition"
             value={selectedCondition}
@@ -274,11 +295,18 @@ function Dashboard({ userProfile, location, navigate }) {
               </option>
             )}
             
-            {protocolsData.map(protocol => (
-              <option key={protocol.id} value={protocol.id}>
-                {protocol.ailmentName}
-              </option>
-            ))}
+            {protocolsData
+              .filter(protocol => {
+                if (!conditionFilter.trim()) return true;
+                return protocol.ailmentName.toLowerCase().includes(conditionFilter.toLowerCase());
+              })
+              .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
+              .map(protocol => (
+                <option key={protocol.id} value={protocol.id}>
+                  {protocol.ailmentName}
+                </option>
+              ))
+            }
           </select>
         </div>
 

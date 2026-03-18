@@ -1506,6 +1506,60 @@ body {
   margin-bottom: var(--spacing-sm);
 }
 
+.condition-filter-input {
+  position: relative;
+  margin-bottom: var(--spacing-md);
+}
+
+.condition-filter-input .filter-icon {
+  position: absolute;
+  left: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.condition-filter {
+  width: 100%;
+  padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 2.5rem;
+  font-size: 0.95rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.condition-filter:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.1);
+}
+
+.condition-filter::placeholder {
+  color: var(--text-muted);
+}
+
+.clear-filter-btn {
+  position: absolute;
+  right: var(--spacing-md);
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.clear-filter-btn:hover {
+  color: var(--text-primary);
+}
+
 .condition-select {
   width: 100%;
   padding: var(--spacing-md);
