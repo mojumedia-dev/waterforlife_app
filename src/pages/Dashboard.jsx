@@ -422,7 +422,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
             <div key={idx} className="channel-row">
               <div className="channel-label">Channel {idx + 1}</div>
               <div className="channel-inputs">
-                <div className="channel-input-group">
+                <div className="channel-input-group full-width">
                   <label htmlFor={`freq-${idx}`}>Frequency</label>
                   <input
                     type="number"
@@ -433,27 +433,29 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
                     className="channel-input"
                   />
                 </div>
-                <div className="channel-input-group">
-                  <label htmlFor={`duty-${idx}`}>Duty</label>
-                  <input
-                    type="number"
-                    id={`duty-${idx}`}
-                    placeholder=""
-                    value={channel.duty}
-                    onChange={(e) => handleChannelChange(idx, 'duty', e.target.value)}
-                    className="channel-input"
-                  />
-                </div>
-                <div className="channel-input-group">
-                  <label htmlFor={`duration-${idx}`}>Duration</label>
-                  <input
-                    type="number"
-                    id={`duration-${idx}`}
-                    placeholder="min"
-                    value={channel.duration}
-                    onChange={(e) => handleChannelChange(idx, 'duration', e.target.value)}
-                    className="channel-input"
-                  />
+                <div className="channel-input-row">
+                  <div className="channel-input-group half-width">
+                    <label htmlFor={`duty-${idx}`}>Duty</label>
+                    <input
+                      type="number"
+                      id={`duty-${idx}`}
+                      placeholder=""
+                      value={channel.duty}
+                      onChange={(e) => handleChannelChange(idx, 'duty', e.target.value)}
+                      className="channel-input"
+                    />
+                  </div>
+                  <div className="channel-input-group half-width">
+                    <label htmlFor={`duration-${idx}`}>Duration</label>
+                    <input
+                      type="number"
+                      id={`duration-${idx}`}
+                      placeholder="min"
+                      value={channel.duration}
+                      onChange={(e) => handleChannelChange(idx, 'duration', e.target.value)}
+                      className="channel-input"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

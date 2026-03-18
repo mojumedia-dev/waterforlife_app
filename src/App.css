@@ -1738,20 +1738,28 @@ body {
 }
 
 .channel-inputs {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-md);
 }
 
-@media (min-width: 640px) {
-  .channel-inputs {
-    grid-template-columns: 2fr 1fr 1fr;
-  }
+.channel-input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
 }
 
 .channel-input-group {
   display: flex;
   flex-direction: column;
+}
+
+.channel-input-group.full-width {
+  width: 100%;
+}
+
+.channel-input-group.half-width {
+  flex: 1;
 }
 
 .channel-input-group label {
