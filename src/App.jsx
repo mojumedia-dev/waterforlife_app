@@ -27,6 +27,49 @@ function App() {
   const [packages] = useState(packagesData);
   const [conditions] = useState(conditionsData);
   const [availability] = useState(availabilityData);
+  const [frequencyDatabase, setFrequencyDatabase] = useState([]);
+
+  // Load frequency database CSV once on mount
+  useEffect(() => {
+    fetch('/assets/frequency_database.csv')
+      .then(response => response.text())
+      .then(csvText => {
+        const lines = csvText.split('\n');
+        const data = [];
+        
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i].trim();
+          if (!line) continue;
+          
+          const fields = [];
+          let currentField = '';
+          let inQuotes = false;
+          
+          for (let j = 0; j < line.length; j++) {
+            const char = line[j];
+            if (char === '"') {
+              inQuotes = !inQuotes;
+            } else if (char === ',' && !inQuotes) {
+              fields.push(currentField);
+              currentField = '';
+            } else {
+              currentField += char;
+            }
+          }
+          fields.push(currentField);
+          
+          if (fields.length >= 2) {
+            data.push({
+              condition: fields[0].replace(/^"|"$/g, ''),
+              frequencies: fields[1].replace(/^"|"$/g, '')
+            });
+          }
+        }
+        
+        setFrequencyDatabase(data);
+      })
+      .catch(err => console.error('Failed to load frequency database:', err));
+  }, []);
 
   // Check for existing email on mount
   useEffect(() => {
@@ -71,11 +114,13 @@ function App() {
           userProfile={userProfile} 
           location={location}
           navigate={navigate}
+          frequencyDatabase={frequencyDatabase}
         />;
       case 'wellness':
         return <WellnessGuide 
           conditions={conditions}
           navigate={navigate}
+          frequencyDatabase={frequencyDatabase}
         />;
       case 'condition':
         return <ConditionDetail 
