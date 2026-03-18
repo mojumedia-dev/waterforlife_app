@@ -266,6 +266,14 @@ function Dashboard({ userProfile, location, navigate }) {
             className="condition-select"
           >
             <option value="">Select a condition...</option>
+            
+            {/* Show custom condition if it's not in protocolsData */}
+            {selectedCondition && !protocolsData.find(p => p.id === selectedCondition) && (
+              <option value={selectedCondition}>
+                {selectedCondition} (Custom)
+              </option>
+            )}
+            
             {protocolsData.map(protocol => (
               <option key={protocol.id} value={protocol.id}>
                 {protocol.ailmentName}
