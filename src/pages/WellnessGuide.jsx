@@ -213,7 +213,7 @@ function WellnessGuide({ conditions, navigate }) {
       <div className="results-section">
         <div className="results-header">
           <span className="results-count">
-            {allResults.length} {allResults.length === 1 ? 'result' : 'results'} found
+            Results
           </span>
         </div>
 
