@@ -118,7 +118,7 @@ function App() {
       
       <header className="app-header">
         <div className="header-content">
-          <h1 className="logo">💧✨ Water & Light</h1>
+          <img src="/assets/logo.jpg" alt="Water & Light for Health" className="header-logo" />
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             {userEmail && (
               <button 
