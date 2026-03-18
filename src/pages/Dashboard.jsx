@@ -289,6 +289,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
                   setSelectedCondition(conditionFilter.trim());
                   storage.setItem('selectedCondition', conditionFilter.trim());
                   setShowConditionResults(false);
+                  e.target.blur(); // Hide keyboard
                 }
               }}
               className="condition-input"
@@ -353,6 +354,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
                           handleConditionChange({ target: { value: protocol.id } });
                           setConditionFilter(protocol.ailmentName);
                           setShowConditionResults(false);
+                          document.activeElement?.blur(); // Hide keyboard
                         }}
                       >
                         <span className="suggestion-badge protocol-badge">Protocol</span>
@@ -381,6 +383,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
                           storage.setItem('sessionChannels', JSON.stringify(newChannels));
                           storage.setItem('selectedCondition', condition.condition);
                           setShowConditionResults(false);
+                          document.activeElement?.blur(); // Hide keyboard
                         }}
                       >
                         <span className="suggestion-badge condition-badge">Condition</span>
