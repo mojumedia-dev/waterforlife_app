@@ -293,24 +293,6 @@ body {
   margin-bottom: var(--spacing-xl);
 }
 
-.welcome-header {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.brand-logo {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: var(--shadow-sm);
-}
-
-.welcome-text {
-  flex: 1;
-}
-
 .welcome-section h2 {
   font-size: 1.5rem;
   font-weight: 700;
