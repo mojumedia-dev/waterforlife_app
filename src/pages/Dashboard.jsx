@@ -10,19 +10,35 @@ function Dashboard({ userProfile, location, navigate }) {
     freq1: '',
     freq2: '',
     freq3: '',
-    freq4: ''
+    freq4: '',
+    freq5: '',
+    freq6: '',
+    freq7: '',
+    freq8: ''
   });
+  const [intensity, setIntensity] = useState('');
+  const [timeMinutes, setTimeMinutes] = useState('');
   const [selectedCondition, setSelectedCondition] = useState('');
   const [lastBookedProtocol, setLastBookedProtocol] = useState(null);
 
   // Load saved frequencies and condition from localStorage on mount
   useEffect(() => {
     const savedFreqs = storage.getItem('sessionFrequencies');
+    const savedIntensity = storage.getItem('sessionIntensity');
+    const savedTime = storage.getItem('sessionTimeMinutes');
     const savedCondition = storage.getItem('selectedCondition');
     const bookedProtocol = storage.getItem('lastBookedProtocol');
     
     if (savedFreqs) {
       setFrequencies(JSON.parse(savedFreqs));
+    }
+    
+    if (savedIntensity) {
+      setIntensity(savedIntensity);
+    }
+    
+    if (savedTime) {
+      setTimeMinutes(savedTime);
     }
     
     if (savedCondition) {
@@ -60,6 +76,18 @@ function Dashboard({ userProfile, location, navigate }) {
     storage.setItem('sessionFrequencies', JSON.stringify(updated));
   };
 
+  // Handle intensity change
+  const handleIntensityChange = (value) => {
+    setIntensity(value);
+    storage.setItem('sessionIntensity', value);
+  };
+
+  // Handle time change
+  const handleTimeChange = (value) => {
+    setTimeMinutes(value);
+    storage.setItem('sessionTimeMinutes', value);
+  };
+
   // Handle condition selection and auto-populate frequencies
   const handleConditionChange = (e) => {
     const conditionId = e.target.value;
@@ -81,16 +109,26 @@ function Dashboard({ userProfile, location, navigate }) {
         // Parse frequencies from comma-separated string
         const freqArray = protocol.frequencies.split(',').map(f => f.trim());
         
-        // Populate the 4 frequency fields
+        // Populate all 8 frequency fields
         const updated = {
           freq1: freqArray[0] || '',
           freq2: freqArray[1] || '',
           freq3: freqArray[2] || '',
-          freq4: freqArray[3] || ''
+          freq4: freqArray[3] || '',
+          freq5: freqArray[4] || '',
+          freq6: freqArray[5] || '',
+          freq7: freqArray[6] || '',
+          freq8: freqArray[7] || ''
         };
         
         setFrequencies(updated);
         storage.setItem('sessionFrequencies', JSON.stringify(updated));
+        
+        // Auto-populate time from protocol duration
+        if (protocol.durationMinutes) {
+          setTimeMinutes(protocol.durationMinutes.toString());
+          storage.setItem('sessionTimeMinutes', protocol.durationMinutes.toString());
+        }
       }
     }
   };
@@ -199,6 +237,80 @@ function Dashboard({ userProfile, location, navigate }) {
               className="frequency-input"
             />
             <span className="unit">Hz</span>
+          </div>
+          <div className="frequency-input-group">
+            <label htmlFor="freq5">Frequency 5</label>
+            <input
+              type="number"
+              id="freq5"
+              placeholder="e.g., 880"
+              value={frequencies.freq5}
+              onChange={(e) => handleFrequencyChange('freq5', e.target.value)}
+              className="frequency-input"
+            />
+            <span className="unit">Hz</span>
+          </div>
+          <div className="frequency-input-group">
+            <label htmlFor="freq6">Frequency 6</label>
+            <input
+              type="number"
+              id="freq6"
+              placeholder="e.g., 1500"
+              value={frequencies.freq6}
+              onChange={(e) => handleFrequencyChange('freq6', e.target.value)}
+              className="frequency-input"
+            />
+            <span className="unit">Hz</span>
+          </div>
+          <div className="frequency-input-group">
+            <label htmlFor="freq7">Frequency 7</label>
+            <input
+              type="number"
+              id="freq7"
+              placeholder="e.g., 1550"
+              value={frequencies.freq7}
+              onChange={(e) => handleFrequencyChange('freq7', e.target.value)}
+              className="frequency-input"
+            />
+            <span className="unit">Hz</span>
+          </div>
+          <div className="frequency-input-group">
+            <label htmlFor="freq8">Frequency 8</label>
+            <input
+              type="number"
+              id="freq8"
+              placeholder="e.g., 6000"
+              value={frequencies.freq8}
+              onChange={(e) => handleFrequencyChange('freq8', e.target.value)}
+              className="frequency-input"
+            />
+            <span className="unit">Hz</span>
+          </div>
+        </div>
+        
+        <div className="session-controls" style={{ marginTop: '1.5rem' }}>
+          <div className="frequency-input-group">
+            <label htmlFor="intensity">Duty</label>
+            <input
+              type="number"
+              id="intensity"
+              placeholder="e.g., 50"
+              value={intensity}
+              onChange={(e) => handleIntensityChange(e.target.value)}
+              className="frequency-input"
+            />
+          </div>
+          <div className="frequency-input-group">
+            <label htmlFor="timeMinutes">Duration</label>
+            <input
+              type="number"
+              id="timeMinutes"
+              placeholder="e.g., 30"
+              value={timeMinutes}
+              onChange={(e) => handleTimeChange(e.target.value)}
+              className="frequency-input"
+            />
+            <span className="unit">min</span>
           </div>
         </div>
         <p className="auto-save-note">✓ Saved automatically</p>

@@ -1529,6 +1529,18 @@ body {
   text-align: center;
 }
 
+.session-controls {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+}
+
+@media (min-width: 768px) {
+  .session-controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 .badge.info {
   background-color: var(--info);
 }
