@@ -27,9 +27,6 @@ function Dashboard({ userProfile, location, navigate }) {
     const savedCondition = storage.getItem('selectedCondition');
     const bookedProtocol = storage.getItem('lastBookedProtocol');
     
-    console.log('Dashboard loading - savedCondition:', savedCondition);
-    console.log('Dashboard loading - savedChannels:', savedChannels);
-    
     if (savedChannels) {
       setChannels(JSON.parse(savedChannels));
     }
@@ -38,29 +35,22 @@ function Dashboard({ userProfile, location, navigate }) {
       // Try to find protocol by ID first
       let protocol = protocolsData.find(p => p.id === savedCondition);
       
-      console.log('Found by ID?', protocol ? 'Yes' : 'No');
-      
       // If not found by ID, try matching by ailmentName (fallback for name-based saves)
       if (!protocol) {
         protocol = protocolsData.find(
           p => p.ailmentName.toLowerCase() === savedCondition.toLowerCase()
         );
         
-        console.log('Found by name?', protocol ? 'Yes' : 'No');
-        
         // If found by name, update localStorage with the proper ID
         if (protocol) {
           storage.setItem('selectedCondition', protocol.id);
           setSelectedCondition(protocol.id);
-          console.log('Set condition to protocol ID:', protocol.id);
         } else {
           // Keep the saved value even if no match (user might have entered custom)
           setSelectedCondition(savedCondition);
-          console.log('Set condition to custom value:', savedCondition);
         }
       } else {
         setSelectedCondition(savedCondition);
-        console.log('Set condition to saved ID:', savedCondition);
       }
     }
     
@@ -268,7 +258,7 @@ function Dashboard({ userProfile, location, navigate }) {
         <p className="frequency-help">Select a condition to auto-fill frequencies, or enter manually</p>
         
         <div className="condition-select-group">
-          <label htmlFor="condition">Target Condition</label>
+          <label htmlFor="condition">Condition/Protocol</label>
           <select
             id="condition"
             value={selectedCondition}

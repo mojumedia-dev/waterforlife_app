@@ -143,14 +143,8 @@ function WellnessGuide({ conditions, navigate }) {
     
     const conditionToSave = matchingProtocol ? matchingProtocol.id : condition.conditionName;
     
-    console.log('Saving protocol condition:', conditionToSave);
-    console.log('Saving protocol channels:', channels);
-    
     storage.setItem('sessionChannels', JSON.stringify(channels));
     storage.setItem('selectedCondition', conditionToSave);
-    
-    // Verify it was saved
-    console.log('Verified saved condition:', storage.getItem('selectedCondition'));
     
     setSavedConditionId(condition.id);
     setTimeout(() => setSavedConditionId(null), 2500);
@@ -166,14 +160,8 @@ function WellnessGuide({ conditions, navigate }) {
       duration: ''
     }));
     
-    console.log('Saving condition:', freqEntry.condition);
-    console.log('Saving channels:', channels);
-    
     storage.setItem('sessionChannels', JSON.stringify(channels));
     storage.setItem('selectedCondition', freqEntry.condition);
-    
-    // Verify it was saved
-    console.log('Verified saved condition:', storage.getItem('selectedCondition'));
     
     setSavedConditionId(freqEntry.condition);
     setTimeout(() => setSavedConditionId(null), 2500);
