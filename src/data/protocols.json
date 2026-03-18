@@ -1695,5 +1695,345 @@
     "notes": "May support hair health and reduce loss. Medical evaluation recommended for sudden or severe hair loss.",
     "suggestedPackageId": "pkg-003",
     "frequencies": "3, 20, 28, 95, 146, 465, 787, 800, 880"
+  },
+  {
+    "id": "prot-101",
+    "ailmentName": "Cancer Breast",
+    "category": "Oncology",
+    "tags": [
+      "cancer",
+      "breast cancer",
+      "supportive care",
+      "immune support"
+    ],
+    "frequencyPerWeek": 5,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 60,
+    "notes": "Supportive therapy only. Must be used alongside conventional medical treatment. Consult oncologist before starting.",
+    "suggestedPackageId": "pkg-004",
+    "frequencies": "20, 460, 5120"
+  },
+  {
+    "id": "prot-102",
+    "ailmentName": "Cancer Prostate",
+    "category": "Oncology",
+    "tags": [
+      "cancer",
+      "prostate cancer",
+      "supportive care",
+      "men's health"
+    ],
+    "frequencyPerWeek": 5,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 60,
+    "notes": "Supportive therapy only. Must be used alongside conventional medical treatment. Consult oncologist before starting.",
+    "suggestedPackageId": "pkg-004",
+    "frequencies": "130, 570, 830, 2250"
+  },
+  {
+    "id": "prot-103",
+    "ailmentName": "Cancer Lung",
+    "category": "Oncology",
+    "tags": [
+      "cancer",
+      "lung cancer",
+      "supportive care",
+      "respiratory"
+    ],
+    "frequencyPerWeek": 5,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 60,
+    "notes": "Supportive therapy only. Must be used alongside conventional medical treatment. Consult oncologist before starting.",
+    "suggestedPackageId": "pkg-004",
+    "frequencies": "50, 410, 620"
+  },
+  {
+    "id": "prot-104",
+    "ailmentName": "Alzheimer's Disease",
+    "category": "Neurological",
+    "tags": [
+      "alzheimer's",
+      "dementia",
+      "memory",
+      "cognitive decline"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 24,
+    "totalSuggestedSessions": 72,
+    "notes": "May support cognitive function and slow progression. Best results when started early. Regular medical monitoring required.",
+    "suggestedPackageId": "pkg-004",
+    "frequencies": "110, 7500"
+  },
+  {
+    "id": "prot-105",
+    "ailmentName": "Parkinson's Disease",
+    "category": "Neurological",
+    "tags": [
+      "parkinson's",
+      "tremor",
+      "movement disorder",
+      "motor function"
+    ],
+    "frequencyPerWeek": 4,
+    "recommendedWeeks": 16,
+    "totalSuggestedSessions": 64,
+    "notes": "May help reduce tremors and improve motor function. Use alongside conventional treatment. Monitor progress with neurologist.",
+    "suggestedPackageId": "pkg-004",
+    "frequencies": "80, 350, 650, 830, 9500"
+  },
+  {
+    "id": "prot-106",
+    "ailmentName": "Multiple Sclerosis",
+    "category": "Neurological",
+    "tags": [
+      "MS",
+      "autoimmune",
+      "myelin",
+      "nerve function"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 20,
+    "totalSuggestedSessions": 60,
+    "notes": "May help reduce inflammation and support nerve function. Combine with conventional MS therapy. Regular neurological assessment recommended.",
+    "suggestedPackageId": "pkg-004",
+    "frequencies": "50, 320, 730, 3950"
+  },
+  {
+    "id": "prot-107",
+    "ailmentName": "Lupus",
+    "category": "Autoimmune",
+    "tags": [
+      "lupus",
+      "autoimmune",
+      "inflammation",
+      "immune system"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 36,
+    "notes": "May help reduce inflammation and autoimmune symptoms. Use alongside immunosuppressive medications as prescribed by rheumatologist.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "243, 633, 702, 2008, 2489"
+  },
+  {
+    "id": "prot-108",
+    "ailmentName": "Rheumatoid Arthritis",
+    "category": "Autoimmune",
+    "tags": [
+      "RA",
+      "autoimmune",
+      "joint inflammation",
+      "chronic pain"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 10,
+    "totalSuggestedSessions": 30,
+    "notes": "Targets joint inflammation and pain. Best results when combined with DMARD therapy. Regular rheumatology follow-up essential.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "190, 1000, 2800"
+  },
+  {
+    "id": "prot-109",
+    "ailmentName": "Heart Disease General",
+    "category": "Cardiovascular",
+    "tags": [
+      "heart disease",
+      "cardiovascular",
+      "circulation",
+      "heart health"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 36,
+    "notes": "Supportive care for heart health. Continue all cardiac medications. Cardiologist clearance required before starting.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "70, 220, 700, 2750, 7250"
+  },
+  {
+    "id": "prot-110",
+    "ailmentName": "Atrial Fibrillation",
+    "category": "Cardiovascular",
+    "tags": [
+      "AFib",
+      "arrhythmia",
+      "heart rhythm",
+      "palpitations"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 8,
+    "totalSuggestedSessions": 24,
+    "notes": "May help stabilize heart rhythm. Must continue anticoagulation and antiarrhythmic medications. Requires cardiology clearance.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "80, 730, 970, 5750"
+  },
+  {
+    "id": "prot-111",
+    "ailmentName": "Lyme Disease",
+    "category": "Infectious Disease",
+    "tags": [
+      "lyme",
+      "tick-borne",
+      "chronic lyme",
+      "bacteria"
+    ],
+    "frequencyPerWeek": 4,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 48,
+    "notes": "May help address chronic Lyme symptoms. Use alongside antibiotic therapy if prescribed. Integrative medicine approach recommended.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "650, 2500, 7500"
+  },
+  {
+    "id": "prot-112",
+    "ailmentName": "Hepatitis C",
+    "category": "Infectious Disease",
+    "tags": [
+      "hepatitis",
+      "liver",
+      "viral infection",
+      "HCV"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 16,
+    "totalSuggestedSessions": 48,
+    "notes": "Supportive liver therapy. Continue antiviral medications as prescribed. Regular liver function monitoring required.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "166, 200, 224, 317, 329, 528, 633, 727"
+  },
+  {
+    "id": "prot-113",
+    "ailmentName": "COPD Chronic Obstructive Pulmonary",
+    "category": "Respiratory",
+    "tags": [
+      "COPD",
+      "lung disease",
+      "breathing",
+      "chronic"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 36,
+    "notes": "May improve breathing and reduce inflammation. Continue all respiratory medications. Pulmonologist supervision required.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "370, 410, 620, 970, 7500"
+  },
+  {
+    "id": "prot-114",
+    "ailmentName": "Kidney Disease Chronic",
+    "category": "Renal",
+    "tags": [
+      "kidney",
+      "CKD",
+      "renal function",
+      "chronic disease"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 16,
+    "totalSuggestedSessions": 48,
+    "notes": "Supportive kidney function therapy. Regular nephrology care essential. Monitor kidney function tests throughout treatment.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "70, 180, 570, 7500"
+  },
+  {
+    "id": "prot-115",
+    "ailmentName": "Thyroid Disorder Hypothyroid",
+    "category": "Endocrine",
+    "tags": [
+      "hypothyroid",
+      "thyroid",
+      "metabolism",
+      "hormone"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 8,
+    "totalSuggestedSessions": 24,
+    "notes": "May support thyroid function. Continue thyroid hormone replacement. Regular TSH monitoring required.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "70, 460, 620, 830, 7500"
+  },
+  {
+    "id": "prot-116",
+    "ailmentName": "Crohn's Disease",
+    "category": "Digestive",
+    "tags": [
+      "crohn's",
+      "IBD",
+      "inflammation",
+      "digestive"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 12,
+    "totalSuggestedSessions": 36,
+    "notes": "May reduce intestinal inflammation. Use alongside IBD medications. Gastroenterologist supervision recommended.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "30, 410, 620, 950, 7500"
+  },
+  {
+    "id": "prot-117",
+    "ailmentName": "Neuropathy Peripheral",
+    "category": "Neurological",
+    "tags": [
+      "neuropathy",
+      "nerve pain",
+      "numbness",
+      "tingling"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 10,
+    "totalSuggestedSessions": 30,
+    "notes": "May help reduce nerve pain and improve sensation. Address underlying cause (diabetes, vitamin deficiency, etc.).",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "160, 410, 770, 8930"
+  },
+  {
+    "id": "prot-118",
+    "ailmentName": "Macular Degeneration",
+    "category": "Vision",
+    "tags": [
+      "vision",
+      "eye health",
+      "retina",
+      "AMD"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 16,
+    "totalSuggestedSessions": 48,
+    "notes": "May support retinal health and slow progression. Regular ophthalmology exams essential. Consider nutritional supplements.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "150, 180, 800, 5500"
+  },
+  {
+    "id": "prot-119",
+    "ailmentName": "Tinnitus",
+    "category": "Auditory",
+    "tags": [
+      "tinnitus",
+      "ringing ears",
+      "hearing",
+      "ear health"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 8,
+    "totalSuggestedSessions": 24,
+    "notes": "May help reduce ringing and improve tolerance. Rule out underlying causes with ENT specialist first.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "20, 727, 787, 880, 5000"
+  },
+  {
+    "id": "prot-120",
+    "ailmentName": "Erectile Dysfunction",
+    "category": "Men's Health",
+    "tags": [
+      "ED",
+      "sexual health",
+      "circulation",
+      "men's health"
+    ],
+    "frequencyPerWeek": 3,
+    "recommendedWeeks": 8,
+    "totalSuggestedSessions": 24,
+    "notes": "May improve circulation and function. Address cardiovascular risk factors. Urologist consultation recommended.",
+    "suggestedPackageId": "pkg-003",
+    "frequencies": "80, 240, 650, 900, 2500"
   }
 ]
