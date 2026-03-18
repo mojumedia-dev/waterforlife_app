@@ -17,6 +17,8 @@ function Dashboard({ userProfile, location, navigate }) {
     { freq: '', duty: '', duration: '' }
   ]);
   const [selectedCondition, setSelectedCondition] = useState('');
+  const [sessionDate, setSessionDate] = useState(new Date().toISOString().split('T')[0]);
+  const [editingSessionId, setEditingSessionId] = useState(null);
   const [lastBookedProtocol, setLastBookedProtocol] = useState(null);
 
   // Load saved channels and condition from localStorage on mount
@@ -110,31 +112,51 @@ function Dashboard({ userProfile, location, navigate }) {
     const protocol = protocolsData.find(p => p.id === selectedCondition);
     const conditionName = protocol ? protocol.ailmentName : selectedCondition || 'Custom';
     
-    // Create session object
-    const session = {
-      id: Date.now(),
-      date: new Date().toISOString(),
-      condition: conditionName,
-      channels: channels
-    };
-    
-    // Add to beginning of array
-    history.unshift(session);
-    
-    // Keep only last 10
-    const trimmed = history.slice(0, 10);
+    if (editingSessionId) {
+      // UPDATE existing session
+      const sessionIndex = history.findIndex(s => s.id === editingSessionId);
+      if (sessionIndex !== -1) {
+        history[sessionIndex] = {
+          id: editingSessionId,
+          date: sessionDate,
+          condition: conditionName,
+          channels: channels
+        };
+      }
+      setEditingSessionId(null);
+    } else {
+      // CREATE new session
+      const session = {
+        id: Date.now(),
+        date: sessionDate,
+        condition: conditionName,
+        channels: channels
+      };
+      
+      // Add to beginning of array
+      history.unshift(session);
+      
+      // Keep only last 10
+      history.splice(10);
+    }
     
     // Save back
-    storage.setItem('sessionHistory', JSON.stringify(trimmed));
+    storage.setItem('sessionHistory', JSON.stringify(history));
     
     // Reload history
     loadHistory();
   };
 
-  // Load a saved session
+  // Load a saved session for editing
   const loadSession = (session) => {
     setChannels(session.channels);
     storage.setItem('sessionChannels', JSON.stringify(session.channels));
+    
+    // Set date from session
+    setSessionDate(session.date);
+    
+    // Track which session is being edited
+    setEditingSessionId(session.id);
     
     // Try to find matching condition
     const protocol = protocolsData.find(p => p.ailmentName === session.condition);
@@ -142,6 +164,17 @@ function Dashboard({ userProfile, location, navigate }) {
       setSelectedCondition(protocol.id);
       storage.setItem('selectedCondition', protocol.id);
     }
+  };
+
+  // Cancel editing
+  const cancelEdit = () => {
+    setEditingSessionId(null);
+    setSessionDate(new Date().toISOString().split('T')[0]);
+    // Clear channels
+    const emptyChannels = Array(8).fill(null).map(() => ({ freq: '', duty: '', duration: '' }));
+    setChannels(emptyChannels);
+    storage.setItem('sessionChannels', JSON.stringify(emptyChannels));
+    setSelectedCondition('');
   };
 
   // Load history
@@ -179,7 +212,7 @@ function Dashboard({ userProfile, location, navigate }) {
                 <div className="session-card-header">
                   <div className="session-condition">{session.condition}</div>
                   <div className="session-date">
-                    {new Date(session.date).toLocaleDateString()}
+                    {new Date(session.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </div>
                 </div>
                 <div className="session-preview">
@@ -199,10 +232,28 @@ function Dashboard({ userProfile, location, navigate }) {
       <div className="card session-frequencies">
         <div className="card-header">
           <h3>Session Frequencies</h3>
-          <button onClick={saveSession} className="save-session-btn">
-            Save Session
-          </button>
+          <div className="save-controls">
+            <input
+              type="date"
+              value={sessionDate}
+              onChange={(e) => setSessionDate(e.target.value)}
+              className="session-date-input"
+            />
+            {editingSessionId && (
+              <button onClick={cancelEdit} className="cancel-edit-btn">
+                Cancel
+              </button>
+            )}
+            <button onClick={saveSession} className="save-session-btn">
+              {editingSessionId ? '✓ Update' : 'Save'}
+            </button>
+          </div>
         </div>
+        {editingSessionId && (
+          <div className="editing-notice">
+            ✏️ Editing saved session - modify channels and click Update to save changes
+          </div>
+        )}
         <p className="frequency-help">Select a condition to auto-fill frequencies, or enter manually</p>
         
         <div className="condition-select-group">

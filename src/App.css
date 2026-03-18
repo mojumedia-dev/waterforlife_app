@@ -1597,6 +1597,28 @@ body {
   font-size: 0.875rem;
 }
 
+.save-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-wrap: wrap;
+}
+
+.session-date-input {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+}
+
+.session-date-input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
 .save-session-btn {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
@@ -1607,11 +1629,40 @@ body {
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .save-session-btn:hover {
   background: var(--primary-dark);
   transform: translateY(-1px);
+}
+
+.cancel-edit-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.cancel-edit-btn:hover {
+  background: var(--surface);
+  border-color: var(--text-muted);
+}
+
+.editing-notice {
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  color: #92400e;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .saved-sessions {
