@@ -236,7 +236,7 @@ function WellnessGuide({ conditions, navigate }) {
                   >
                     <div className="protocol-header">
                       <h3 className="protocol-name">{condition.conditionName}</h3>
-                      <span className="protocol-category">{condition.category}</span>
+                      <span className="protocol-category">Protocol</span>
                     </div>
                     
                     <p className="condition-description">{condition.description}</p>
@@ -294,7 +294,7 @@ function WellnessGuide({ conditions, navigate }) {
                   >
                     <div className="protocol-header">
                       <h3 className="protocol-name">{freqEntry.condition}</h3>
-                      <span className="protocol-category" style={{ background: '#6366f1' }}>Database</span>
+                      <span className="protocol-category" style={{ background: '#6366f1' }}>Condition</span>
                     </div>
                     
                     <div className="frequency-list">
