@@ -294,7 +294,7 @@ function WellnessGuide({ conditions, navigate }) {
                   >
                     <div className="protocol-header">
                       <h3 className="protocol-name">{freqEntry.condition}</h3>
-                      <span className="protocol-category" style={{ background: '#6366f1' }}>Condition</span>
+                      <span className="protocol-category" style={{ background: '#6366f1', color: 'white' }}>Condition</span>
                     </div>
                     
                     <div className="frequency-list">
