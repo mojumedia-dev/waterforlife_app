@@ -203,7 +203,7 @@ function Dashboard({ userProfile, location, navigate }) {
       {sessionHistory.length > 0 && (
         <div className="card saved-sessions">
           <div className="card-header">
-            <h3>Saved Sessions</h3>
+            <h3>Previous Sessions</h3>
             <span className="badge">{sessionHistory.length}/10</span>
           </div>
           <div className="sessions-scroll">
