@@ -22,14 +22,15 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
       filtered = filtered.filter(p => p.category === selectedCategory);
     }
 
-    // Filter by search term (including frequencies)
+    // Filter by search term (including frequencies) - word order independent
     if (searchTerm.trim()) {
-      const term = searchTerm.toLowerCase();
-      filtered = filtered.filter(p => 
-        p.ailmentName.toLowerCase().includes(term) ||
-        p.category.toLowerCase().includes(term) ||
-        p.frequencies.toLowerCase().includes(term)
-      );
+      const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+      
+      filtered = filtered.filter(p => {
+        const searchableText = `${p.ailmentName} ${p.category} ${p.frequencies}`.toLowerCase();
+        // Match if ALL words appear somewhere in the searchable text
+        return words.every(word => searchableText.includes(word));
+      });
     }
 
     return filtered;
@@ -39,11 +40,13 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
   const frequencyResults = useMemo(() => {
     if (!searchTerm.trim()) return [];
     
-    const term = searchTerm.toLowerCase();
-    return frequencyDatabase.filter(entry =>
-      entry.condition.toLowerCase().includes(term) ||
-      entry.frequencies.includes(term)
-    ).slice(0, 50); // Limit to 50 results
+    const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+    
+    return frequencyDatabase.filter(entry => {
+      const searchableText = `${entry.condition} ${entry.frequencies}`.toLowerCase();
+      // Match if ALL words appear somewhere in the searchable text
+      return words.every(word => searchableText.includes(word));
+    }).slice(0, 50); // Limit to 50 results
   }, [frequencyDatabase, searchTerm]);
 
   // Combine results - show protocols first, then frequency database matches
