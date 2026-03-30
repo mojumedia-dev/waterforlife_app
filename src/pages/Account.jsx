@@ -1,8 +1,37 @@
+import { useState, useEffect } from 'react';
 import storage from '../utils/storage';
 
 function Account({ userProfile, location, navigate }) {
   const userEmail = storage.getItem('userEmail') || '';
   const username = userEmail.split('@')[0] || 'User';
+  
+  // Waiver status
+  const [waiverCompleted, setWaiverCompleted] = useState(false);
+  const [waiverDate, setWaiverDate] = useState(null);
+
+  useEffect(() => {
+    // Load waiver status from localStorage
+    const completed = storage.getItem('waiverCompleted') === 'true';
+    const date = storage.getItem('waiverCompletedDate');
+    setWaiverCompleted(completed);
+    setWaiverDate(date);
+  }, []);
+
+  const handleMarkComplete = () => {
+    const now = new Date().toLocaleDateString('en-US', { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    });
+    storage.setItem('waiverCompleted', 'true');
+    storage.setItem('waiverCompletedDate', now);
+    setWaiverCompleted(true);
+    setWaiverDate(now);
+  };
+
+  const handleOpenWaiver = () => {
+    window.open('https://waiver.fr/p-jAJtM', '_blank');
+  };
   
   return (
     <div className="page account-page">
@@ -40,6 +69,40 @@ function Account({ userProfile, location, navigate }) {
         </button>
         <p className="help-text">
           Multiple location support will be available in the production version
+        </p>
+      </div>
+
+      <div className="waiver-section card">
+        <h3>📋 Liability Waiver</h3>
+        <div className="waiver-status">
+          {waiverCompleted ? (
+            <div className="waiver-complete">
+              <div className="status-badge success">✓ Completed</div>
+              <p className="waiver-date">Signed on {waiverDate}</p>
+            </div>
+          ) : (
+            <div className="waiver-incomplete">
+              <div className="status-badge pending">⏳ Not Completed</div>
+              <p className="waiver-help">
+                Please complete the waiver before your first session
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="waiver-actions">
+          <button className="btn primary" onClick={handleOpenWaiver}>
+            📄 View Waiver Form
+          </button>
+          {!waiverCompleted && (
+            <button className="btn secondary" onClick={handleMarkComplete}>
+              ✓ Mark as Complete
+            </button>
+          )}
+        </div>
+        <p className="help-text">
+          {waiverCompleted 
+            ? 'Already signed? Your waiver is on file.' 
+            : 'Already signed a physical copy? Mark it complete above.'}
         </p>
       </div>
 
