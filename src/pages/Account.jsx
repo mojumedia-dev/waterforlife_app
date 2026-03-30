@@ -17,18 +17,6 @@ function Account({ userProfile, location, navigate }) {
     setWaiverDate(date);
   }, []);
 
-  const handleMarkComplete = () => {
-    const now = new Date().toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
-    });
-    storage.setItem('waiverCompleted', 'true');
-    storage.setItem('waiverCompletedDate', now);
-    setWaiverCompleted(true);
-    setWaiverDate(now);
-  };
-
   const handleOpenWaiver = () => {
     window.open('https://waiver.fr/p-jAJtM', '_blank');
   };
@@ -93,16 +81,11 @@ function Account({ userProfile, location, navigate }) {
           <button className="btn primary" onClick={handleOpenWaiver}>
             📄 View Waiver Form
           </button>
-          {!waiverCompleted && (
-            <button className="btn secondary" onClick={handleMarkComplete}>
-              ✓ Mark as Complete
-            </button>
-          )}
         </div>
         <p className="help-text">
           {waiverCompleted 
-            ? 'Already signed? Your waiver is on file.' 
-            : 'Already signed a physical copy? Mark it complete above.'}
+            ? 'Your waiver is on file.' 
+            : 'Please complete the waiver before your first session.'}
         </p>
       </div>
 
