@@ -13,6 +13,24 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
     return cats;
   }, []);
 
+  // Per-word matcher: numeric words match against exact frequency tokens
+  // (so "72" doesn't also match "172", "720", "727"); text words match as a
+  // substring against the searchable text. Users mix both freely
+  // ("anxiety 72" → anxiety-related conditions that use frequency 72).
+  const wordMatches = (word, textLower, freqTokens) => {
+    if (/^\d+(\.\d+)?$/.test(word)) {
+      return freqTokens.has(word);
+    }
+    return textLower.includes(word);
+  };
+
+  const parseFreqTokens = (freqStr) => {
+    if (!freqStr) return new Set();
+    return new Set(
+      String(freqStr).split(/[,\s]+/).map(t => t.trim().replace(/[^0-9.]/g, '')).filter(Boolean)
+    );
+  };
+
   // Filter protocols based on search and category
   const filteredProtocols = useMemo(() => {
     let filtered = protocolsData;
@@ -22,31 +40,31 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
       filtered = filtered.filter(p => p.category === selectedCategory);
     }
 
-    // Filter by search term (including frequencies) - word order independent
+    // Filter by search term - word-order independent, numeric words match
+    // exact frequency tokens, text words match against name/category/notes.
     if (searchTerm.trim()) {
       const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
-      
       filtered = filtered.filter(p => {
-        const searchableText = `${p.ailmentName} ${p.category} ${p.frequencies}`.toLowerCase();
-        // Match if ALL words appear somewhere in the searchable text
-        return words.every(word => searchableText.includes(word));
+        const textLower = `${p.ailmentName} ${p.category}`.toLowerCase();
+        const freqTokens = parseFreqTokens(p.frequencies);
+        return words.every(word => wordMatches(word, textLower, freqTokens));
       });
     }
 
     return filtered;
   }, [searchTerm, selectedCategory]);
 
-  // Search frequency database
+  // Search frequency database (~6320 rows). No hard result cap — a bare
+  // frequency search (e.g. "72") should return every condition that uses
+  // that frequency, not just the alphabetically-first 50.
   const frequencyResults = useMemo(() => {
     if (!searchTerm.trim()) return [];
-    
     const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
-    
     return frequencyDatabase.filter(entry => {
-      const searchableText = `${entry.condition} ${entry.frequencies}`.toLowerCase();
-      // Match if ALL words appear somewhere in the searchable text
-      return words.every(word => searchableText.includes(word));
-    }).slice(0, 50); // Limit to 50 results
+      const textLower = String(entry.condition || '').toLowerCase();
+      const freqTokens = parseFreqTokens(entry.frequencies);
+      return words.every(word => wordMatches(word, textLower, freqTokens));
+    });
   }, [frequencyDatabase, searchTerm]);
 
   // Combine results - show protocols first, then frequency database matches
