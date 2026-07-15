@@ -312,26 +312,44 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
           {showConditionResults && conditionFilter.trim() && (
             <div className="condition-suggestions">
               {(() => {
-                const term = conditionFilter.toLowerCase().trim();
+                // Same rule as WellnessGuide: split on whitespace, numeric words
+                // exact-match against comma-split frequency tokens, text words
+                // substring-match against condition name. "72" alone returns
+                // every condition using 72 Hz; "anxiety 72" narrows to anxiety
+                // conditions that use 72 Hz.
+                const words = conditionFilter.toLowerCase().trim().split(/\s+/).filter(Boolean);
+                const parseFreqTokens = (freqStr) => new Set(
+                  String(freqStr || '').split(/[,\s]+/).map(t => t.trim().replace(/[^0-9.]/g, '')).filter(Boolean)
+                );
+                const wordMatches = (word, textLower, freqTokens) =>
+                  /^\d+(\.\d+)?$/.test(word) ? freqTokens.has(word) : textLower.includes(word);
                 const results = [];
-                
+
                 // Add matching protocols first
                 const matchingProtocols = protocolsData
-                  .filter(p => p.ailmentName.toLowerCase().includes(term))
+                  .filter(p => {
+                    const textLower = p.ailmentName.toLowerCase();
+                    const freqTokens = parseFreqTokens(p.frequencies);
+                    return words.every(w => wordMatches(w, textLower, freqTokens));
+                  })
                   .sort((a, b) => a.ailmentName.localeCompare(b.ailmentName))
                   .slice(0, 50)
                   .map(p => ({ type: 'protocol', data: p }));
-                
+
                 // Add matching database conditions
                 const matchingConditions = frequencyDatabase
-                  .filter(c => c.condition.toLowerCase().includes(term))
-                  .filter(c => !protocolsData.some(p => 
+                  .filter(c => {
+                    const textLower = String(c.condition || '').toLowerCase();
+                    const freqTokens = parseFreqTokens(c.frequencies);
+                    return words.every(w => wordMatches(w, textLower, freqTokens));
+                  })
+                  .filter(c => !protocolsData.some(p =>
                     p.ailmentName.toLowerCase() === c.condition.toLowerCase()
                   ))
                   .sort((a, b) => a.condition.localeCompare(b.condition))
                   .slice(0, 50)
                   .map(c => ({ type: 'condition', data: c }));
-                
+
                 results.push(...matchingProtocols, ...matchingConditions);
                 
                 if (results.length === 0) {
