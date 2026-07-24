@@ -96,7 +96,7 @@ function WellnessGuide({ conditions = [], navigate, frequencyDatabase = [], init
 
   const handleFreqChipClick = (e, freq) => {
     e.stopPropagation();
-    setSearchTerm(String(freq));
+    navigate('frequency', parseFloat(freq));
   };
 
   const handleSaveToDashboard = (e, condition) => {

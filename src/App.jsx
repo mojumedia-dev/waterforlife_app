@@ -3,6 +3,7 @@ import './App.css';
 import Dashboard from './pages/Dashboard';
 import WellnessGuide from './pages/WellnessGuide';
 import ConditionDetail from './pages/ConditionDetail';
+import FrequencyDetail from './pages/FrequencyDetail';
 import Booking from './pages/Booking';
 import Packages from './pages/Packages';
 import Account from './pages/Account';
@@ -22,6 +23,7 @@ function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [selectedCondition, setSelectedCondition] = useState(null);
   const [selectedProtocol, setSelectedProtocol] = useState(null);
+  const [selectedFrequency, setSelectedFrequency] = useState(null);
   const [wellnessSearchTerm, setWellnessSearchTerm] = useState('');
   const [location] = useState(locationData);
   const [userProfile] = useState(userProfileData);
@@ -61,6 +63,19 @@ function App() {
       setCurrentPage('wellness');
     } else if (['dashboard', 'packages', 'account'].includes(startAt)) {
       setCurrentPage(startAt);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ?frequency=150 deep-link. Same shape as ?condition= but for the Hz page.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const raw = params.get('frequency');
+    if (!raw) return;
+    const hz = parseFloat(raw);
+    if (!isNaN(hz) && hz > 0) {
+      setSelectedFrequency(hz);
+      setCurrentPage('frequency');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -140,6 +155,12 @@ function App() {
     } else if (page === 'wellness' && data && typeof data.searchTerm === 'string') {
       setWellnessSearchTerm(data.searchTerm);
       setCurrentPage('wellness');
+    } else if (page === 'frequency' && (typeof data === 'number' || typeof data === 'string')) {
+      const hz = typeof data === 'number' ? data : parseFloat(data);
+      if (!isNaN(hz) && hz > 0) {
+        setSelectedFrequency(hz);
+        setCurrentPage('frequency');
+      }
     } else {
       if (page === 'wellness') setWellnessSearchTerm('');
       setCurrentPage(page);
@@ -164,9 +185,15 @@ function App() {
           initialSearchTerm={wellnessSearchTerm}
         />;
       case 'condition':
-        return <ConditionDetail 
+        return <ConditionDetail
           condition={selectedCondition}
           packages={packages}
+          navigate={navigate}
+        />;
+      case 'frequency':
+        return <FrequencyDetail
+          frequency={selectedFrequency}
+          conditions={conditions}
           navigate={navigate}
         />;
       case 'booking':

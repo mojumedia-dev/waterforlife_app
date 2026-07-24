@@ -48,7 +48,7 @@ function ConditionDetail({ condition, navigate }) {
   };
 
   const handleFreqClick = (hz) => {
-    navigate('wellness', { searchTerm: String(hz) });
+    navigate('frequency', parseFloat(hz));
   };
 
   const primarySession = sessions.find(s => s.name === 'Standard Session') || sessions[0];
