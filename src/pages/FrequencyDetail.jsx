@@ -164,10 +164,6 @@ function FrequencyDetail({ frequency, conditions, navigate }) {
         <div className="disclaimer">
           <strong>This information is provided for educational purposes only and is not intended to diagnose, treat, cure, or prevent any disease.</strong> The SpectraLight / EverForged Light Bed and its frequency protocols are wellness-support tools. Consult a licensed healthcare provider before beginning any protocol, particularly if you have an underlying condition, are pregnant, or use a pacemaker or other implanted device.
         </div>
-
-        <p className="cite-footer">
-          Reference base: {stats.sources.join(', ')} source list{stats.sources.length === 1 ? '' : 's'}; SpectraLight 2024 Frequency Book (alphabetical + numerical volumes).
-        </p>
       </article>
     </div>
   );

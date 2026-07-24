@@ -92,11 +92,6 @@ function ConditionDetail({ condition, navigate }) {
             ))}
           </tbody>
         </table>
-        <p className="table-note">
-          Categories are derived from frequency-band clustering across the
-          {' '}{sources.join(', ')} source list{sources.length === 1 ? '' : 's'} for {condition.conditionName}. All unique frequencies appear at least once in a source-verified protocol.
-        </p>
-
         <h2 className="doc-section">Simple Session Structure</h2>
         <div className="session-list">
           {sessions.map(s => (
@@ -178,10 +173,6 @@ function ConditionDetail({ condition, navigate }) {
         <div className="disclaimer">
           <strong>This information is provided for educational purposes only and is not intended to diagnose, treat, cure, or prevent any disease.</strong> The SpectraLight / EverForged Light Bed and its frequency protocols are wellness-support tools. Consult a licensed healthcare provider before beginning any protocol, particularly if you have an underlying condition, are pregnant, or use a pacemaker or other implanted device.
         </div>
-
-        <p className="cite-footer">
-          Reference base: {sources.join(', ')} source list{sources.length === 1 ? '' : 's'}; SpectraLight 2024 Frequency Book (alphabetical + numerical volumes).
-        </p>
       </article>
     </div>
   );
