@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# 2024 book ingest — local safety backup only
+src/data/conditions.json.pre_2024_ingest.bak
+scripts/output/mockup_*.html
+dist/_screenshot_bootstrap.html

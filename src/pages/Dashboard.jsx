@@ -28,8 +28,34 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
     const savedChannels = storage.getItem('sessionChannels');
     const savedCondition = storage.getItem('selectedCondition');
     const bookedProtocol = storage.getItem('lastBookedProtocol');
-    
-    if (savedChannels) {
+    const fromConditionRaw = storage.getItem('sessionFromCondition');
+
+    // If the user came from a ConditionDetail Start/Save-to-Dashboard action,
+    // populate the channels with the full frequency list from that session
+    // (up to 8, matching the bed's channel count). Clear the key so a page
+    // reload doesn't re-apply it — this is a one-shot handoff.
+    if (fromConditionRaw) {
+      try {
+        const fromCondition = JSON.parse(fromConditionRaw);
+        const freqs = Array.isArray(fromCondition.frequencies) ? fromCondition.frequencies : [];
+        const populated = channels.map((channel, idx) => ({
+          freq: freqs[idx] != null ? String(freqs[idx]) : '',
+          duty: channel.duty,
+          duration: channel.duration,
+        }));
+        setChannels(populated);
+        storage.setItem('sessionChannels', JSON.stringify(populated));
+        if (fromCondition.conditionName) {
+          setConditionFilter(fromCondition.conditionName);
+          setSelectedCondition(fromCondition.conditionName);
+          storage.setItem('selectedCondition', fromCondition.conditionName);
+        }
+        storage.removeItem('sessionFromCondition');
+      } catch (err) {
+        console.warn('Could not parse sessionFromCondition:', err);
+        storage.removeItem('sessionFromCondition');
+      }
+    } else if (savedChannels) {
       setChannels(JSON.parse(savedChannels));
     }
     

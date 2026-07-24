@@ -1,11 +1,20 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import protocolsData from '../data/protocols.json';
 import storage from '../utils/storage';
 
-function WellnessGuide({ conditions, navigate, frequencyDatabase = [] }) {
-  const [searchTerm, setSearchTerm] = useState('');
+function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSearchTerm = '' }) {
+  const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [savedConditionId, setSavedConditionId] = useState(null);
+
+  // If a freq-click on ConditionDetail routed here with a Hz value, sync it
+  // once so the search input shows the value and results filter to it.
+  useEffect(() => {
+    if (initialSearchTerm && initialSearchTerm !== searchTerm) {
+      setSearchTerm(initialSearchTerm);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialSearchTerm]);
 
   // Get unique categories from protocols
   const categories = useMemo(() => {

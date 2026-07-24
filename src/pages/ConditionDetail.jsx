@@ -1,41 +1,14 @@
 import { useState } from 'react';
-import protocolsData from '../data/protocols.json';
 import storage from '../utils/storage';
+import { deriveCategories, deriveSessions, uniqueSources } from '../utils/deriveCategories';
 
-function ConditionDetail({ condition, packages, navigate }) {
-  const [savedProtocolId, setSavedProtocolId] = useState(null);
+// New "Rife Frequency Summary" layout — programmatic categorization + curated
+// session presets, both derived from the condition's protocols with no owner
+// content authoring required. Matches the shape of Doug's printed ailment
+// sheets while running against the ingested source-database rows.
 
-  const handleSaveToDashboard = (protocol) => {
-    // Parse frequencies and save to dashboard
-    const freqArray = protocol.frequencies.split(',').map(f => f.trim());
-    const frequencies = {
-      freq1: freqArray[0] || '',
-      freq2: freqArray[1] || '',
-      freq3: freqArray[2] || '',
-      freq4: freqArray[3] || ''
-    };
-    
-    // Find matching protocol in protocols.json by ailmentName
-    // This ensures the Dashboard dropdown can find and select it
-    const matchingProtocol = protocolsData.find(
-      p => p.ailmentName.toLowerCase() === condition.conditionName.toLowerCase()
-    );
-    
-    // Save to localStorage
-    storage.setItem('sessionFrequencies', JSON.stringify(frequencies));
-    
-    // Save the protocol ID from protocols.json if found, otherwise save the condition name
-    if (matchingProtocol) {
-      storage.setItem('selectedCondition', matchingProtocol.id);
-    } else {
-      // Fallback: save condition name for manual matching
-      storage.setItem('selectedCondition', condition.conditionName);
-    }
-    
-    // Show confirmation message
-    setSavedProtocolId(protocol.id);
-    setTimeout(() => setSavedProtocolId(null), 3000);
-  };
+function ConditionDetail({ condition, navigate }) {
+  const [savedSessionName, setSavedSessionName] = useState(null);
 
   if (!condition) {
     return (
@@ -48,174 +21,168 @@ function ConditionDetail({ condition, packages, navigate }) {
     );
   }
 
-  const suggestedPackage = packages.find(p => p.id === condition.suggestedPackageId);
-  const maxSessions = Math.max(...condition.protocols.map(p => p.totalSessions));
+  const categories = deriveCategories(condition.protocols || []);
+  const sessions = deriveSessions(condition.protocols || [], categories);
+  const sources = uniqueSources(condition.protocols || []);
 
-  const handleBookProtocol = (protocol) => {
-    navigate('booking', { condition, protocol });
+  const persistSession = (session) => {
+    storage.setItem('sessionFromCondition', JSON.stringify({
+      conditionName: condition.conditionName,
+      sessionName: session.name,
+      frequencies: session.frequencies,
+      duration: session.duration,
+      sources,
+      savedAt: new Date().toISOString(),
+    }));
   };
 
+  const handleStartSession = (session) => {
+    persistSession(session);
+    navigate('dashboard');
+  };
+
+  const handleSaveToDashboard = (session) => {
+    persistSession(session);
+    setSavedSessionName(session.name);
+    setTimeout(() => setSavedSessionName(null), 3000);
+  };
+
+  const handleFreqClick = (hz) => {
+    navigate('wellness', { searchTerm: String(hz) });
+  };
+
+  const primarySession = sessions.find(s => s.name === 'Standard Session') || sessions[0];
+
   return (
-    <div className="page condition-detail-page">
+    <div className="page freq-sheet-page">
       <button className="back-btn" onClick={() => navigate('wellness')}>
         ← Back to Wellness Guide
       </button>
 
-      <div className="protocol-hero">
-        <div className="protocol-category-badge">{condition.category}</div>
-        <h1 className="protocol-title">{condition.conditionName}</h1>
-        <p className="protocol-subtitle">{condition.description}</p>
-      </div>
+      <article className="freq-sheet">
+        <h1 className="doc-title">{condition.conditionName} — Rife Frequency Summary</h1>
 
-      <div className="condition-overview card">
-        <h3>📊 Treatment Overview</h3>
-        <div className="overview-grid">
-          <div className="overview-item">
-            <div className="overview-label">Available Protocols</div>
-            <div className="overview-value">{condition.protocols.length}</div>
-          </div>
-          <div className="overview-item">
-            <div className="overview-label">Sessions Per Week</div>
-            <div className="overview-value">{condition.protocols[0].frequencyPerWeek}x</div>
-          </div>
-          <div className="overview-item">
-            <div className="overview-label">Session Duration</div>
-            <div className="overview-value">{condition.protocols[0].durationMinutes} min</div>
-          </div>
-          <div className="overview-item">
-            <div className="overview-label">Recommended Weeks</div>
-            <div className="overview-value">{condition.protocols[0].recommendedWeeks}</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="tags-section card">
-        <h3>🎯 Addresses These Symptoms</h3>
-        <div className="tags-list">
-          {condition.tags.map((tag, index) => (
-            <span key={index} className="tag large">{tag}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className="protocols-section">
-        <h2>Available Frequency Protocols</h2>
-        <p className="section-subtitle">
-          We offer multiple frequency protocols for {condition.conditionName}. Each protocol uses different therapeutic frequencies from various research sources.
+        <table className="doc">
+          <colgroup>
+            <col style={{ width: '22%' }} />
+            <col style={{ width: '32%' }} />
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Purpose</th>
+              <th>Common Frequencies (Hz)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map(cat => (
+              <tr key={cat.name}>
+                <td>{cat.name}</td>
+                <td>{cat.purpose}</td>
+                <td className="freq-cell">
+                  {cat.frequenciesText.map((f, i) => (
+                    <span key={f + '-' + i}>
+                      {i > 0 && ', '}
+                      <span className="fq" onClick={() => handleFreqClick(f)}>{f}</span>
+                    </span>
+                  ))}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p className="table-note">
+          Categories are derived from frequency-band clustering across the
+          {' '}{sources.join(', ')} source list{sources.length === 1 ? '' : 's'} for {condition.conditionName}. All unique frequencies appear at least once in a source-verified protocol.
         </p>
-        
-        <div className="protocol-options">
-          {condition.protocols.map((protocol, index) => (
-            <div key={protocol.id} className="protocol-option-card card">
-              <div className="protocol-option-header">
-                <h3>{protocol.name}</h3>
-                <span className="source-badge">{protocol.source}</span>
-              </div>
-              
-              <div className="protocol-frequencies">
-                <div className="freq-label">Therapeutic Frequencies (Hz):</div>
-                <div className="freq-values">{protocol.frequencies}</div>
-              </div>
 
-              <div className="protocol-schedule">
-                <div className="schedule-item">
-                  <span className="icon">📅</span>
-                  <span>{protocol.frequencyPerWeek}x per week</span>
-                </div>
-                <div className="schedule-item">
-                  <span className="icon">⏱️</span>
-                  <span>{protocol.durationMinutes} minutes</span>
-                </div>
-                <div className="schedule-item">
-                  <span className="icon">🗓️</span>
-                  <span>{protocol.recommendedWeeks} weeks</span>
-                </div>
-                <div className="schedule-item">
-                  <span className="icon">📊</span>
-                  <span>{protocol.totalSessions} total sessions</span>
-                </div>
-              </div>
-
-              {savedProtocolId === protocol.id && (
-                <div style={{
-                  padding: '0.75rem',
-                  background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                  color: 'white',
-                  borderRadius: 'var(--radius-md)',
-                  textAlign: 'center',
-                  fontWeight: '600',
-                  marginBottom: '0.75rem',
-                  fontSize: '0.9rem'
-                }}>
-                  ✓ Frequencies saved to dashboard!
-                </div>
+        <h2 className="doc-section">Simple Session Structure</h2>
+        <div className="session-list">
+          {sessions.map(s => (
+            <p key={s.name}>
+              <strong>{s.name} ({s.duration}):</strong>{' '}
+              {s.frequenciesText.map((f, i) => (
+                <span key={f + '-' + i}>
+                  {i > 0 && ', '}
+                  <span className="fq" onClick={() => handleFreqClick(f)}>{f}</span>
+                </span>
+              ))}
+            </p>
+          ))}
+          {primarySession && (
+            <div className="session-actions">
+              <button className="btn primary" onClick={() => handleStartSession(primarySession)}>
+                Start {primarySession.name}
+              </button>
+              <button className="btn" onClick={() => handleSaveToDashboard(primarySession)}>
+                Save to Dashboard
+              </button>
+              {savedSessionName && (
+                <span className="save-confirm">✓ {savedSessionName} saved</span>
               )}
-
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                <button 
-                  className="btn primary large"
-                  onClick={() => handleBookProtocol(protocol)}
-                  style={{ flex: 1 }}
-                >
-                  Book This Protocol
-                </button>
-                <button 
-                  className="btn secondary large"
-                  onClick={() => handleSaveToDashboard(protocol)}
-                  style={{ flex: 1 }}
-                >
-                  💾 Save to Dashboard
-                </button>
-              </div>
             </div>
+          )}
+        </div>
+
+        <h2 className="doc-section">Duty Guidance (Bed)</h2>
+        <table className="doc">
+          <colgroup>
+            <col style={{ width: '30%' }} />
+            <col style={{ width: '35%' }} />
+            <col />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Purpose</th>
+              <th>Duty Selection Recommendation</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map(cat => (
+              <tr key={cat.name}>
+                <td>{cat.name}</td>
+                <td>{cat.purpose}</td>
+                <td>{cat.duty}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        <h2 className="doc-section">Duty Selection by Category, Purpose, and Common Frequencies</h2>
+        <div className="duty-list">
+          {categories.map(cat => (
+            <p key={cat.name}>
+              {cat.name} (
+              {cat.frequenciesText.map((f, i) => (
+                <span key={f + '-' + i}>
+                  {i > 0 && ', '}
+                  <span className="fq" onClick={() => handleFreqClick(f)}>{f}</span>
+                </span>
+              ))}
+              ): {cat.duty}
+            </p>
           ))}
         </div>
-      </div>
 
-      {suggestedPackage && (
-        <div className="suggested-package card">
-          <h3>💡 Recommended Package</h3>
-          <div className="package-suggestion">
-            <div className="package-header">
-              <div className="package-name-section">
-                <div className="package-name">{suggestedPackage.name}</div>
-                {suggestedPackage.badge && (
-                  <span className="package-badge">{suggestedPackage.badge}</span>
-                )}
-              </div>
-              <div className="package-price">{suggestedPackage.priceDisplay}</div>
-            </div>
-            <div className="package-sessions">
-              {suggestedPackage.sessionsIncluded} sessions included
-            </div>
-            <p className="package-description">{suggestedPackage.description}</p>
-            <div className="package-match">
-              ✓ This package covers the recommended {maxSessions}-session treatment program
-            </div>
-            <button 
-              className="btn secondary large"
-              onClick={() => navigate('packages')}
-            >
-              View Package Details
-            </button>
-          </div>
+        <h2 className="doc-section">General Use Notes</h2>
+        <ul className="use-notes">
+          <li>Begin with shorter sessions and lower intensity, then build up as your body adapts.</li>
+          <li>Hydrate before and after sessions.</li>
+          <li>Space sessions at least 24 hours apart unless running a short protocol.</li>
+          <li>Log your sessions in the dashboard so you can track your progress across the recommended run.</li>
+          <li>If you experience any adverse symptoms during a session, stop and consult a licensed healthcare provider.</li>
+        </ul>
+
+        <div className="disclaimer">
+          <strong>This information is provided for educational purposes only and is not intended to diagnose, treat, cure, or prevent any disease.</strong> The SpectraLight / EverForged Light Bed and its frequency protocols are wellness-support tools. Consult a licensed healthcare provider before beginning any protocol, particularly if you have an underlying condition, are pregnant, or use a pacemaker or other implanted device.
         </div>
-      )}
 
-      <div className="action-buttons">
-        <button 
-          className="btn primary large"
-          onClick={() => handleBookProtocol(condition.protocols[0])}
-        >
-          Book a Session Now
-        </button>
-        <button 
-          className="btn secondary large"
-          onClick={() => navigate('wellness')}
-        >
-          Browse Other Conditions
-        </button>
-      </div>
+        <p className="cite-footer">
+          Reference base: {sources.join(', ')} source list{sources.length === 1 ? '' : 's'}; SpectraLight 2024 Frequency Book (alphabetical + numerical volumes).
+        </p>
+      </article>
     </div>
   );
 }

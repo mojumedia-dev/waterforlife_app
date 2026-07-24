@@ -22,12 +22,32 @@ function App() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const [selectedCondition, setSelectedCondition] = useState(null);
   const [selectedProtocol, setSelectedProtocol] = useState(null);
+  const [wellnessSearchTerm, setWellnessSearchTerm] = useState('');
   const [location] = useState(locationData);
   const [userProfile] = useState(userProfileData);
   const [packages] = useState(packagesData);
   const [conditions] = useState(conditionsData);
   const [availability] = useState(availabilityData);
   const [frequencyDatabase, setFrequencyDatabase] = useState([]);
+
+  // Deep-link support: ?condition=Fibromyalgia (or an id) auto-navigates to
+  // that condition's detail page after conditions load. Handy for sharing a
+  // specific ailment page and for QA screenshots.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get('condition');
+    if (!target || !conditions?.length) return;
+    const t = target.toLowerCase();
+    const match = conditions.find(c =>
+      (c.id && c.id.toLowerCase() === t) ||
+      (c.conditionName && c.conditionName.toLowerCase() === t)
+    );
+    if (match) {
+      setSelectedCondition(match);
+      setCurrentPage('condition');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [conditions]);
 
   // Load frequency database CSV once on mount
   useEffect(() => {
@@ -101,7 +121,11 @@ function App() {
       setSelectedCondition(data.condition || null);
       setSelectedProtocol(data.protocol || null);
       setCurrentPage('booking');
+    } else if (page === 'wellness' && data && typeof data.searchTerm === 'string') {
+      setWellnessSearchTerm(data.searchTerm);
+      setCurrentPage('wellness');
     } else {
+      if (page === 'wellness') setWellnessSearchTerm('');
       setCurrentPage(page);
     }
     window.scrollTo(0, 0);
@@ -117,10 +141,11 @@ function App() {
           frequencyDatabase={frequencyDatabase}
         />;
       case 'wellness':
-        return <WellnessGuide 
+        return <WellnessGuide
           conditions={conditions}
           navigate={navigate}
           frequencyDatabase={frequencyDatabase}
+          initialSearchTerm={wellnessSearchTerm}
         />;
       case 'condition':
         return <ConditionDetail 

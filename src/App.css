@@ -2205,3 +2205,236 @@ body {
     display: grid;
   }
 }
+
+/* ============================================
+   CONDITION DETAIL — RIFE FREQUENCY SUMMARY
+   Print-forward document layout for the new
+   ailment guide. Programmatic categories, no
+   owner content authoring per condition.
+   ============================================ */
+
+.freq-sheet-page {
+  padding: 20px 0 60px;
+}
+
+.freq-sheet-page .back-btn {
+  margin: 4px 20px 12px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.freq-sheet-page .back-btn:hover {
+  color: var(--text-primary);
+}
+
+.freq-sheet {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 32px 28px 48px;
+  background: #fff;
+  color: #1E1D1A;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  line-height: 1.55;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+@media (max-width: 640px) {
+  .freq-sheet {
+    padding: 24px 16px 40px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.freq-sheet .doc-title {
+  font-family: "Cambria", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.55rem;
+  margin: 0 0 22px;
+  letter-spacing: -0.005em;
+  color: #1E1D1A;
+  line-height: 1.3;
+}
+
+.freq-sheet table.doc {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 14px;
+  border: 1px solid #A9A49A;
+  background: #fff;
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-size: 0.86rem;
+}
+
+.freq-sheet table.doc th,
+.freq-sheet table.doc td {
+  padding: 8px 12px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #D8D4CB;
+  border-right: 1px solid #D8D4CB;
+}
+
+.freq-sheet table.doc th:last-child,
+.freq-sheet table.doc td:last-child {
+  border-right: none;
+}
+
+.freq-sheet table.doc tr:last-child td {
+  border-bottom: none;
+}
+
+.freq-sheet table.doc thead th {
+  background: #F5F1E8;
+  color: #1E1D1A;
+  font-weight: 700;
+  font-size: 0.82rem;
+  border-bottom: 1px solid #A9A49A;
+}
+
+.freq-sheet table.doc td:first-child {
+  font-weight: 600;
+  color: #1E1D1A;
+  white-space: nowrap;
+}
+
+.freq-sheet .freq-cell {
+  color: #4A4844;
+}
+
+.freq-sheet .fq {
+  color: #B58037;
+  cursor: pointer;
+  border-bottom: 1px dotted #B58037;
+  padding-bottom: 1px;
+}
+
+.freq-sheet .fq:hover {
+  color: #1E1D1A;
+  border-bottom-color: #1E1D1A;
+}
+
+.freq-sheet .table-note {
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-size: 0.78rem;
+  color: #6E6B65;
+  font-style: italic;
+  margin: 0 2px 28px;
+}
+
+.freq-sheet .doc-section {
+  font-family: "Cambria", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  margin: 28px 0 10px;
+  color: #1E1D1A;
+  letter-spacing: -0.005em;
+}
+
+.freq-sheet .session-list,
+.freq-sheet .duty-list {
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-size: 0.88rem;
+  color: #1E1D1A;
+  margin: 0 0 16px;
+  padding-left: 4px;
+}
+
+.freq-sheet .session-list p,
+.freq-sheet .duty-list p {
+  margin: 6px 0;
+  line-height: 1.55;
+}
+
+.freq-sheet .session-list p strong {
+  font-weight: 700;
+  color: #1E1D1A;
+}
+
+.freq-sheet .session-actions {
+  margin-top: 14px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.freq-sheet .btn {
+  display: inline-block;
+  background: #fff;
+  color: #1E1D1A;
+  border: 1px solid #A9A49A;
+  border-radius: 3px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.15s;
+}
+
+.freq-sheet .btn:hover {
+  border-color: #B58037;
+  color: #B58037;
+}
+
+.freq-sheet .btn.primary {
+  background: #B58037;
+  color: #fff;
+  border-color: #B58037;
+}
+
+.freq-sheet .btn.primary:hover {
+  filter: brightness(0.94);
+  color: #fff;
+}
+
+.freq-sheet .save-confirm {
+  color: #10B981;
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.freq-sheet ul.use-notes {
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-size: 0.86rem;
+  color: #4A4844;
+  margin: 8px 0 24px;
+  padding-left: 24px;
+}
+
+.freq-sheet ul.use-notes li {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.freq-sheet .disclaimer {
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-size: 0.74rem;
+  color: #6E6B65;
+  line-height: 1.55;
+  padding: 12px 0 0;
+  border-top: 1px solid #D8D4CB;
+  margin-top: 22px;
+}
+
+.freq-sheet .disclaimer strong {
+  color: #8A3E2A;
+  font-weight: 600;
+}
+
+.freq-sheet .cite-footer {
+  font-family: Arial, Helvetica, "Liberation Sans", sans-serif;
+  font-size: 0.7rem;
+  color: #6E6B65;
+  margin-top: 14px;
+  font-style: italic;
+}
