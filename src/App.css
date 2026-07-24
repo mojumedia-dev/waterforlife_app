@@ -2438,3 +2438,34 @@ body {
   margin-top: 14px;
   font-style: italic;
 }
+
+/* Wellness Guide — clickable result cards + freq chips */
+.wellness-result-card {
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.wellness-result-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+.wellness-result-card:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.frequency-chip.clickable {
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s;
+}
+.frequency-chip.clickable:hover {
+  background: var(--primary);
+  color: #fff;
+}
+.frequency-chip.more {
+  opacity: 0.6;
+  cursor: default;
+}
+.wellness-result-card .protocol-footer {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}

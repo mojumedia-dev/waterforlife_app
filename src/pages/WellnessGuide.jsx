@@ -1,14 +1,16 @@
 import { useState, useMemo, useEffect } from 'react';
-import protocolsData from '../data/protocols.json';
 import storage from '../utils/storage';
 
-function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSearchTerm = '' }) {
+// Search over the full ingested conditions.json (3,688 ailments). Each result
+// card is a clickable link that opens the Rife Frequency Summary page for
+// that ailment. Frequency chips on cards filter the search inline.
+
+function WellnessGuide({ conditions = [], navigate, frequencyDatabase = [], initialSearchTerm = '' }) {
   const [searchTerm, setSearchTerm] = useState(initialSearchTerm);
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [savedConditionId, setSavedConditionId] = useState(null);
 
-  // If a freq-click on ConditionDetail routed here with a Hz value, sync it
-  // once so the search input shows the value and results filter to it.
+  // Sync when a freq-click on ConditionDetail routes here with a Hz value.
   useEffect(() => {
     if (initialSearchTerm && initialSearchTerm !== searchTerm) {
       setSearchTerm(initialSearchTerm);
@@ -16,16 +18,14 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSe
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSearchTerm]);
 
-  // Get unique categories from protocols
   const categories = useMemo(() => {
-    const cats = ['all', ...new Set(protocolsData.map(p => p.category))];
-    return cats;
-  }, []);
+    const set = new Set();
+    for (const c of conditions) {
+      if (c.category) set.add(c.category);
+    }
+    return ['all', ...[...set].sort()];
+  }, [conditions]);
 
-  // Per-word matcher: numeric words match against exact frequency tokens
-  // (so "72" doesn't also match "172", "720", "727"); text words match as a
-  // substring against the searchable text. Users mix both freely
-  // ("anxiety 72" → anxiety-related conditions that use frequency 72).
   const wordMatches = (word, textLower, freqTokens) => {
     if (/^\d+(\.\d+)?$/.test(word)) {
       return freqTokens.has(word);
@@ -40,99 +40,78 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSe
     );
   };
 
-  // Filter protocols based on search and category
-  const filteredProtocols = useMemo(() => {
-    let filtered = protocolsData;
-
-    // Filter by category
-    if (selectedCategory !== 'all') {
-      filtered = filtered.filter(p => p.category === selectedCategory);
-    }
-
-    // Filter by search term - word-order independent, numeric words match
-    // exact frequency tokens, text words match against name/category/notes.
-    if (searchTerm.trim()) {
-      const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
-      filtered = filtered.filter(p => {
-        const textLower = `${p.ailmentName} ${p.category}`.toLowerCase();
-        const freqTokens = parseFreqTokens(p.frequencies);
-        return words.every(word => wordMatches(word, textLower, freqTokens));
-      });
-    }
-
-    return filtered;
-  }, [searchTerm, selectedCategory]);
-
-  // Search frequency database (~6320 rows). No hard result cap — a bare
-  // frequency search (e.g. "72") should return every condition that uses
-  // that frequency, not just the alphabetically-first 50.
-  const frequencyResults = useMemo(() => {
-    if (!searchTerm.trim()) return [];
-    const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
-    return frequencyDatabase.filter(entry => {
-      const textLower = String(entry.condition || '').toLowerCase();
-      const freqTokens = parseFreqTokens(entry.frequencies);
-      return words.every(word => wordMatches(word, textLower, freqTokens));
-    });
-  }, [frequencyDatabase, searchTerm]);
-
-  // Combine results - show protocols first, then frequency database matches
-  const allResults = useMemo(() => {
-    const results = [];
-    
-    // Add protocols
-    filteredProtocols.forEach(protocol => {
-      results.push({ type: 'protocol', data: protocol });
-    });
-    
-    // Add frequency database results that don't match protocols
-    if (searchTerm.trim()) {
-      frequencyResults.forEach(freqEntry => {
-        // Check if this condition already exists in protocol results
-        const alreadyExists = filteredProtocols.some(p => 
-          p.ailmentName.toLowerCase() === freqEntry.condition.toLowerCase()
-        );
-        
-        if (!alreadyExists) {
-          results.push({ type: 'frequency', data: freqEntry });
-        }
-      });
-    }
-    
-    return results;
-  }, [filteredProtocols, frequencyResults, searchTerm]);
-
-  const handleProtocolSave = (e, protocol) => {
-    e.stopPropagation();
-    
-    const freqArray = protocol.frequencies.split(',').map(f => f.trim());
-    const channels = Array(8).fill(null).map((_, i) => ({
-      freq: freqArray[i] || '',
-      duty: '',
-      duration: ''
-    }));
-    
-    storage.setItem('sessionChannels', JSON.stringify(channels));
-    storage.setItem('selectedCondition', protocol.id);
-    
-    setSavedConditionId(protocol.id);
-    setTimeout(() => setSavedConditionId(null), 2500);
+  // Roll a condition's protocols into a single searchable freq-token set.
+  const conditionFreqTokens = (cond) => {
+    const combined = (cond.protocols || []).map(p => p.frequencies).filter(Boolean).join(', ');
+    return parseFreqTokens(combined);
   };
 
-  const handleFrequencySave = (e, freqEntry) => {
+  // Combined-text search across name / body system / category / tags.
+  const conditionSearchText = (cond) => {
+    return [
+      cond.conditionName,
+      cond.bodySystem,
+      cond.category,
+      ...(cond.tags || []),
+    ].filter(Boolean).join(' ').toLowerCase();
+  };
+
+  const filteredConditions = useMemo(() => {
+    let filtered = conditions;
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(c => c.category === selectedCategory);
+    }
+    if (searchTerm.trim()) {
+      const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+      filtered = filtered.filter(c => {
+        const text = conditionSearchText(c);
+        const freqs = conditionFreqTokens(c);
+        return words.every(word => wordMatches(word, text, freqs));
+      });
+    }
+    // Cap the render to keep the page snappy on searches with thousands of hits.
+    return filtered.slice(0, 200);
+  }, [conditions, searchTerm, selectedCategory]);
+
+  // Total unfiltered hit count (before the 200-cap) so users know when more exist.
+  const totalHits = useMemo(() => {
+    let filtered = conditions;
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(c => c.category === selectedCategory);
+    }
+    if (searchTerm.trim()) {
+      const words = searchTerm.toLowerCase().split(/\s+/).filter(w => w.length > 0);
+      filtered = filtered.filter(c => {
+        const text = conditionSearchText(c);
+        const freqs = conditionFreqTokens(c);
+        return words.every(word => wordMatches(word, text, freqs));
+      });
+    }
+    return filtered.length;
+  }, [conditions, searchTerm, selectedCategory]);
+
+  const openCondition = (condition) => {
+    navigate('condition', condition);
+  };
+
+  const handleFreqChipClick = (e, freq) => {
     e.stopPropagation();
-    
-    const freqArray = freqEntry.frequencies.split(',').map(f => f.trim());
+    setSearchTerm(String(freq));
+  };
+
+  const handleSaveToDashboard = (e, condition) => {
+    e.stopPropagation();
+    const firstProtocol = condition.protocols?.[0];
+    if (!firstProtocol) return;
+    const freqArray = String(firstProtocol.frequencies || '').split(',').map(f => f.trim()).filter(Boolean);
     const channels = Array(8).fill(null).map((_, i) => ({
       freq: freqArray[i] || '',
       duty: '',
-      duration: ''
+      duration: '',
     }));
-    
     storage.setItem('sessionChannels', JSON.stringify(channels));
-    storage.setItem('selectedCondition', freqEntry.condition);
-    
-    setSavedConditionId(freqEntry.condition);
+    storage.setItem('selectedCondition', condition.conditionName);
+    setSavedConditionId(condition.id);
     setTimeout(() => setSavedConditionId(null), 2500);
   };
 
@@ -140,7 +119,7 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSe
     <div className="page wellness-guide-page">
       <div className="page-header">
         <h2>🔍 Wellness Guide</h2>
-        <p className="subtitle">Search 6,400+ conditions, protocols, and frequencies (Hz)</p>
+        <p className="subtitle">Search {conditions.length.toLocaleString()} ailments across CAFL, KHZ, PROV, VEGA, XTRA, ALT, BIO, CUST, HC, ODD source lists.</p>
       </div>
 
       <div className="search-section">
@@ -148,15 +127,16 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSe
           <span className="search-icon">🔍</span>
           <input
             type="text"
-            placeholder="Search conditions, symptoms, frequencies (Hz), or keywords..."
+            placeholder="Search ailments, symptoms, or frequencies (Hz)..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="search-input"
           />
           {searchTerm && (
-            <button 
+            <button
               className="clear-btn"
               onClick={() => setSearchTerm('')}
+              aria-label="Clear search"
             >
               ✕
             </button>
@@ -164,7 +144,7 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSe
         </div>
 
         <div className="category-filters">
-          {categories.map(category => (
+          {categories.slice(0, 12).map(category => (
             <button
               key={category}
               className={`category-btn ${selectedCategory === category ? 'active' : ''}`}
@@ -179,113 +159,94 @@ function WellnessGuide({ conditions, navigate, frequencyDatabase = [], initialSe
       <div className="results-section">
         <div className="results-header">
           <span className="results-count">
-            Results
+            {totalHits === 0
+              ? 'No results'
+              : totalHits > filteredConditions.length
+                ? `Showing ${filteredConditions.length} of ${totalHits.toLocaleString()} — refine your search to narrow down`
+                : `${totalHits} result${totalHits === 1 ? '' : 's'}`}
           </span>
         </div>
 
-        {allResults.length === 0 ? (
+        {filteredConditions.length === 0 ? (
           <div className="no-results">
             <div className="no-results-icon">🔍</div>
-            <h3>No conditions found</h3>
+            <h3>No ailments found</h3>
             <p>Try adjusting your search or filters</p>
           </div>
         ) : (
           <div className="protocols-list">
-            {allResults.map((result, index) => {
-              if (result.type === 'protocol') {
-                const protocol = result.data;
-                const freqArray = protocol.frequencies.split(',').map(f => f.trim());
-                
-                return (
-                  <div 
-                    key={`prot-${protocol.id}`}
-                    className="protocol-card"
-                  >
-                    <div className="protocol-header">
-                      <h3 className="protocol-name">{protocol.ailmentName}</h3>
-                      <span className="protocol-category">Protocol</span>
-                    </div>
-                    
-                    <p className="condition-description">{protocol.description}</p>
-                    
-                    <div className="frequency-list">
-                      <div className="frequency-list-label">Frequencies (Hz):</div>
-                      <div className="frequency-chips">
-                        {freqArray.map((freq, i) => (
-                          <span key={i} className="frequency-chip">{freq}</span>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    <div className="protocol-recommendations">
-                      <div className="recommendation-item">
-                        <strong>Intensity:</strong> {protocol.intensity}
-                      </div>
-                      <div className="recommendation-item">
-                        <strong>Sessions:</strong> {protocol.sessionsPerWeek}x per week
-                      </div>
-                      <div className="recommendation-item">
-                        <strong>Notes:</strong> {protocol.notes}
-                      </div>
-                    </div>
-                    
-                    {savedConditionId === protocol.id && (
-                      <div className="saved-notice">
-                        ✓ Saved to dashboard!
-                      </div>
+            {filteredConditions.map(condition => {
+              const uniqueFreqs = [...conditionFreqTokens(condition)]
+                .map(f => parseFloat(f))
+                .filter(f => !isNaN(f))
+                .sort((a, b) => a - b);
+              const sources = [...new Set((condition.protocols || []).map(p => p.source).filter(Boolean))];
+              return (
+                <div
+                  key={condition.id}
+                  className="protocol-card wellness-result-card"
+                  onClick={() => openCondition(condition)}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => { if (e.key === 'Enter') openCondition(condition); }}
+                >
+                  <div className="protocol-header">
+                    <h3 className="protocol-name">{condition.conditionName}</h3>
+                    {condition.bodySystem && (
+                      <span className="protocol-category">{condition.bodySystem}</span>
                     )}
+                  </div>
 
-                    <div className="protocol-footer">
-                      <button 
-                        className="btn secondary"
-                        onClick={(e) => handleProtocolSave(e, protocol)}
-                      >
-                        💾 Save
-                      </button>
+                  {condition.description && (
+                    <p className="condition-description">{condition.description}</p>
+                  )}
+
+                  <div className="frequency-list">
+                    <div className="frequency-list-label">
+                      {condition.protocols?.length || 0} protocol{condition.protocols?.length === 1 ? '' : 's'}
+                      {sources.length ? ' · ' + sources.join(', ') : ''}
+                      {' · '}
+                      {uniqueFreqs.length} unique frequenc{uniqueFreqs.length === 1 ? 'y' : 'ies'} (Hz):
+                    </div>
+                    <div className="frequency-chips">
+                      {uniqueFreqs.slice(0, 20).map(freq => (
+                        <span
+                          key={freq}
+                          className="frequency-chip clickable"
+                          onClick={(e) => handleFreqChipClick(e, freq)}
+                          title={`Filter search to ${freq} Hz`}
+                        >
+                          {freq}
+                        </span>
+                      ))}
+                      {uniqueFreqs.length > 20 && (
+                        <span className="frequency-chip more">+{uniqueFreqs.length - 20} more</span>
+                      )}
                     </div>
                   </div>
-                );
-              } else {
-                // Frequency database entry
-                const freqEntry = result.data;
-                const freqArray = freqEntry.frequencies.split(',').map(f => f.trim());
-                
-                return (
-                  <div 
-                    key={`freq-${index}`}
-                    className="protocol-card frequency-card"
-                  >
-                    <div className="protocol-header">
-                      <h3 className="protocol-name">{freqEntry.condition}</h3>
-                      <span className="protocol-category" style={{ background: '#6366f1', color: 'white' }}>Condition</span>
-                    </div>
-                    
-                    <div className="frequency-list">
-                      <div className="frequency-list-label">Frequencies (Hz):</div>
-                      <div className="frequency-chips">
-                        {freqArray.map((freq, i) => (
-                          <span key={i} className="frequency-chip">{freq}</span>
-                        ))}
-                      </div>
-                    </div>
-                    
-                    {savedConditionId === freqEntry.condition && (
-                      <div className="saved-notice">
-                        ✓ Saved to dashboard!
-                      </div>
-                    )}
 
-                    <div className="protocol-footer">
-                      <button 
-                        className="btn secondary"
-                        onClick={(e) => handleFrequencySave(e, freqEntry)}
-                      >
-                        💾 Save to Dashboard
-                      </button>
+                  {savedConditionId === condition.id && (
+                    <div className="saved-notice">
+                      ✓ Saved to dashboard!
                     </div>
+                  )}
+
+                  <div className="protocol-footer">
+                    <button
+                      className="btn primary"
+                      onClick={(e) => { e.stopPropagation(); openCondition(condition); }}
+                    >
+                      View Rife Frequency Summary →
+                    </button>
+                    <button
+                      className="btn secondary"
+                      onClick={(e) => handleSaveToDashboard(e, condition)}
+                    >
+                      💾 Save first protocol
+                    </button>
                   </div>
-                );
-              }
+                </div>
+              );
             })}
           </div>
         )}

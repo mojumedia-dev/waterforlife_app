@@ -49,6 +49,22 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conditions]);
 
+  // ?startAt=wellness (optional &search=<term>) opens the Wellness Guide with
+  // an optional prefilled search. Simple deep-link for shareable demos.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const startAt = params.get('startAt');
+    if (!startAt) return;
+    if (startAt === 'wellness') {
+      const search = params.get('search') || '';
+      setWellnessSearchTerm(search);
+      setCurrentPage('wellness');
+    } else if (['dashboard', 'packages', 'account'].includes(startAt)) {
+      setCurrentPage(startAt);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Load frequency database CSV once on mount
   useEffect(() => {
     fetch('/assets/frequency_database.csv')
