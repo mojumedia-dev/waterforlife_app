@@ -111,16 +111,6 @@ function FrequencyDetail({ frequency, conditions, navigate }) {
         </div>
 
         <h2 className="doc-section">Where This Frequency Appears</h2>
-        <p className="table-note" style={{ marginBottom: 12 }}>
-          {stats.usingConditionsCount.toLocaleString()} ailment{stats.usingConditionsCount === 1 ? '' : 's'} across
-          {' '}{stats.sources.join(', ')}{' '}source list{stats.sources.length === 1 ? '' : 's'} reference {hz} Hz.
-          {stats.bodySystems.length > 0 && (
-            <>
-              {' '}Most-cited body systems:
-              {' ' + stats.bodySystems.slice(0, 4).map(([sys, n]) => `${sys} (${n})`).join(', ')}.
-            </>
-          )}
-        </p>
         <div className="duty-list">
           {sampleUsingConditions.map(c => (
             <p key={c.id}>
@@ -138,7 +128,7 @@ function FrequencyDetail({ frequency, conditions, navigate }) {
           ))}
           {stats.usingConditionsCount > sampleUsingConditions.length && (
             <p className="table-note">
-              …and {(stats.usingConditionsCount - sampleUsingConditions.length).toLocaleString()} more. Search {hz} in the Wellness Guide to see the full list.
+              …and {(stats.usingConditionsCount - sampleUsingConditions.length).toLocaleString()} more.
             </p>
           )}
         </div>
@@ -146,15 +136,11 @@ function FrequencyDetail({ frequency, conditions, navigate }) {
         {topComplementary.length > 0 && (
           <>
             <h2 className="doc-section">Complementary Frequencies</h2>
-            <p className="table-note" style={{ marginBottom: 12 }}>
-              Frequencies most frequently paired with {hz} Hz across the source lists. Click any to open its own Master Reference.
-            </p>
             <div className="duty-list">
               {topComplementary.map(c => (
                 <p key={c.hz}>
                   <span className="fq" onClick={() => handleFreqClick(c.hz)}>{c.hz}</span>
                   {' Hz'}
-                  {' — appears with '}{c.count}{' protocols using '}{hz}{' Hz'}
                 </p>
               ))}
             </div>

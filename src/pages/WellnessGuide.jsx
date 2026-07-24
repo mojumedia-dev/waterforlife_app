@@ -119,7 +119,7 @@ function WellnessGuide({ conditions = [], navigate, frequencyDatabase = [], init
     <div className="page wellness-guide-page">
       <div className="page-header">
         <h2>🔍 Wellness Guide</h2>
-        <p className="subtitle">Search {conditions.length.toLocaleString()} ailments across CAFL, KHZ, PROV, VEGA, XTRA, ALT, BIO, CUST, HC, ODD source lists.</p>
+        <p className="subtitle">Search {conditions.length.toLocaleString()} ailments and their frequencies.</p>
       </div>
 
       <div className="search-section">
@@ -204,7 +204,6 @@ function WellnessGuide({ conditions = [], navigate, frequencyDatabase = [], init
                   <div className="frequency-list">
                     <div className="frequency-list-label">
                       {condition.protocols?.length || 0} protocol{condition.protocols?.length === 1 ? '' : 's'}
-                      {sources.length ? ' · ' + sources.join(', ') : ''}
                       {' · '}
                       {uniqueFreqs.length} unique frequenc{uniqueFreqs.length === 1 ? 'y' : 'ies'} (Hz):
                     </div>
