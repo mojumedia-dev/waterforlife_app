@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import storage from '../utils/storage';
 import { deriveCategories, deriveSessions, uniqueSources } from '../utils/deriveCategories';
 
@@ -9,6 +9,15 @@ import { deriveCategories, deriveSessions, uniqueSources } from '../utils/derive
 
 function ConditionDetail({ condition, navigate }) {
   const [savedSessionName, setSavedSessionName] = useState(null);
+
+  // Set document.title so the phone's Save-as-PDF picks it up as the default
+  // filename. Restore the app's default on unmount.
+  useEffect(() => {
+    if (!condition) return;
+    const previous = document.title;
+    document.title = `${condition.conditionName} - Rife Frequency Summary`;
+    return () => { document.title = previous; };
+  }, [condition]);
 
   if (!condition) {
     return (

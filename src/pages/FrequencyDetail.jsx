@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { deriveFrequencyGuide } from '../utils/deriveFrequencyGuide';
 
 // Per-frequency Master Reference page. Layout matches Doug's printed
@@ -10,6 +10,15 @@ import { deriveFrequencyGuide } from '../utils/deriveFrequencyGuide';
 
 function FrequencyDetail({ frequency, conditions, navigate }) {
   const guide = useMemo(() => deriveFrequencyGuide(frequency, conditions), [frequency, conditions]);
+
+  // Set document.title so the phone's Save-as-PDF picks it up as the default
+  // filename. Restore the app's default on unmount.
+  useEffect(() => {
+    if (guide == null) return;
+    const previous = document.title;
+    document.title = `${guide.hz} Hz Light Frequency - Master Reference`;
+    return () => { document.title = previous; };
+  }, [guide]);
 
   if (guide == null) {
     return (
