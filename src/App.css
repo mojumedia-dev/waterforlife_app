@@ -2469,3 +2469,76 @@ body {
   gap: 8px;
   flex-wrap: wrap;
 }
+
+/* ============================================
+   PRINT STYLES — save-as-PDF for guide pages
+   Hides app shell (header, bottom nav, buttons)
+   so the printed page is just the freq-sheet
+   document with clean margins.
+   ============================================ */
+@media print {
+  .app-header,
+  .bottom-nav,
+  .back-btn,
+  .print-btn,
+  .session-actions,
+  .btn {
+    display: none !important;
+  }
+  body, .app-main {
+    background: #fff !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .freq-sheet-page {
+    padding: 0 !important;
+  }
+  .freq-sheet {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0.25in !important;
+    max-width: 100% !important;
+  }
+  .fq {
+    color: #1E1D1A !important;
+    border-bottom-color: transparent !important;
+  }
+  .disclaimer {
+    page-break-inside: avoid;
+  }
+  h2.doc-section, h1.doc-title {
+    page-break-after: avoid;
+  }
+  table.doc { page-break-inside: avoid; }
+}
+
+/* Print button in-page (visible on screen, hidden on print) */
+.print-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--brand, #B58037);
+  border: 1px solid var(--brand, #B58037);
+  border-radius: 3px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: auto;
+  transition: background 0.15s, color 0.15s;
+}
+.print-btn:hover {
+  background: var(--brand, #B58037);
+  color: #fff;
+}
+.freq-sheet-page .top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 20px 12px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+.freq-sheet-page .top-bar .back-btn { margin: 0; padding: 4px 0; }

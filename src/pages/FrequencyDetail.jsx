@@ -35,9 +35,18 @@ function FrequencyDetail({ frequency, conditions, navigate }) {
 
   return (
     <div className="page freq-sheet-page">
-      <button className="back-btn" onClick={() => window.history.length > 1 ? navigate('wellness') : navigate('wellness')}>
-        ← Back to Wellness Guide
-      </button>
+      <div className="top-bar">
+        <button className="back-btn" onClick={() => navigate('wellness')}>
+          ← Back to Wellness Guide
+        </button>
+        <button
+          className="print-btn"
+          onClick={() => window.print()}
+          title="Opens your browser's print dialog. On phones, pick 'Save as PDF' from the destination."
+        >
+          🖨 Save as PDF
+        </button>
+      </div>
 
       <article className="freq-sheet">
         <h1 className="doc-title">{hz} Hz Light Frequency — Master Reference</h1>
