@@ -208,6 +208,18 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
     setSelectedCondition('');
   };
 
+  // Delete the session currently open for edit
+  const clearSession = () => {
+    if (!editingSessionId) return;
+    if (!window.confirm('Delete this saved session? This cannot be undone.')) return;
+    const historyRaw = storage.getItem('sessionHistory');
+    const history = historyRaw ? JSON.parse(historyRaw) : [];
+    const next = history.filter(s => s.id !== editingSessionId);
+    storage.setItem('sessionHistory', JSON.stringify(next));
+    setSessionHistory(next);
+    cancelEdit();
+  };
+
   // Load history
   const [sessionHistory, setSessionHistory] = useState([]);
   
@@ -272,9 +284,14 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
               className="session-date-input"
             />
             {editingSessionId && (
-              <button onClick={cancelEdit} className="cancel-edit-btn">
-                Cancel
-              </button>
+              <>
+                <button onClick={cancelEdit} className="cancel-edit-btn">
+                  Cancel
+                </button>
+                <button onClick={clearSession} className="clear-session-btn">
+                  🗑 Clear
+                </button>
+              </>
             )}
             <button onClick={saveSession} className="save-session-btn">
               {editingSessionId ? '✓ Update' : 'Save'}
@@ -283,7 +300,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
         </div>
         {editingSessionId && (
           <div className="editing-notice">
-            ✏️ Editing saved session - modify channels and click Update to save changes
+            ✏️ Editing saved session. Modify channels then Update, or Clear to delete it.
           </div>
         )}
         <p className="frequency-help">Select a condition to auto-fill frequencies, or enter manually</p>
