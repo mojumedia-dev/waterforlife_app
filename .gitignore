@@ -27,3 +27,9 @@ dist-ssr
 src/data/conditions.json.pre_2024_ingest.bak
 scripts/output/mockup_*.html
 dist/_screenshot_bootstrap.html
+
+# playwright + smoke test outputs
+tests/output/
+playwright-report/
+playwright/.auth/
+test-results/
