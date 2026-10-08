@@ -2078,6 +2078,16 @@ body {
   font-size: 0.65rem;
 }
 
+.preview-band {
+  font-weight: 500;
+  color: var(--primary);
+  padding: 0.125rem 0.25rem;
+  background: var(--background);
+  border: 1px solid var(--primary);
+  border-radius: var(--radius-sm);
+  font-size: 0.65rem;
+}
+
 .badge.info {
   background-color: var(--info);
 }

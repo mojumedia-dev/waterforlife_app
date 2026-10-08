@@ -7,14 +7,14 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
   const username = userEmail.split('@')[0] || 'User';
   
   const [channels, setChannels] = useState([
-    { freq: '', duty: '', duration: '' },
-    { freq: '', duty: '', duration: '' },
-    { freq: '', duty: '', duration: '' },
-    { freq: '', duty: '', duration: '' },
-    { freq: '', duty: '', duration: '' },
-    { freq: '', duty: '', duration: '' },
-    { freq: '', duty: '', duration: '' },
-    { freq: '', duty: '', duration: '' }
+    { freq: '', duty: '', duration: '', band: '' },
+    { freq: '', duty: '', duration: '', band: '' },
+    { freq: '', duty: '', duration: '', band: '' },
+    { freq: '', duty: '', duration: '', band: '' },
+    { freq: '', duty: '', duration: '', band: '' },
+    { freq: '', duty: '', duration: '', band: '' },
+    { freq: '', duty: '', duration: '', band: '' },
+    { freq: '', duty: '', duration: '', band: '' }
   ]);
   const [selectedCondition, setSelectedCondition] = useState('');
   const [sessionDate, setSessionDate] = useState(new Date().toISOString().split('T')[0]);
@@ -42,6 +42,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
           freq: freqs[idx] != null ? String(freqs[idx]) : '',
           duty: channel.duty,
           duration: channel.duration,
+          band: channel.band || '',
         }));
         setChannels(populated);
         storage.setItem('sessionChannels', JSON.stringify(populated));
@@ -124,7 +125,8 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
         const updated = channels.map((channel, idx) => ({
           freq: freqArray[idx] || '',
           duty: channel.duty,
-          duration: channel.duration
+          duration: channel.duration,
+          band: channel.band || ''
         }));
         
         setChannels(updated);
@@ -202,7 +204,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
     setEditingSessionId(null);
     setSessionDate(new Date().toISOString().split('T')[0]);
     // Clear channels
-    const emptyChannels = Array(8).fill(null).map(() => ({ freq: '', duty: '', duration: '' }));
+    const emptyChannels = Array(8).fill(null).map(() => ({ freq: '', duty: '', duration: '', band: '' }));
     setChannels(emptyChannels);
     storage.setItem('sessionChannels', JSON.stringify(emptyChannels));
     setSelectedCondition('');
@@ -264,6 +266,7 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
                       <span className="preview-freq">{ch.freq} Hz</span>
                       {ch.duty && <span className="preview-duty">D: {ch.duty}</span>}
                       {ch.duration && <span className="preview-duration">{ch.duration}m</span>}
+                      {ch.band && <span className="preview-band">{ch.band}</span>}
                     </div>
                   ))}
                 </div>
@@ -435,7 +438,8 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
                           const newChannels = Array(8).fill(null).map((_, i) => ({
                             freq: freqArray[i] || '',
                             duty: '',
-                            duration: ''
+                            duration: '',
+                            band: ''
                           }));
                           
                           setChannels(newChannels);
@@ -520,6 +524,17 @@ function Dashboard({ userProfile, location, navigate, frequencyDatabase = [] }) 
                       className="channel-input"
                     />
                   </div>
+                </div>
+                <div className="channel-input-group full-width">
+                  <label htmlFor={`band-${idx}`}>Band</label>
+                  <input
+                    type="text"
+                    id={`band-${idx}`}
+                    placeholder="Which band?"
+                    value={channel.band || ''}
+                    onChange={(e) => handleChannelChange(idx, 'band', e.target.value)}
+                    className="channel-input"
+                  />
                 </div>
               </div>
             </div>
